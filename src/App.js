@@ -9,6 +9,8 @@ import PostLoginNavigation from './navigation/PostLoginNavigation'
 import { SCREENS, LOCAL_STORAGE } from './common/Constants'
 import { getItemFromSessionStorage, storeToSessionStorage } from './common/LocalStorage'
 
+import './assets/css/global.css'
+
 class App extends Component {
 
   constructor(props) {

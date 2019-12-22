@@ -1,0 +1,8 @@
+
+.header-base {
+    height: 50px;
+    background-color: #ffea3e;
+    font-family: "Museo Sans";
+    display: flex;
+    align-items: center;
+}
