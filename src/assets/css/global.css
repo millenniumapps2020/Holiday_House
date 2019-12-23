@@ -1,1 +1,36 @@
-@import 'header.css'
+@import 'header.css';
+
+
+
+
+@media only screen and (max-width: 765px) {
+
+    .header-base .menus {
+        display: none;
+    }
+
+    .header-base .menu-base {
+        display: block;
+    }
+
+  }
+
+  @media only screen and (min-width: 765px) {
+   
+    .header-base .menus {
+        display: flex;
+    }
+
+    .header-base .menu-base {
+        display: none;
+    }
+
+  }
+
+  @media only screen and (max-width: 850px) {
+   
+    .header-base .menus {
+        font-size: 14px;
+    }
+
+  }

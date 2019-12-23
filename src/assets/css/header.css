@@ -2,7 +2,18 @@
 .header-base {
     height: 50px;
     background-color: #ffea3e;
-    font-family: "Museo Sans";
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px 0px 20px;
+}
+
+.header-base .menus {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.header-base .menus > div {
+    padding-left: 20px;
 }
