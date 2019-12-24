@@ -17,3 +17,21 @@
 .header-base .menus > div {
     padding-left: 20px;
 }
+
+.headerComp .dropdown-content .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.headerComp .dropdown-content {
+    position: absolute;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.headerComp .dropdown-content.hide {
+    display: none;
+}
