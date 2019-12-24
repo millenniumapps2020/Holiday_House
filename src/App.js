@@ -23,21 +23,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path={SCREENS.BASE}
-            render={(props) =>
-              <BaseRouter {...props} loginStatus={this.state.loginStatus} />
-            }
-          />
-
+          <Route exact path={SCREENS.BASE} render={(props) => <BaseRouter {...props} loginStatus={this.state.loginStatus} />} />
           <Route path={SCREENS.PRELOGIN} component={PreLoginNavigation} />
-
           <Authorized path={SCREENS.HOME} component={PostLoginNavigation} />
-
-          {this.state.loginStatus ?
-            <Redirect to={SCREENS.HOME} />
-            :
-            <Redirect to={SCREENS.PRELOGIN} />
-          }
         </Switch>
       </BrowserRouter>
     )
