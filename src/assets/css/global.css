@@ -1,31 +1,41 @@
 @import 'header.css';
+@import 'footer.css';
+
+
+
+.align-self-center {
+    align-self: center!important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
 
 
 
 
 @media screen and (max-width: 765px) {
-
-    .lg-view-flex {
-        display: none !important;
-    }
-
-    .sm-view {
-        display: block !important;
-    }
+  .lg-view-flex {
+    display: none !important;
   }
 
-  @media screen and (min-width: 765px) {
-   
-    .lg-view-flex {
-        display: flex !important;
-    }
-
-    .lg-view {
-        display: block !important;
-    }
-
-    .sm-view {
-        display: none !important;
-    }
-
+  .sm-view {
+    display: block !important;
   }
+}
+
+@media screen and (min-width: 765px) {
+  .lg-view-flex {
+    display: flex !important;
+  }
+
+  .lg-view {
+    display: block !important;
+  }
+
+  .sm-view {
+    display: none !important;
+  }
+}
+
