@@ -8,6 +8,8 @@ import store from './state/store'
 
 import './index.css';
 import './assets/css/bootstrap.min.css';
+import './assets/css/fontawesome.min.css'
+
 
 
 ReactDOM.render(<Provider store={store}>

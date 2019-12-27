@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router';
+
+import { SCREENS } from '../common/Constants'
 
 class HeaderComponent extends Component {
 
@@ -11,12 +14,18 @@ class HeaderComponent extends Component {
         }
     }
 
-    onClickMenu = () => {
+    onClickMenuBtn = () => {
         this.setState({ showMenu: true })
     }
 
-    onClickCloseMenu = () => {
+    onClickCloseMenuBtn = () => {
         this.setState({ showMenu: false })
+    }
+
+    onClickMenu = (menu) => {
+        if (menu === "Shortlist") {
+            this.props.history.push(SCREENS.SHORTLIST)
+        }
     }
 
     render() {
@@ -29,16 +38,16 @@ class HeaderComponent extends Component {
                     <div className="lg-view-flex menus">
                         {menuList.map((item, index) => {
                             return (
-                                <div>{item}</div>
+                                <div onClick={() => this.onClickMenu(item)}>{item}</div>
                             )
                         })}
                     </div>
                     <div className="sm-view menu-icon-div">
                         {
                             showMenu ?
-                                <i class="fa fa-bars" onClick={this.onClickCloseMenu}>B</i>
+                                <i class="fa fa-bars" onClick={this.onClickCloseMenuBtn}>B</i>
                                 :
-                                <i class="fa fa-bars" onClick={this.onClickMenu}>A</i>
+                                <i class="fa fa-bars" onClick={this.onClickMenuBtn}>A</i>
 
                         }
                         <i class="fa fa-bars"></i>
@@ -56,4 +65,4 @@ class HeaderComponent extends Component {
     }
 }
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);

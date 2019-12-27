@@ -1,31 +1,56 @@
 @import 'header.css';
+@import 'footer.css';
+@import 'shortList.css';
+
+
+
+.align-self-center {
+    align-self: center!important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.row {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: normal;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
 
 
 
 
 @media screen and (max-width: 765px) {
-
-    .lg-view-flex {
-        display: none !important;
-    }
-
-    .sm-view {
-        display: block !important;
-    }
+  .lg-view-flex {
+    display: none !important;
   }
 
-  @media screen and (min-width: 765px) {
-   
-    .lg-view-flex {
-        display: flex !important;
-    }
-
-    .lg-view {
-        display: block !important;
-    }
-
-    .sm-view {
-        display: none !important;
-    }
-
+  .sm-view {
+    display: block !important;
   }
+}
+
+@media screen and (min-width: 765px) {
+  .lg-view-flex {
+    display: flex !important;
+  }
+
+  .lg-view {
+    display: block !important;
+  }
+
+  .sm-view {
+    display: none !important;
+  }
+}
+

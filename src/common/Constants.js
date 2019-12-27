@@ -4,8 +4,10 @@ export const SCREENS = {
 
     PRELOGIN: "/base",
     LOGIN: "/base/login",
-    HOME: "/",
-    DASHBOARD: "/home/dashboard"
+
+    HOME: "/home",
+    DASHBOARD: "/home/dashboard",
+    SHORTLIST: "/home/shortlist"
 }
 
 export const LOCAL_STORAGE = {

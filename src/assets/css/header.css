@@ -1,37 +1,39 @@
-
 .header-base {
-    height: 50px;
-    background-color: #ffea3e;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 20px 0px 20px;
+  height: 50px;
+  background-color: #ffea3e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px 0px 20px;
 }
 
 .header-base .menus {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .header-base .menus > div {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .headerComp .dropdown-content .menu-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border-bottom: 1px solid rgb(235, 235, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #FFF;
+  border-bottom: 1px solid rgb(235, 235, 235);
 }
 
 .headerComp .dropdown-content {
-    position: absolute;
-    width: 100%;
-    background-color: #FFFFFF;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.22);
+  z-index: 5;
 }
 
 .headerComp .dropdown-content.hide {
-    display: none;
+  display: none;
 }
