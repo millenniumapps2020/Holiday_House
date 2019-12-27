@@ -1,5 +1,6 @@
 @import 'header.css';
 @import 'footer.css';
+@import 'shortList.css';
 
 
 
@@ -11,6 +12,20 @@
     justify-content: center !important;
 }
 
+.row {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: normal;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
 
 
 

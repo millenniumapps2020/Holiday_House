@@ -23,14 +23,14 @@ class FooterComponent extends Component {
                         <div className="col-md-5 col-lg-4 order-1 order-md-2 align-self-center">
                             <div className="row v-separator">
                                 <div className="col-md-6">
-                                    <ul class="unstyled-list">
+                                    <ul className="unstyled-list">
                                         <li><a href="">Help</a></li>
                                         <li><a href="">Pricing</a></li>
                                         <li><a href="">Terms and Conditions</a></li>
                                     </ul>
                                 </div>
                                 <div className="col-md-6">
-                                    <ul class="unstyled-list">
+                                    <ul className="unstyled-list">
                                         <li><a href="">Privacy Policy</a></li>
                                         <li><a href="">Site Map</a></li>
                                         <li><a href="">Contact Us</a></li>

@@ -6,7 +6,8 @@ export const SCREENS = {
     LOGIN: "/base/login",
 
     HOME: "/home",
-    DASHBOARD: "/home/dashboard"
+    DASHBOARD: "/home/dashboard",
+    SHORTLIST: "/home/shortlist"
 }
 
 export const LOCAL_STORAGE = {
