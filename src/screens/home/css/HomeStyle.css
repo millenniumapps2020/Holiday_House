@@ -1,0 +1,52 @@
+
+.banner-wrap{
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.banner-cover{
+    padding: 12% 5%;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: rgba(0,0,0,.2);
+}
+.search-box{
+    background-color: rgba(0,0,0,.5);
+    border-radius: 4px;
+    padding: .5rem;
+}
+.banner-title{
+    color: #fff;
+    font-size: 52px;
+}
+.search-icon {
+    padding-left: 35px!important;
+    background-image: url('https://www.holidayhouses.co.nz/ReactApp/images/home/search-location.png');
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+.input-controller{
+    padding: 0px 2px!important;
+}
+.date-controller{
+    display: flex;
+    flex-direction: row;
+}
+.start-date{
+    border-top-right-radius: 0px!important;
+    border-bottom-right-radius: 0px!important;
+}
+.end-date{
+    border-top-left-radius: 0px!important;
+    border-bottom-left-radius: 0px!important;
+}
+.search-button{
+    color: #333!important;
+    background-color: #ffea3e!important;
+    box-shadow: 0 3px #f3dd29!important;
+    border: 0!important;
+    top: 0
+}

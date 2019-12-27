@@ -5,6 +5,7 @@ import Authorized from './navigation/Authorized'
 
 import PreLoginNavigation from './navigation/PreLoginNavigation'
 import PostLoginNavigation from './navigation/PostLoginNavigation'
+import HomePage from './screens/home/HomePage'
 
 import { SCREENS, LOCAL_STORAGE } from './common/Constants'
 import { getItemFromSessionStorage, storeToSessionStorage } from './common/LocalStorage'
@@ -25,9 +26,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path={SCREENS.BASE} render={(props) => <BaseRouter {...props} loginStatus={this.state.loginStatus} />} />
+          <Route exact path={SCREENS.HOME} component={HomePage} />
+          <Route exact path={SCREENS.BASE} render={(props) => <BaseRouter {...props} loginStatus={this.state.loginStatus} />} /> */}
           <Route path={SCREENS.PRELOGIN} component={PreLoginNavigation} />
-          <Authorized path={SCREENS.HOME} component={PostLoginNavigation} />
+          {/* <Authorized path={SCREENS.HOME} component={PostLoginNavigation} /> */}
         </Switch>
       </BrowserRouter>
     )
