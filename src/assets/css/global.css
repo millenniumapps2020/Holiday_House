@@ -1,6 +1,7 @@
 @import 'header.css';
 @import 'footer.css';
 @import 'shortList.css';
+@import 'houseCard.css';
 
 
 body {
@@ -42,6 +43,12 @@ h5{
 .row{
   margin-top: 0px!important;
   margin-bottom: 0px!important;
+}
+
+.flex-align {
+  display: flex!important;
+  justify-content: space-between;
+  align-items: center;
 }
 
 

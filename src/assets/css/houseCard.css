@@ -1,0 +1,249 @@
+.house-card {
+    margin: 10px;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    transition: ease-in-out .2s;
+    transition: box-shadow .4s;
+    cursor: pointer;
+}
+
+.house-card .img-container {
+    position: relative;
+    display: block;
+    color: #fff;
+    padding-bottom: 75%;
+}
+
+.house-card:hover {
+    box-shadow: 0 0 10px rgba(20, 20, 20, 0.5); 
+}
+
+.simple-image-gallery {
+    background-color: #1b2c3b;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.simple-image-gallery .arrow.arrow-prev {
+    left: 0;
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/arrow-left.svg");
+}
+
+.simple-image-gallery .arrow.arrow-next {
+    right: 0;
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/arrow-right.svg");
+}
+
+.simple-image-gallery .arrow {
+    vertical-align: middle;
+    z-index: 105;
+    width: 40px;
+    background-size: 50%;
+    opacity: .5;
+}
+
+.simple-image-gallery .arrow, .simple-image-gallery .image {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.simple-image-gallery .image.current {
+    z-index: 2;
+    opacity: 1;
+}
+
+.simple-image-gallery .image {
+    width: 100%;
+    background-size: cover;
+    transition: opacity .3s ease-in;
+    z-index: 100;
+    opacity: 0;
+}
+
+.simple-image-gallery .image.next {
+    z-index: 1;
+}
+
+.house-card .img-container .house-card__shortlist {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 200;
+    font-size: 1.25rem;
+    text-shadow: 0 0 2px rgba(51,51,51,.25);
+}
+
+.shortlisted {
+    color: #f05755;
+    transition: color .15s ease-out;
+    animation: shortlistBounce linear .15s;
+    animation-iteration-count: 1;
+    transform-origin: 50% 50%;
+}
+
+.flag.house-card-flag.instant {
+    background-color: #02bc82;
+}
+
+.flag.house-card-flag {
+    top: 15px;
+    left: 0;
+    padding: 0 10px;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+.flag {
+    position: absolute;
+    font-weight: 300;
+    color: #fff;
+    z-index: 100;
+}
+
+.house-card .img-container .house-card__rate {
+    position: absolute;
+    padding: 0 10px;
+    line-height: 28px;
+    right: 10px;
+    bottom: 10px;
+    background-color: rgba(32,32,32,.8);
+    font-size: 16px;
+    font-weight: 300;
+    z-index: 100;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.house-card .info-container {
+    overflow: hidden;
+    position: relative;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.house-card .info-container .house-card__location {
+    text-transform: uppercase;
+    color: #8f8f8f;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.house-card .info-container .house-card__name {
+    font-size: 18px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #222;
+}
+
+.house-card .info-container .house-card__rating {
+    font-size: 8px;
+}
+
+.rating-star {
+    margin: auto;
+}
+
+.rating-star .rating-star__img.filled {
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/review/star-filled.svg");
+}
+
+.rating-star .rating-star__img.empty {
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/review/star-empty.svg");
+}
+
+.rating-star .rating-star__img {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 14px;
+    width: 14px;
+    margin: 2px;
+}
+
+.d-inline-flex {
+    display: inline-flex!important;
+}
+
+.house-card .info-container .house-card__specs {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.house-card .info-container .house-card__specs li:first-of-type {
+    margin-left: 0;
+}
+
+.house-card .info-container .house-card__specs li {
+    display: flex;
+    margin-left: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+    align-items: center;
+}
+
+.house-card .info-container .house-card__specs li .house-card__img.guest {
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/housecard/guest.png");
+}
+
+.house-card__specs li .house-card__img.bed {
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/housecard/bed.png");
+}
+
+.house-card__specs li .house-card__img.bath {
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/housecard/bath.png");
+}
+
+.house-card .info-container .house-card__specs li .house-card__img {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 15px;
+    width: 15px;
+    margin-right: 5px;
+}
+
+.fa-heart:before {
+    content: "\f004";
+}
+
+.flag:after, .flag:before {
+    display: block;
+    position: absolute;
+    content: "";
+}
+
+.flag.house-card-flag.instant:after {
+    border: 12px solid #02bc82;
+}
+
+.flag.house-card-flag:after {
+    top: 0;
+    bottom: 0;
+    right: -10px;
+}
+
+.flag.booking-form-flag:after, .flag.house-card-flag:after {
+    border-right: 10px solid transparent!important;
+    border-left: none!important;
+}
+
+.flag:after, .flag:before {
+    display: block;
+    position: absolute;
+    content: "";
+}

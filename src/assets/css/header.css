@@ -1,5 +1,5 @@
 .header-base {
-  height: 50px;
+  height: 55px;
   background-color: #ffea3e;
   display: flex;
   align-items: center;
@@ -7,10 +7,16 @@
   padding: 0px 20px 0px 20px;
 }
 
+.header-base .logo {
+  height: 28px;
+  cursor: pointer;
+}
+
 .header-base .menus {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
 }
 
 .header-base .menus > div {
@@ -26,6 +32,16 @@
   border-bottom: 1px solid rgb(235, 235, 235);
 }
 
+.headerComp .shortlist-bubble {
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  background-color: #fff6b6;
+  margin-left: 5px;
+}
+
 .headerComp .dropdown-content {
   position: absolute;
   width: 100%;
@@ -36,4 +52,14 @@
 
 .headerComp .dropdown-content.hide {
   display: none;
+}
+
+
+
+@media (max-width: 991.98px) and (min-width: 768px){
+  .headerComp .shortlist-bubble {
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+}
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 
 import { SCREENS } from '../common/Constants'
@@ -28,17 +29,33 @@ class HeaderComponent extends Component {
         }
     }
 
+    gotoHome = () => {
+        this.props.history.push(SCREENS.HOME)
+    }
+
     render() {
         const { menuList, showMenu } = this.state;
 
         return (
             <div className="headerComp">
                 <div className="header-base">
-                    <div>holiday house</div>
+                    <div >
+                        <img className="logo"
+                            src="https://www.holidayhouses.co.nz/ReactApp/images/brand/hh-full-dark.svg"
+                            onClick={this.gotoHome}
+                        />
+                    </div>
                     <div className="lg-view-flex menus">
                         {menuList.map((item, index) => {
                             return (
-                                <div onClick={() => this.onClickMenu(item)}>{item}</div>
+                                <div onClick={() => this.onClickMenu(item)}>
+                                    {item}
+                                    {
+                                        (item === "Shortlist" && this.props.houseCount) ?
+                                            <span className="shortlist-bubble">{this.props.houseCount}</span>
+                                            : null
+                                    }
+                                </div>
                             )
                         })}
                     </div>
@@ -65,4 +82,11 @@ class HeaderComponent extends Component {
     }
 }
 
-export default withRouter(HeaderComponent);
+
+const mapStateToProps = ({ shortList }) => {
+    return {
+        houseCount: shortList.houseCount
+    }
+}
+
+export default connect(mapStateToProps, null)(withRouter(HeaderComponent));

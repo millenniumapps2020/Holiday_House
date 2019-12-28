@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 
 import Dashboard from '../screens/postLogin/DashboardPage'
+import Home from '../screens/home/HomePage'
 import ShortList from '../screens/postLogin/ShortlistPage'
 
 import Header from '../components/HeaderComponent'

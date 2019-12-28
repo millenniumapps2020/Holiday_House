@@ -10,12 +10,16 @@ class FooterComponent extends Component {
                             <div className="row">
                                 <div className="col-lg-6 foot-home-logo">
                                     <div>
-                                        holiday house
+                                        <img className="footer-logo1"
+                                            src="https://www.holidayhouses.co.nz/ReactApp/images/brand/hh-footer-light.svg"
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-lg-6  foot-home-logo">
                                     <div>
-                                        trademe
+                                        <img className="footer-logo2"
+                                            src="https://www.holidayhouses.co.nz/ReactApp/images/brand/trademe.svg"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -41,9 +45,21 @@ class FooterComponent extends Component {
                         </div>
                         <div className="col-md-3 col-lg-2 order-3 order-md-3 align-self-center">
                             <div className="row justify-content-center social-media">
-                                <div>Insta</div>
-                                <div>FB</div>
-                                <div>WEB</div>
+                                <div>
+                                    <img
+                                        src="https://www.holidayhouses.co.nz/ReactApp/images/social/instagram-light.svg"
+                                    />
+                                </div>
+                                <div>
+                                    <img
+                                        src="https://www.holidayhouses.co.nz/ReactApp/images/social/facebook-light.svg"
+                                    />
+                                </div>
+                                <div>
+                                    <img
+                                        src="https://www.holidayhouses.co.nz/ReactApp/images/social/shield-site.svg"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

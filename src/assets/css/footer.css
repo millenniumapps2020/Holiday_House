@@ -16,9 +16,17 @@
     margin: 1rem auto;
 }
 
+.footer-base .footer-container .footer-logo1 {
+    height: 45px;
+}
+
+.footer-base .footer-container .footer-logo1 {
+    height: 45px;
+}
+
 .footer-base .row {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
 }
 
 .footer-base .v-separator {

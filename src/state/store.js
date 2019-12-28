@@ -1,12 +1,14 @@
 import { createStore, combineReducers, compose } from "redux";
 
 import login from './reducers/LoginReducer'
+import shortList from './reducers/ShortListReducer'
 
 import { RESET_APP } from './actions/actions'
 
 const appReducers = combineReducers(
     {
-        login
+        login,
+        shortList
     }
 );
 
