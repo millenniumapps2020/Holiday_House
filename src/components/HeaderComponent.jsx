@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { withRouter } from 'react-router';
 
+import LoginSignUpModal from './LoginSignUpModalComponent'
+
 import { SCREENS } from '../common/Constants'
 
 class HeaderComponent extends Component {
@@ -11,7 +13,8 @@ class HeaderComponent extends Component {
 
         this.state = {
             menuList: ["Shortlist", "List my house", "Help", "Login"],
-            showMenu: false
+            showMenu: false,
+            openLoginModal: false
         }
     }
 
@@ -26,6 +29,8 @@ class HeaderComponent extends Component {
     onClickMenu = (menu) => {
         if (menu === "Shortlist") {
             this.props.history.push(SCREENS.SHORTLIST)
+        } else if (menu === "Login") {
+            this.setState({ openLoginModal: true })
         }
     }
 
@@ -33,8 +38,12 @@ class HeaderComponent extends Component {
         this.props.history.push(SCREENS.HOME)
     }
 
+    closeDialog = () => {
+        this.setState({ openLoginModal: false })
+    }
+
     render() {
-        const { menuList, showMenu } = this.state;
+        const { menuList, showMenu, openLoginModal } = this.state;
 
         return (
             <div className="headerComp">
@@ -73,10 +82,24 @@ class HeaderComponent extends Component {
                 <div className={`dropdown-content ${showMenu ? 'show' : 'hide'}`}>
                     {menuList.map((item, index) => {
                         return (
-                            <div className="menu-item">{item}</div>
+                            <div className="menu-item" onClick={() => this.onClickMenu(item)}>
+                                {item}
+                                {
+                                    (item === "Shortlist" && this.props.houseCount) ?
+                                        <span className="shortlist-bubble">{this.props.houseCount}</span>
+                                        : null
+                                }
+                            </div>
                         )
                     })}
                 </div>
+
+                {
+                    openLoginModal ?
+                        <LoginSignUpModal closeDialogCB={this.closeDialog} />
+                        : null
+                }
+
             </div>
         )
     }

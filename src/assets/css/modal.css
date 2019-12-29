@@ -1,0 +1,34 @@
+.modal-login .modal-dialog {
+  width: 500px;
+  max-width: 800px;
+  z-index: 1050;
+}
+
+.modal button {
+    outline: none !important;
+}
+
+.modal .modal-content {
+  /* padding: 20px; */
+}
+
+.modal-login .modal-dialog .close-btn {
+  position: absolute;
+  cursor: pointer;
+  line-height: 18px;
+  font-size: 30px;
+  border: 0;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #ffea3e;
+  color: #5e5e5e;
+}
+
+
+
+@media (min-width: 992px) {
+  .modal-content .close-btn {
+    top: -20px;
+    right: -20px;
+  }
+}
