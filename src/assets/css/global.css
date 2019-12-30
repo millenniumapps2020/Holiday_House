@@ -53,6 +53,9 @@ h5{
   align-items: center;
 }
 
+button {
+  cursor: pointer;
+}
 
 
 

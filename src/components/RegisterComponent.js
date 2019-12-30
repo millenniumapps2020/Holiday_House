@@ -26,19 +26,31 @@ class RegisterComponent extends Component {
                         <div className="info-content">Required fields are marked with a star *</div>
                         <div className="input-div">
                             <div className="label">First name *</div>
-                            <input className="form-control" placeholder="Email Address" />
+                            <input className="form-control" placeholder="Your first name" />
+                            <div class="invalid inside-flex r-fname">
+                                <div><span>Please enter your first name</span></div>
+                            </div>
                         </div>
                         <div className="input-div">
                             <div className="label">Last name *</div>
-                            <input className="form-control" placeholder="Email Address" />
+                            <input className="form-control" placeholder="Your last name" />
+                            <div class="invalid inside-flex r-lname">
+                                <div><span>Please enter your last name</span></div>
+                            </div>
                         </div>
                         <div className="input-div">
                             <div className="label">Email Address *</div>
                             <input className="form-control" placeholder="Email Address" />
+                            <div class="invalid inside-flex r-email">
+                                <div><span>Please enter your email</span></div>
+                            </div>
                         </div>
                         <div className="input-div">
                             <div className="label">Password</div>
-                            <input className="form-control" placeholder="Email Address" />
+                            <input className="form-control" placeholder="Password" />
+                            <div class="invalid inside-flex r-password">
+                                <div><span>Please enter your password</span></div>
+                            </div>
                         </div>
                         <div className="btn-div">
                             <button className="btn registerBtn">

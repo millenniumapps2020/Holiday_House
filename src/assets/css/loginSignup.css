@@ -24,11 +24,20 @@
 
 .login-base .body .input-div .label, .register-base .body .input-div .label {
     padding-bottom: 5px;
+    font-weight: 500;
   }
 
 .login-base .body .input-div input, .register-base .body .input-div input {
-  width: 100%;
   height: 50px;
+}
+
+.input-div .password-label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-div .password-label .forgrt-password-btn {
+    font-size: 12px;
 }
 
 .login-base .body .loginBtn, .register-base .body .registerBtn {
@@ -36,7 +45,10 @@
   color: #333 !important;
   background-color: #ffea3e;
   box-shadow: 0 3px #f3dd29;
-  margin-top: 20px;
+}
+
+.register-base .body .registerBtn {
+    margin-top: 20px;
 }
 
 .login-base .body .loginBtn:hover, .register-base .body .registerBtn:hover {
@@ -95,3 +107,44 @@
     padding-bottom: 20px;
 }
 
+.invalid.inside-flex.email {
+    transform: translate(80%,-285%);
+}
+
+.invalid.inside-flex.r-fname, .invalid.inside-flex.r-lname,
+.invalid.inside-flex.r-password {
+    transform: translate(80%,-285%);
+}
+
+.invalid.inside-flex.r-email {
+    transform: translate(93%,-285%);
+}
+
+.invalid.inside-flex.password {
+    transform: translate(70%,-340%);
+}
+
+.invalid {
+    position: absolute;
+    z-index: 5;
+    padding: .5rem;
+    margin-top: 0;
+    font-size: .875rem;
+    line-height: 1;
+    color: #fff;
+    background-color: #f05755;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);
+    border-radius: .2rem;
+}
+
+.invalid.inside-flex::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    width: 0;
+    height: 0;
+    left: 45%;
+    border-top: solid 10px #f05755;
+    border-left: solid 8px transparent;
+    border-right: solid 8px transparent;
+}

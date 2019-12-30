@@ -6,7 +6,7 @@ class LoginComponent extends Component {
         super(props);
 
         this.state = {
-
+            showPassword: false
         }
     }
 
@@ -14,7 +14,17 @@ class LoginComponent extends Component {
         this.props.registerCB && this.props.registerCB()
     }
 
+    showPassword = () => {
+        this.setState({ showPassword: true })
+    }
+
+    hidePassword = () => {
+        this.setState({ showPassword: false })
+    }
+
     render() {
+        const { showPassword } = this.state
+
         return (
             <div className="login-base">
                 <div className="body">
@@ -23,10 +33,32 @@ class LoginComponent extends Component {
                         <div className="input-div">
                             <div className="label">Email Address</div>
                             <input className="form-control" placeholder="Email Address" />
+                            <div class="invalid inside-flex email">
+                                <div><span>Please enter a valid email</span></div>
+                            </div>
                         </div>
                         <div className="input-div">
-                            <div className="label">Password</div>
-                            <input className="form-control" placeholder="Password" />
+                            <div className="label password-label">
+                                <span>Password</span>
+                                <span className="forgrt-password-btn">I forget my password</span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type={showPassword ? "text" : "password"}
+                                    class="form-control" aria-label="Default"
+                                    placeholder="Password" aria-describedby="inputGroup-sizing-default"
+                                />
+                                <div class="input-group-append">
+                                    {
+                                        showPassword ?
+                                            <button class="input-group-text show-pass-btn" onClick={this.hidePassword}>Hide</button>
+                                            :
+                                            <button class="input-group-text hide-pass-btn" onClick={this.showPassword}>Show</button>
+                                    }
+                                </div>
+                            </div>
+                            <div class="invalid inside-flex password">
+                                <div><span>Please enter your password</span></div>
+                            </div>
                         </div>
                         <div className="btn-div">
                             <button className="btn loginBtn">

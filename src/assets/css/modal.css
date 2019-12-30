@@ -1,3 +1,9 @@
+
+.modal {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
 .modal-login .modal-dialog {
   width: 500px;
   max-width: 800px;
@@ -13,15 +19,18 @@
 }
 
 .modal-login .modal-dialog .close-btn {
-  position: absolute;
-  cursor: pointer;
-  line-height: 18px;
-  font-size: 30px;
-  border: 0;
-  border-radius: 50%;
-  padding: 10px;
-  background-color: #ffea3e;
-  color: #5e5e5e;
+    cursor: pointer;
+    line-height: 18px;
+    font-size: 30px;
+    border: 0;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #ffea3e;
+    color: #5e5e5e;
+    position: absolute;
+    top: -20px;
+    right: -16px;
+    z-index: 100;
 }
 
 

@@ -30,7 +30,7 @@ class LoginSignUpModalComponent extends Component {
 
         return (
             <div class="modal modal-login show fade" id="myModal" role="dialog" style={{ display: "block" }}>
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-md modal-dialog-centered">
                     <div class="modal-content">
                         <button className="close-btn" onClick={this.closeDialog}>×</button>
                         {
