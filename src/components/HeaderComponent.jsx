@@ -12,7 +12,7 @@ class HeaderComponent extends Component {
         super(props);
 
         this.state = {
-            menuList: ["Shortlist", "List my house", "Help", "Login"],
+            menuList: ["Shortlist", "List my house", "Help", "Login","Map Test"],
             showMenu: false,
             openLoginModal: false
         }
@@ -31,6 +31,8 @@ class HeaderComponent extends Component {
             this.props.history.push(SCREENS.SHORTLIST)
         } else if (menu === "Login") {
             this.setState({ openLoginModal: true })
+        } else if(menu === "Map Test"){
+            this.props.history.push(SCREENS.MAP)
         }
     }
 

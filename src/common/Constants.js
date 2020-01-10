@@ -7,7 +7,8 @@ export const SCREENS = {
 
     HOME: "/",
     DASHBOARD: "/home/dashboard",
-    SHORTLIST: "/home/shortlist"
+    SHORTLIST: "/home/shortlist",
+    MAP: "/home/map",
 }
 
 export const LOCAL_STORAGE = {
