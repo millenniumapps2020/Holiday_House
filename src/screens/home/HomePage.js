@@ -3,6 +3,8 @@ import images from '../../assets/images'
 import './css/HomeStyle.css';
 import HeaderComponent from '../../components/HeaderComponent';
 import FooterComponent from '../../components/FooterComponent';
+import HouseCard from '../../components/HouseCardComponent';
+
 var suggestionList = [{
     name: "Pet friendly",
     url: "https://www.holidayhouses.co.nz/ReactApp/images/home/pet-friendly.png",
@@ -156,9 +158,10 @@ class HomePage extends Component {
                             {suggestionList.map((suggestionItem) => {
                                 return (
                                     <div className="suggestion-wrap col-lg-3 col-sm-6">
-                                        <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.url})` }}>
+                                        <HouseCard />
+                                        {/* <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.url})` }}>
                                             <h5 className="suggestion-name">{suggestionItem.name}</h5>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 )
                             })}

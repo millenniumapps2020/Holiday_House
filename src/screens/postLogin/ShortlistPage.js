@@ -13,7 +13,7 @@ class ShortlistPage extends Component {
         super(props);
 
         this.state = {
-            shortListedHouses: [{},{},{},{},{},{}]
+            shortListedHouses: [{}, {}, {}, {}, {}, {}]
         }
     }
 
