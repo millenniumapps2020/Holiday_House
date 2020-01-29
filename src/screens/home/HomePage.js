@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import images from '../../assets/images'
-import './css/HomeStyle.css';
+import './css/HomePageStyle.css';
 import HeaderComponent from '../../components/HeaderComponent';
 import FooterComponent from '../../components/FooterComponent';
 import HouseCard from '../../components/HouseCardComponent';

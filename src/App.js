@@ -14,6 +14,7 @@ import { SCREENS, LOCAL_STORAGE } from './common/Constants'
 import { getItemFromSessionStorage, storeToSessionStorage } from './common/LocalStorage'
 
 import './assets/css/global.css'
+import DetailsPage from './screens/details/DetailsPage';
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path={SCREENS.HOME} component={HomePage} />
+            <Route exact path={SCREENS.DETAILS} component={DetailsPage} />
             <Route exact path={SCREENS.SHORTLIST} component={ShortList} />
             <Route exact path={SCREENS.MAP} component={Map} />
             <Route exact path={SCREENS.BASE} render={(props) => <BaseRouter {...props} loginStatus={this.state.loginStatus} />} />

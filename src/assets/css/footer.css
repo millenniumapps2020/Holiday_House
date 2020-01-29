@@ -30,7 +30,7 @@
 }
 
 .footer-base .v-separator {
-    border-left: 1px solid #ffea3e;
+    border-left: 1px solid var(--primary_color);
 }
 
 .footer-base .unstyled-list, .footer-base .unstyled-list li {
@@ -52,7 +52,7 @@
 }
 
 .footer-base .footer-container .footer-container-inner hr {
-    border-color: #ffea3e;
+    border-color: var(--primary_color);
     border-width: 1px;
     width: 35%;
 }

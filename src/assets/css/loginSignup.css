@@ -43,7 +43,7 @@
 .login-base .body .loginBtn, .register-base .body .registerBtn {
   width: 100%;
   color: #333 !important;
-  background-color: #ffea3e;
+  background-color: var(--primary_color);
   box-shadow: 0 3px #f3dd29;
 }
 

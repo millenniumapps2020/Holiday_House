@@ -1,0 +1,84 @@
+.details-header {
+    padding: 10px 0 10px 0px;
+}
+
+.bread-crumbs {
+    padding: 5px 0 5px 0;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.title-section {
+}
+
+.placeText {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.locationText {
+    margin-bottom: 0px;
+}
+
+.starImage {
+    margin-left: 3px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 14px;
+    width: 14px;
+}
+.review-section {
+    align-items: flex-end;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.rate-review {
+    display: flex;
+    /* flex-direction: row; */
+}
+
+.feature-wrap {
+    padding: 20px 0px 20px 0px;
+}
+
+.reviews {
+    margin-left: 80px;
+}
+
+.decription-section {
+    padding: 25px 0;
+    border-bottom: 2px solid #ccc;
+}
+
+.decription-section h2 {
+    font-size: 24px!important;
+    margin-bottom: 20px;
+}
+
+.decription-section p {
+    font-size: 16px!important;
+    white-space: pre-line!important;
+}
+
+.addButton {
+    width: 230px!important;
+    margin-top: 10px;
+    color: #5e5e5e!important;
+    padding: 3px!important;
+}
+
+.features h3 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 48px;
+    color: #5e5e5e;
+}
+
+.features p {
+    text-align: center;
+    font-size: 16px;
+}

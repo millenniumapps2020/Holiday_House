@@ -4,11 +4,15 @@
 @import 'houseCard.css';
 @import 'modal.css';
 @import 'loginSignup.css';
-
+:root {
+  --primary_color: #ffea3e;
+  --secondary_color:#1b2c3b;
+  --primary_text_color:
+}
 
 body {
   margin: 0!important;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: "MuseoSans"!important;
   font-size: 1rem!important;
   font-weight: 400!important;
   line-height: 1.5!important;
@@ -83,3 +87,8 @@ button {
   }
 }
 
+
+@font-face {
+  font-family: MuseoSans;
+  src: url(../fonts/museo_sans/MuseoSans-300.otf);
+}
