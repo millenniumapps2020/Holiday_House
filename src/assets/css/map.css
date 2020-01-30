@@ -1,0 +1,18 @@
+.map-base {
+    height: 100%;
+    width: 100%;
+}
+
+.map-base .content-div {
+    height: calc(100vh - 55px);
+    display: flex;
+    flex-direction: row;
+}
+
+.map-base .list-div {
+    flex: 1
+}
+
+.map-base .map-div {
+    flex: 1
+}

@@ -24,7 +24,14 @@ class MapComponent extends Component {
                 { latitude: 13.067439, longitude: 80.237617, name: "Chennai" },
             ]
         }
-        console.log('map props', props)
+    }
+
+    onClickCity = (city) => {
+        console.log('city details', city)
+    }
+
+    centerMoved = (data) => {
+        console.log('centerMoved', data)
     }
 
     displayMarkers = () => {
@@ -33,7 +40,7 @@ class MapComponent extends Component {
                 lat: city.latitude,
                 lng: city.longitude
             }}
-                onClick={() => alert("You clicked! ", city.name)} />
+                onClick={() => this.onClickCity(city)} />
         })
     }
 
@@ -42,19 +49,27 @@ class MapComponent extends Component {
         return (
             <div className="map-base">
                 <Header />
-                <Map
-                    google={this.props.google}
-                    zoom={7}
-                    style={mapStyles}
-                    initialCenter={{ lat: 11.127123, lng: 78.656891 }}
-                >
-                    {this.displayMarkers()}
-                </Map>
+                <div className="content-div">
+                    <div className="list-div">
+
+                    </div>
+                    <div className="map-div">
+                        <Map
+                            google={this.props.google}
+                            zoom={7}
+                            style={mapStyles}
+                            initialCenter={{ lat: 11.127123, lng: 78.656891 }}
+                            onDragend={this.centerMoved}
+                        >
+                            {this.displayMarkers()}
+                        </Map>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: ""
+    apiKey: "AIzaSyBuJnGEpeJlW8w0CV0htUt3ZpEMW6eL1_M"
 })(MapComponent);
