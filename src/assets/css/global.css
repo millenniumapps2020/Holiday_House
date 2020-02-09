@@ -4,6 +4,9 @@
 @import 'houseCard.css';
 @import 'modal.css';
 @import 'loginSignup.css';
+@import 'map.css';
+
+
 :root {
   --primary_color: #ffea3e;
   --secondary_color: #1b2c3b;
