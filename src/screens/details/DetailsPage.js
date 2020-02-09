@@ -98,33 +98,51 @@ class DetailsPage extends Component {
                                 </div>
                             </div>
                             <div className="decription-section">
-                                <h2>About this Holiday House</h2>
+                                <h2 className="title">About this Holiday House</h2>
                                 <p>
                                     Strasbourge Cottage is a  stone throw from the village yet private and secluded.  For a couples retreat or a small family weekend away, our cottage is the perfect spot to relax and central to everything Martinborough has to offer.
-                                    {"\n"}
+                                    {"\n"}{"\n"}
                                     Our charming property offers two bedrooms with a queen bed and two singles in the second room.  A separate lounge with a fabulous woodburner to keep warm in winter and in summer entertaining is a breeze on  the large sunny deck (BBQ provided) under the grapevine while surrounded by the beautiful roses.
-                                    {"\n"}
+                                    {"\n"}{"\n"}
                                     A fully fenced private section for children to play; and dogs are welcome at a small charge (please enquire).
-                                    {"\n"}
+                                    {"\n"}{"\n"}
                                     Coffee, tea, sugar, milk and muesli are included in your stay.
-                                    {"\n"}
+                                    {"\n"}{"\n"}
                                     Continuous hot water with our newly installed Rinnai System and free Wifi available.
-                                    {"\n"}
+                                    {"\n"}{"\n"}
                                     Four lovely bikes to cruise around Martinborough enjoying everything the area has to offer.
-                                    {"\n"}
+                                    {"\n"}{"\n"}
                                     Check in is from 2pm (we may be able to accommodate earlier upon request) and check out is 10am the day of your departure.
-                                    {"\n"}
+                                    {"\n"}{"\n"}
                                     A cleaning fee of $35.00 is charged per stay.
                                 </p>
                             </div>
                             <div className="decription-section">
-                                <h2>About this Holiday House</h2>
+                                <h2 className="title">Bed layout</h2>
+                                <p>1 Super King(s), 1 Super King(s), 1 Super King(s), 1 Cot(s), 2 Extra bed(s) available</p>
+                            </div>
+                        </div>
+                        <div className="col-md-5 col-sm12">
+                            <div className="booking-section">
+                                <div className="container">
+                                    <div class="rate-container">
+                                        <div >
+                                            <span>From</span>
+                                        </div>
+                                        <div>
+                                            <div class="rate-row">
+                                                <span class="rate">$300<sup ></sup></span>
+                                                <span>per night</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <FooterComponent />
-            </div>
+            </div >
         );
     }
 }

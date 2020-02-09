@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import Autosuggest from 'react-autosuggest';
 import images from '../../assets/images'
 import './css/HomePageStyle.css';
 import HeaderComponent from '../../components/HeaderComponent';
 import FooterComponent from '../../components/FooterComponent';
 import HouseCard from '../../components/HouseCardComponent';
+import moment from 'moment';
 
 var suggestionList = [{
     name: "Pet friendly",
@@ -23,10 +26,30 @@ var suggestionList = [{
     id: "4"
 }
 ]
+
+
+const languages = [
+    {
+        name: 'C',
+        year: 1972
+    },
+    {
+        name: 'Elm',
+        year: 2012
+    },
+];
+
 class HomePage extends Component {
 
 
     state = {
+        focused: false,
+        date: null,
+        value: '',
+        suggestions: [],
+        suggestionListView: false,
+        suggestionListViewValue: '',
+        guestDropdownView: false,
         holidayList: [
             {
                 name: "Common searches",
@@ -79,11 +102,42 @@ class HomePage extends Component {
             }
         ]
     }
+    onDateChange = (date) => {
+        this.setState({ date });
+    }
+
+    onFocusChange = (suggestionListView) => {
+        this.setState({ suggestionListView });
+    }
+    onGuestChange = (guestDropdownView) => {
+        this.setState({ guestDropdownView })
+    }
+
+    onTextChange = (data) => {
+        this.setState({ suggestionListViewValue: data.target.value })
+    }
+
+
     render() {
-        var { holidayList } = this.state;
+        var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;
+
+        // autoFocus and initialDate are helper props for the example wrapper but are not
+        // props on the SingleDatePicker itself and thus, have to be omitted.
+
         return (
             <div className="homePage">
                 <HeaderComponent />
+
+                {/* <SingleDatePicker
+                    id="date_input"
+                    date={date}
+                    focused={focused}
+                    onDateChange={this.onDateChange}
+                    onFocusChange={this.onFocusChange}
+                /> */}
+
+
+
                 <div className="container-fluid banner">
                     <div className="row">
                         <div className="banner-wrap" style={{ backgroundImage: `url(${images.common.banner_three})` }}>
@@ -93,11 +147,42 @@ class HomePage extends Component {
                                     <div className="row search-box">
                                         <div className="col input-controller location-controller">
                                             <input
+                                                onFocus={() => this.onFocusChange(true)}
+                                                onBlur={() => this.onFocusChange(false)}
                                                 type="text"
-                                                value=""
+                                                value={suggestionListViewValue}
+                                                onChange={this.onTextChange}
                                                 className="search-icon form-control"
                                                 placeholder="Where would you like to go?"
                                             />
+                                            {suggestionListView ?
+                                                <div className="autosuggest-wrap">
+                                                    <div className="autosuggest-header">
+                                                        <p>{suggestionListViewValue == '' ? "Top Locations" : "Locations"}</p>
+                                                    </div>
+                                                    <div className="autosuggest-list">
+                                                        {suggestionListViewValue == '' ?
+                                                            <div className="top-list">
+                                                                <div className="list">
+                                                                    <h6>Queenstown</h6>
+                                                                    <p>Queenstown/wanaka</p>
+                                                                </div>
+
+                                                                <div className="list">
+                                                                    <h6>Queenstown</h6>
+                                                                    <p>Queenstown/wanaka</p>
+                                                                </div>
+                                                            </div>
+                                                            :
+                                                            <div className="search-list">
+                                                                <div className="list">
+                                                                    <h6>Queenstown</h6>
+                                                                    <p>Queenstown/wanaka</p>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div> : null}
                                         </div>
                                         <div className="col input-controller date-controller">
                                             <input
@@ -115,11 +200,54 @@ class HomePage extends Component {
                                         </div>
                                         <div className="col input-controller location-controller">
                                             <input
-                                                type="text"
-                                                value=""
-                                                className="search-icon form-control"
+                                                onFocus={() => this.onGuestChange(true)}
+                                                onBlur={() => this.onGuestChange(false)}
+                                                value={"Guests"}
+                                                className="guestInput search-icon form-control"
                                                 placeholder="Guests"
                                             />
+                                            {guestDropdownView ?
+                                                <div className="guest-drowndown-wrap">
+                                                    <div className="guest-wrap">
+                                                        <h6>Adults</h6>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <button id="" class="btn btn-action btn-number"> - </button>
+                                                            </div>
+                                                            <input type="text" value="2" name="adults" class="form-control text-center" />
+                                                            <div class="input-group-append">
+                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number"> + </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="guest-wrap">
+                                                        <div className="row-spaceBetween">
+                                                            <h6>children</h6>
+                                                            <p>ages 3 to 16</p>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <button id="" class="btn btn-action btn-number"> - </button>
+                                                            </div>
+                                                            <input type="text" value="2" name="adults" class="form-control text-center" />
+                                                            <div class="input-group-append">
+                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number"> + </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="guest-wrap">
+                                                        <div className="row-spaceBetween">
+                                                            <div class="position-relative form-check">
+                                                                <label class="form-check-label">
+                                                                    <input type="checkbox" class="form-check-input" />
+                                                                    <span>Pets</span>
+                                                                </label>
+                                                            </div>
+                                                            <button class="btn btn-primary apply-button">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div> : null}
                                         </div>
                                         <div className="col-auto input-controller">
                                             <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block">

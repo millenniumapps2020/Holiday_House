@@ -8,8 +8,7 @@
     font-size: 12px;
 }
 
-.title-section {
-}
+.title-section {}
 
 .placeText {
     font-size: 24px;
@@ -28,6 +27,7 @@
     height: 14px;
     width: 14px;
 }
+
 .review-section {
     align-items: flex-end;
     justify-content: center;
@@ -53,14 +53,29 @@
     border-bottom: 2px solid #ccc;
 }
 
-.decription-section h2 {
+.decription-section .title {
     font-size: 24px!important;
     margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .decription-section p {
     font-size: 16px!important;
     white-space: pre-line!important;
+}
+
+.details_amenties span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.details_amenties img {
+    width: 32px;
+    height: 32px;
+    margin-right: 15px;
+    filter: opacity(.3) drop-shadow(0 0 0 #5e5e5e);
 }
 
 .addButton {
@@ -81,4 +96,23 @@
 .features p {
     text-align: center;
     font-size: 16px;
+    line-height: 24px;
+}
+
+.details_amenties-heading {
+    font-size: 24px!important;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.feature-heading {
+    font-weight: 700;
+    line-height: 24px;
+    font-size: 16px;
+    color: #000;
+}
+
+.booking-section {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .25);
+    padding: 20px 50px;
 }

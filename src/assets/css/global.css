@@ -6,26 +6,16 @@
 @import 'loginSignup.css';
 :root {
   --primary_color: #ffea3e;
-  --secondary_color:#1b2c3b;
+  --secondary_color: #1b2c3b;
   --primary_text_color:
 }
 
-body {
-  margin: 0!important;
-  font-family: "MuseoSans"!important;
-  font-size: 1rem!important;
-  font-weight: 400!important;
-  line-height: 1.5!important;
-  color: #212529!important;
-  text-align: left!important;
-  background-color: #fff!important;
-}
 .align-self-center {
-    align-self: center!important;
+  align-self: center!important;
 }
 
 .justify-content-center {
-    justify-content: center !important;
+  justify-content: center !important;
 }
 
 .row {
@@ -42,11 +32,13 @@ h1 {
 h4 {
   font-size: 1.2rem;
 }
-h5{
+
+h5 {
   font-size: 1.25rem!important;
   color: #fff!important;
 }
-.row{
+
+.row {
   margin-top: 0px!important;
   margin-bottom: 0px!important;
 }
@@ -61,13 +53,10 @@ button {
   cursor: pointer;
 }
 
-
-
 @media screen and (max-width: 765px) {
   .lg-view-flex {
     display: none !important;
   }
-
   .sm-view {
     display: block !important;
   }
@@ -77,18 +66,34 @@ button {
   .lg-view-flex {
     display: flex !important;
   }
-
   .lg-view {
     display: block !important;
   }
-
   .sm-view {
     display: none !important;
   }
 }
 
+@font-face {
+  font-family: MuseoSans;
+  src: url(../fonts/museo_sans/MuseoSans-100.otf);
+  font-weight: 100;
+}
 
 @font-face {
   font-family: MuseoSans;
   src: url(../fonts/museo_sans/MuseoSans-300.otf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: MuseoSans;
+  src: url(../fonts/museo_sans/MuseoSans-500.otf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: MuseoSans;
+  src: url(../fonts/museo_sans/MuseoSans-700.otf);
+  font-weight: 700;
 }

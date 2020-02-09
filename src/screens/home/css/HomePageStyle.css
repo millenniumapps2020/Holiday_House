@@ -1,64 +1,75 @@
-
-.banner-wrap{
+.banner-wrap {
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
-.banner-cover{
+
+.banner-cover {
     padding: 12% 5%;
-    width:100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
     display: flex;
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0, 0, 0, .2);
 }
-.search-box{
-    background-color: rgba(0,0,0,.5);
+
+.search-box {
+    background-color: rgba(0, 0, 0, .5);
     border-radius: 4px;
     padding: .5rem;
 }
-.banner-title{
+
+.banner-title {
     color: #fff;
     font-size: 52px;
 }
+
 .search-icon {
     padding-left: 35px!important;
     background-image: url('https://www.holidayhouses.co.nz/ReactApp/images/home/search-location.png');
     background-repeat: no-repeat;
     background-position: 10px;
 }
-.input-controller{
+
+.input-controller {
     padding: 0px 2px!important;
 }
-.date-controller{
+
+.date-controller {
     display: flex;
     flex-direction: row;
 }
-.start-date{
+
+.start-date {
     border-top-right-radius: 0px!important;
     border-bottom-right-radius: 0px!important;
 }
-.end-date{
+
+.end-date {
     border-top-left-radius: 0px!important;
     border-bottom-left-radius: 0px!important;
 }
-.search-button{
+
+.search-button {
     color: #333!important;
     background-color: var(--primary_color)!important;
     box-shadow: 0 3px var(--primary_color)!important;
     border: 0!important;
     top: 0
 }
-.suggestion-title{
+
+.suggestion-title {
     font-weight: 700;
     font-size: 28px;
     line-height: normal;
 }
-.suggestion-wrap{
+
+.suggestion-wrap {
     margin-top: 10px;
 }
-.suggestion{
+
+.suggestion {
     display: flex;
     height: 350px;
     align-items: flex-end;
@@ -71,29 +82,39 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-.suggestion-name{
-    text-shadow: 0 1px 4px rgba(167,167,167,.5);
+
+.suggestion:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    transform: translateY(-4px);
 }
-.discover-wrap{
+
+.suggestion-name {
+    text-shadow: 0 1px 4px rgba(167, 167, 167, .5);
+}
+
+.discover-wrap {
     padding: 40px 0;
     background-color: #f9f9f9;
 }
-.discover-list-wrap{
-    width:100%;
+
+.discover-list-wrap {
+    width: 100%;
     display: flex;
     flex-direction: row;
     overflow: scroll;
 }
-.holiday-wrap {
 
+.holiday-wrap {
     margin-top: 10px;
 }
-.holiday-title{
+
+.holiday-title {
     font-weight: 700;
     font-size: 28px;
     line-height: normal;
 }
-.holiday{
+
+.holiday {
     display: flex;
     height: 210px;
     align-items: flex-end;
@@ -106,12 +127,14 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-.holiday-name{
+
+.holiday-name {
     margin-top: 10px;
     color: #000!important;
     font-size: 1.25rem!important;
 }
-.holiday-type-list{
+
+.holiday-type-list {
     border-bottom: 1px solid #eee;
     color: gray;
     text-decoration: none;
@@ -120,7 +143,89 @@
     display: block;
     color: gray;
 }
-.holiday-type-ul{
+
+.holiday-type-ul {
     padding: 0;
     list-style-type: none;
+}
+
+.autosuggest-wrap {
+    z-index: 40000;
+    border: 1px solid #eee;
+    width: 98%;
+    position: absolute;
+    background: #fff;
+    margin-top: 10px;
+}
+
+.autosuggest-header p {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 20px;
+    background: #eeeeee;
+}
+
+.list {
+    padding: 5px 20px;
+    font-size: 16px;
+    border-bottom: 1.5px solid #eee;
+}
+
+.list h6 {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.list p {
+    font-size: 12px;
+}
+
+.guest-drowndown-wrap {
+    border: 1px solid #eee;
+    z-index: 40000;
+    width: 98%;
+    position: absolute;
+    background: #fff;
+    margin-top: 10px;
+    padding: 0px 20px 20px;
+}
+
+.guest-wrap {
+    margin-top: 20px;
+}
+
+.btn.btn-action {
+    width: 50px;
+    border-radius: 3px 3px 0px 0px !important;
+    border: 1px solid #cecece;
+    color: #5e5e5e;
+    background-color: #fff;
+}
+
+.row-spaceBetween {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row-spaceBetween p {
+    font-size: 12px;
+    color: #eee;
+}
+
+.apply-button {
+    color: #333!important;
+    background-color: #ffea3e!important;
+    box-shadow: 0 3px #f3dd29!important;
+    border: 0!important;
+    top: 0!important;
+    font-weight: 500!important;
+    font-size: 14px!important;
+    padding: 5px 20px!important;
+}
+.guestInput:focus{
+    color: transparent!important;
+    text-shadow: 0 0 0 #495057!important;
+    outline: none!important;
 }

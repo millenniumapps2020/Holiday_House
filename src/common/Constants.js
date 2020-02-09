@@ -5,8 +5,8 @@ export const SCREENS = {
     PRELOGIN: "/base",
     LOGIN: "/base/login",
 
-    HOME: "/home",
-    DETAILS: "/",
+    HOME: "/",
+    DETAILS: "/details",
     DASHBOARD: "/home/dashboard",
     SHORTLIST: "/home/shortlist",
     MAP: "/home/map",
