@@ -12,7 +12,7 @@ class HeaderComponent extends Component {
         super(props);
 
         this.state = {
-            menuList: ["Shortlist", "List my house", "Help", "Login","Map Test"],
+            menuList: ["Shortlist", "List my house", "Help", "Login", "Map Test"],
             showMenu: false,
             openLoginModal: false
         }
@@ -31,7 +31,7 @@ class HeaderComponent extends Component {
             this.props.history.push(SCREENS.SHORTLIST)
         } else if (menu === "Login") {
             this.setState({ openLoginModal: true })
-        } else if(menu === "Map Test"){
+        } else if (menu === "Map Test") {
             this.props.history.push(SCREENS.MAP)
         }
     }
@@ -81,6 +81,7 @@ class HeaderComponent extends Component {
                         <i class="fa fa-bars"></i>
                     </div>
                 </div>
+
                 <div className={`dropdown-content ${showMenu ? 'show' : 'hide'}`}>
                     {menuList.map((item, index) => {
                         return (
@@ -95,6 +96,25 @@ class HeaderComponent extends Component {
                         )
                     })}
                 </div>
+
+                {
+                    this.props.showSearch ?
+                        <div className="header-search">
+                            <div className="filter-div">
+                                <input type="text" className="search-input"
+                                    placeholder="Where would you like to go?"
+                                />
+                                <div className="tab">Dates</div>
+                                <div className="tab">Guests</div>
+                                <div className="tab">Price</div>
+                                <div className="tab">Filters</div>
+                            </div>
+                            <div className="map-galary">
+
+                            </div>
+                        </div>
+                        : null
+                }
 
                 {
                     openLoginModal ?
