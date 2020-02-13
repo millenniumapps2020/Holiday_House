@@ -116,6 +116,9 @@ class HomePage extends Component {
     onTextChange = (data) => {
         this.setState({ suggestionListViewValue: data.target.value })
     }
+    clickEvent = ()=>{
+        alert(1)
+    }
 
 
     render() {
@@ -148,7 +151,6 @@ class HomePage extends Component {
                                         <div className="col input-controller location-controller">
                                             <input
                                                 onFocus={() => this.onFocusChange(true)}
-                                                onBlur={() => this.onFocusChange(false)}
                                                 type="text"
                                                 value={suggestionListViewValue}
                                                 onChange={this.onTextChange}
@@ -162,7 +164,7 @@ class HomePage extends Component {
                                                     </div>
                                                     <div className="autosuggest-list">
                                                         {suggestionListViewValue == '' ?
-                                                            <div className="top-list">
+                                                            <div className="top-list" onClick={this.clickEvent}>
                                                                 <div className="list">
                                                                     <h6>Queenstown</h6>
                                                                     <p>Queenstown/wanaka</p>
