@@ -77,30 +77,24 @@ class MapComponent extends Component {
 
         return (
             <div className="map-base">
-                <Header />
-                <div className="content-div">
-                    <div className="list-div">
-
-                    </div>
-                    <div className="map-div">
-                        <Map
-                            google={this.props.google}
-                            zoom={7}
-                            style={mapStyles}
-                            initialCenter={{ lat: 11.127123, lng: 78.656891 }}
-                            onDragend={this.centerMoved}
-                            onClick={this.onMapClicked}
-                        >
-                            {this.displayMarkers()}
-                            <InfoWindow
-                                marker={this.state.activeStore}
-                                visible={this.state.showingInfoWindow}>
-                                <div>
-                                    <HouseCard />
-                                </div>
-                            </InfoWindow>
-                        </Map>
-                    </div>
+                <div className="map-div">
+                    <Map
+                        google={this.props.google}
+                        zoom={7}
+                        style={mapStyles}
+                        initialCenter={{ lat: 11.127123, lng: 78.656891 }}
+                        onDragend={this.centerMoved}
+                        onClick={this.onMapClicked}
+                    >
+                        {this.displayMarkers()}
+                        <InfoWindow
+                            marker={this.state.activeStore}
+                            visible={this.state.showingInfoWindow}>
+                            <div>
+                                <HouseCard />
+                            </div>
+                        </InfoWindow>
+                    </Map>
                 </div>
             </div>
         )

@@ -1,0 +1,37 @@
+
+.search-base {
+    padding: 10px;
+    display: flex;
+}
+
+.search-base .result-view {
+    flex: 1;
+    padding: 10px;
+}
+
+.search-base .map-view {
+    flex: 1;
+}
+
+.search-base .search-header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-base .search-header .left {
+    height: 100%;
+}
+
+.search-base .search-header .sort-select {
+    margin-left: 10px;
+    height: 70%;
+    border: 1px solid rgb(204, 204, 204);
+    color: gray;
+}
+
+.search-base .result-content {
+    padding: 10px;
+}
+

@@ -14,8 +14,13 @@ class HeaderComponent extends Component {
         this.state = {
             menuList: ["Shortlist", "List my house", "Help", "Login", "Map Test"],
             showMenu: false,
-            openLoginModal: false
+            openLoginModal: false,
+            selectedSlideMenu: "map"
         }
+    }
+
+    componentDidMount() {
+        this.props.onClickSlideMenuCB && this.props.onClickSlideMenuCB(this.state.selectedSlideMenu)
     }
 
     onClickMenuBtn = () => {
@@ -42,6 +47,11 @@ class HeaderComponent extends Component {
 
     closeDialog = () => {
         this.setState({ openLoginModal: false })
+    }
+
+    onClickSlideMenu = (menu) => {
+        this.setState({ selectedSlideMenu: menu })
+        this.props.onClickSlideMenuCB && this.props.onClickSlideMenuCB(menu)
     }
 
     render() {
@@ -107,10 +117,21 @@ class HeaderComponent extends Component {
                                 <div className="tab">Dates</div>
                                 <div className="tab">Guests</div>
                                 <div className="tab">Price</div>
-                                <div className="tab">Filters</div>
+                                <div className="tab last">Filters</div>
                             </div>
                             <div className="map-galary">
-
+                                <div className={`tab-slider-bar ${this.state.selectedSlideMenu === 'gallery' ? 'slide' : ''}`}>
+                                    <div className={`tab ${this.state.selectedSlideMenu === "map" ? 'active' : ''}`}
+                                        onClick={() => this.onClickSlideMenu('map')}
+                                    >
+                                        Map
+                                    </div>
+                                    <div className={`tab ${this.state.selectedSlideMenu === "gallery" ? 'active' : ''}`}
+                                        onClick={() => this.onClickSlideMenu('gallery')}
+                                    >
+                                        Gallery
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         : null
