@@ -14,6 +14,21 @@
     background-color: rgba(0, 0, 0, .2);
 }
 
+.guest-icon {
+    background-image: url('../../../assets/images/icons/search_guests.png');
+    padding-left: 35px!important;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+.calendar-icon {
+    background-image: url('../../../assets/images/icons/calendar_icon.png');
+    width: 17px;
+    height: 17px;
+    padding-left: 35px!important;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+
 .search-box {
     background-color: rgba(0, 0, 0, .5);
     border-radius: 4px;
@@ -23,13 +38,6 @@
 .banner-title {
     color: #fff;
     font-size: 52px;
-}
-
-.search-icon {
-    padding-left: 35px!important;
-    background-image: url('https://www.holidayhouses.co.nz/ReactApp/images/home/search-location.png');
-    background-repeat: no-repeat;
-    background-position: 10px;
 }
 
 .input-controller {
@@ -150,38 +158,6 @@
     list-style-type: none;
 }
 
-.autosuggest-wrap {
-    z-index: 40000;
-    border: 1px solid #eee;
-    width: 98%;
-    position: absolute;
-    background: #fff;
-    margin-top: 10px;
-}
-
-.autosuggest-header p {
-    font-size: 16px;
-    font-weight: 600;
-    padding: 5px 20px;
-    background: #eeeeee;
-}
-
-.list {
-    padding: 5px 20px;
-    font-size: 16px;
-    border-bottom: 1.5px solid #eee;
-}
-
-.list h6 {
-    font-size: 16px;
-    font-weight: 400;
-    margin: 0;
-}
-
-.list p {
-    font-size: 12px;
-}
-
 .guest-drowndown-wrap {
     border: 1px solid #eee;
     z-index: 40000;
@@ -225,7 +201,8 @@
     font-size: 14px!important;
     padding: 5px 20px!important;
 }
-.guestInput:focus{
+
+.guestInput:focus {
     color: transparent!important;
     text-shadow: 0 0 0 #495057!important;
     outline: none!important;

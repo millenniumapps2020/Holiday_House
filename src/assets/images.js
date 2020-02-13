@@ -7,6 +7,11 @@ import inactive_star from './images/icons/inactive_star.svg';
 import child from './images/icons/child.png';
 import pets_no from './images/icons/pets_no.png';
 
+import calendar_icon from './images/icons/calendar_icon.png';
+import search_location from './images/icons/search_location.png';
+import search_guests from './images/icons/search_guests.png';
+
+
 const images = {
     "common": {
         "banner_one": banner_one,

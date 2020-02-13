@@ -36,7 +36,7 @@ class HouseCardComponent extends Component {
                             <div className="arrow arrow-next"></div>
                         </div>
                         <div className="house-card__shortlist">
-                            <i className="shortlisted fas fa-heart"></i>
+                            <i className="far fa-heart"></i>
                         </div>
                         <div className="flag house-card-flag instant">
                             <span>Instant booking</span>

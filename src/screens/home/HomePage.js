@@ -9,6 +9,7 @@ import HouseCard from '../../components/HouseCardComponent';
 import moment from 'moment';
 
 import { SCREENS } from '../../common/Constants'
+import PlacesSearchComponent from '../../components/PlacesSearchComponent';
 
 var suggestionList = [{
     name: "Pet friendly",
@@ -104,6 +105,20 @@ class HomePage extends Component {
             }
         ]
     }
+
+    componentDidMount() {
+        document.addEventListener('click', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.handleClickOutside);
+    }
+    handleClickOutside = (event) => {
+        var target = event.target;
+        if (this.guestRef && !this.guestRef.contains(target)) {
+            this.onGuestChange(false)
+        }
+    }
     onDateChange = (date) => {
         this.setState({ date });
     }
@@ -118,7 +133,7 @@ class HomePage extends Component {
     onTextChange = (data) => {
         this.setState({ suggestionListViewValue: data.target.value })
     }
-    clickEvent = ()=>{
+    clickEvent = () => {
         alert(1)
     }
 
@@ -135,17 +150,6 @@ class HomePage extends Component {
         return (
             <div className="homePage">
                 <HeaderComponent />
-
-                {/* <SingleDatePicker
-                    id="date_input"
-                    date={date}
-                    focused={focused}
-                    onDateChange={this.onDateChange}
-                    onFocusChange={this.onFocusChange}
-                /> */}
-
-
-
                 <div className="container-fluid banner">
                     <div className="row">
                         <div className="banner-wrap" style={{ backgroundImage: `url(${images.common.banner_three})` }}>
@@ -153,49 +157,12 @@ class HomePage extends Component {
                                 <div className="search-container">
                                     <h1 className="banner-title">For better places to&nbsp;stay</h1>
                                     <div className="row search-box">
-                                        <div className="col input-controller location-controller">
-                                            <input
-                                                onFocus={() => this.onFocusChange(true)}
-                                                type="text"
-                                                value={suggestionListViewValue}
-                                                onChange={this.onTextChange}
-                                                className="search-icon form-control"
-                                                placeholder="Where would you like to go?"
-                                            />
-                                            {suggestionListView ?
-                                                <div className="autosuggest-wrap">
-                                                    <div className="autosuggest-header">
-                                                        <p>{suggestionListViewValue == '' ? "Top Locations" : "Locations"}</p>
-                                                    </div>
-                                                    <div className="autosuggest-list">
-                                                        {suggestionListViewValue == '' ?
-                                                            <div className="top-list" onClick={this.clickEvent}>
-                                                                <div className="list">
-                                                                    <h6>Queenstown</h6>
-                                                                    <p>Queenstown/wanaka</p>
-                                                                </div>
-
-                                                                <div className="list">
-                                                                    <h6>Queenstown</h6>
-                                                                    <p>Queenstown/wanaka</p>
-                                                                </div>
-                                                            </div>
-                                                            :
-                                                            <div className="search-list">
-                                                                <div className="list">
-                                                                    <h6>Queenstown</h6>
-                                                                    <p>Queenstown/wanaka</p>
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div> : null}
-                                        </div>
+                                        <PlacesSearchComponent name="homeSearch" />
                                         <div className="col input-controller date-controller">
                                             <input
                                                 type="text"
                                                 value=""
-                                                className="search-icon start-date form-control"
+                                                className="calendar-icon start-date form-control"
                                                 placeholder="Check in"
                                             />
                                             <input
@@ -205,12 +172,11 @@ class HomePage extends Component {
                                                 placeholder="Check out"
                                             />
                                         </div>
-                                        <div className="col input-controller location-controller">
+                                        <div className="col input-controller location-controller" ref={(node) => this.guestRef = node}>
                                             <input
                                                 onFocus={() => this.onGuestChange(true)}
-                                                onBlur={() => this.onGuestChange(false)}
                                                 value={"Guests"}
-                                                className="guestInput search-icon form-control"
+                                                className="guestInput guest-icon form-control"
                                                 placeholder="Guests"
                                             />
                                             {guestDropdownView ?
