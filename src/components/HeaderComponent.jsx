@@ -12,7 +12,7 @@ class HeaderComponent extends Component {
         super(props);
 
         this.state = {
-            menuList: ["Shortlist", "List my house", "Help", "Login", "Map Test"],
+            menuList: ["Shortlist", "List my house", "Help", "Login"],
             showMenu: false,
             openLoginModal: false,
             selectedSlideMenu: "map"

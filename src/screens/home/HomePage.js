@@ -6,6 +6,7 @@ import './css/HomePageStyle.css';
 import HeaderComponent from '../../components/HeaderComponent';
 import FooterComponent from '../../components/FooterComponent';
 import HouseCard from '../../components/HouseCardComponent';
+import Calendar from 'react-calendar';
 import moment from 'moment';
 
 import { SCREENS } from '../../common/Constants'
@@ -53,6 +54,9 @@ class HomePage extends Component {
         suggestionListView: false,
         suggestionListViewValue: '',
         guestDropdownView: false,
+        date: new Date(),
+        children: 1,
+        adults: 1,
         holidayList: [
             {
                 name: "Common searches",
@@ -118,6 +122,12 @@ class HomePage extends Component {
         if (this.guestRef && !this.guestRef.contains(target)) {
             this.onGuestChange(false)
         }
+        if (this.checkIndateRef && !this.checkIndateRef.contains(target)) {
+            this.setState({ checkIndateVisible: false })
+        }
+        if (this.checkOutdateRef && !this.checkOutdateRef.contains(target)) {
+            this.setState({ checkOutdateVisible: false })
+        }
     }
     onDateChange = (date) => {
         this.setState({ date });
@@ -137,10 +147,20 @@ class HomePage extends Component {
         alert(1)
     }
 
-    onClickSuggestion = () => {
+    onClickSuggestion = (suggestionItem) => {
         this.props.history.push(SCREENS.SEARCH)
     }
+    changeGuest(key, type) {
+        var value = this.state[key];
+        if (type == "minus") {
+            if (value !== 0) {
+                this.setState({ [key]: value - 1 })
+            }
+        } else {
+            this.setState({ [key]: value + 1 })
+        }
 
+    }
     render() {
         var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;
 
@@ -159,18 +179,40 @@ class HomePage extends Component {
                                     <div className="row search-box">
                                         <PlacesSearchComponent name="homeSearch" />
                                         <div className="col input-controller date-controller">
-                                            <input
-                                                type="text"
-                                                value=""
-                                                className="calendar-icon start-date form-control"
-                                                placeholder="Check in"
-                                            />
-                                            <input
-                                                type="text"
-                                                value=""
-                                                className="end-date form-control"
-                                                placeholder="Check out"
-                                            />
+                                            <div ref={(node) => this.checkIndateRef = node}>
+                                                <input
+                                                    onClick={() => this.setState({ checkIndateVisible: true })}
+                                                    type="text"
+                                                    value={this.state.checkIndate}
+                                                    className="guestInput calendar-icon start-date form-control"
+                                                    placeholder="Check in"
+                                                />
+                                                {this.state.checkIndateVisible ?
+                                                    <div style={{ position: 'absolute', zIndex: 10000 }}>
+                                                        <Calendar
+                                                            onChange={(date) => this.setState({ checkIndate: moment(date).format('DD/MM/YYYY') })}
+                                                            value={this.state.date}
+                                                        />
+                                                    </div> : null}
+                                            </div>
+                                            <div ref={(node) => this.checkOutdateRef = node}>
+                                                <input
+                                                    onClick={() => this.setState({ checkOutdateVisible: true })}
+                                                    type="text"
+                                                    value={this.state.checkOutdate}
+                                                    className="guestInput end-date form-control"
+                                                    placeholder="Check out"
+                                                />
+                                                {this.state.checkOutdateVisible ?
+                                                    <div style={{ position: 'absolute', zIndex: 10000 }}>
+                                                        <Calendar
+                                                            onChange={(date) => this.setState({ checkOutdate: moment(date).format('DD/MM/YYYY') })}
+                                                            value={this.state.date}
+                                                        />
+                                                    </div>
+
+                                                    : null}
+                                            </div>
                                         </div>
                                         <div className="col input-controller location-controller" ref={(node) => this.guestRef = node}>
                                             <input
@@ -185,11 +227,11 @@ class HomePage extends Component {
                                                         <h6>Adults</h6>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <button id="" class="btn btn-action btn-number"> - </button>
+                                                                <button id="" class="btn btn-action btn-number" onClick={() => this.changeGuest('adults', 'minus')}> - </button>
                                                             </div>
-                                                            <input type="text" value="2" name="adults" class="form-control text-center" />
+                                                            <input type="text" name="adults" class="form-control text-center" value={this.state.adults} />
                                                             <div class="input-group-append">
-                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number"> + </button>
+                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number" onClick={() => this.changeGuest('adults', 'plus')} > + </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -200,11 +242,11 @@ class HomePage extends Component {
                                                         </div>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <button id="" class="btn btn-action btn-number"> - </button>
+                                                                <button id="" class="btn btn-action btn-number" onClick={() => this.changeGuest('children', 'minus')}> - </button>
                                                             </div>
-                                                            <input type="text" value="2" name="adults" class="form-control text-center" />
+                                                            <input type="text" value={this.state.children} name="adults" class="form-control text-center" />
                                                             <div class="input-group-append">
-                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number"> + </button>
+                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number" onClick={() => this.changeGuest('children', 'plus')}> + </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -217,13 +259,13 @@ class HomePage extends Component {
                                                                     <span>Pets</span>
                                                                 </label>
                                                             </div>
-                                                            <button class="btn btn-primary apply-button">Apply</button>
+                                                            <button class="btn btn-primary apply-button" onClick={() => this.setState({ guestDropdownView: false })}>Apply</button>
                                                         </div>
                                                     </div>
                                                 </div> : null}
                                         </div>
                                         <div className="col-auto input-controller">
-                                            <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block">
+                                            <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block" onClick={this.onClickSuggestion}>
                                                 {/* <span class="d-sm-none fas fa-search"></span> */}
                                                 <span class="d-none d-sm-inline">Search</span>
                                             </button>
@@ -294,7 +336,7 @@ class HomePage extends Component {
                     </div>
                 </div>
                 <FooterComponent />
-            </div>
+            </div >
         )
     }
 }

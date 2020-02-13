@@ -33,7 +33,7 @@ class SearchPage extends Component {
                     onClickSlideMenuCB={this.onClickSlideMenu}
                 />
                 <div className="search-base">
-                    <div className="result-view">
+                    <div className={selectedSlideMenu === "map" ? "col-6 col" : "col"}>
                         <div className="search-header">
                             <div className="left flex-align-center">
                                 <span>Sort :</span>
@@ -48,9 +48,10 @@ class SearchPage extends Component {
                                 </select>
                             </div>
                             <div className="right flex-align-center">
-                                Showing <span style={{ fontWeight: "bold" }}> 1-24 </span> of <span style={{ fontWeight: "bold" }}> 71 </span> results
-                            </div>
+                                Showing <span style={{ marginLeft: 5, fontWeight: "bold", marginRight: 5, }}>1-24</span> of <span style={{ marginLeft: 5, marginRight: 5, fontWeight: "bold" }}> 71 </span> results
+                                </div>
                         </div>
+
                         <div className="row result-content">
                             {
                                 searchList.length ?
@@ -71,7 +72,7 @@ class SearchPage extends Component {
                     </div>
                     {
                         selectedSlideMenu === "map" ?
-                            <div className="map-view">
+                            <div className="col-6 col">
                                 <MapComponent />
                             </div>
                             : null
