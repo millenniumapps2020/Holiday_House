@@ -56,6 +56,35 @@
 }
 
 
+/* ================= Search div styles starts here  ================= */
+
+.headerComp .header-search {
+  padding: 5px 10px;
+  -webkit-box-shadow: 0 1px 6px rgb(194, 194, 194);
+	   -moz-box-shadow: 0 1px 6px rgb(194, 194, 194);
+	        box-shadow: 0 1px 6px rgb(194, 194, 194);
+}
+
+.headerComp .header-search .filter-div {
+ display: flex;
+} 
+
+.headerComp .header-search .filter-div .search-input {
+  width: 230px;
+  border: 1px solid rgb(199, 199, 199);
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
+.headerComp .header-search .filter-div .tab {
+  border-right: 1px solid rgb(230, 230, 230);
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* ================= Search div styles ends here  ================= */
+
+
 
 @media (max-width: 991.98px) and (min-width: 768px){
   .headerComp .shortlist-bubble {

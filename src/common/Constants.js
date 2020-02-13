@@ -10,6 +10,7 @@ export const SCREENS = {
     DASHBOARD: "/home/dashboard",
     SHORTLIST: "/home/shortlist",
     MAP: "/home/map",
+    SEARCH: "/home/search",
 }
 
 export const LOCAL_STORAGE = {

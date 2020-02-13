@@ -8,6 +8,8 @@ import FooterComponent from '../../components/FooterComponent';
 import HouseCard from '../../components/HouseCardComponent';
 import moment from 'moment';
 
+import { SCREENS } from '../../common/Constants'
+
 var suggestionList = [{
     name: "Pet friendly",
     url: "https://www.holidayhouses.co.nz/ReactApp/images/home/pet-friendly.png",
@@ -120,6 +122,9 @@ class HomePage extends Component {
         alert(1)
     }
 
+    onClickSuggestion = () => {
+        this.props.history.push(SCREENS.SEARCH)
+    }
 
     render() {
         var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;
@@ -269,7 +274,9 @@ class HomePage extends Component {
                         <div className="suggestion-list row">
                             {suggestionList.map((suggestionItem) => {
                                 return (
-                                    <div className="suggestion-wrap col-lg-3 col-sm-6">
+                                    <div className="suggestion-wrap col-lg-3 col-sm-6"
+                                        onClick={() => this.onClickSuggestion(suggestionItem)}
+                                    >
                                         <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.url})` }}>
                                             <h5 className="suggestion-name">{suggestionItem.name}</h5>
                                         </div>
