@@ -60,9 +60,12 @@
 
 .headerComp .header-search {
   padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   -webkit-box-shadow: 0 1px 6px rgb(194, 194, 194);
-	   -moz-box-shadow: 0 1px 6px rgb(194, 194, 194);
-	        box-shadow: 0 1px 6px rgb(194, 194, 194);
+	-moz-box-shadow: 0 1px 6px rgb(194, 194, 194);
+	box-shadow: 0 1px 6px rgb(194, 194, 194);
 }
 
 .headerComp .header-search .filter-div {
@@ -80,6 +83,66 @@
   border-right: 1px solid rgb(230, 230, 230);
   padding: 10px;
   cursor: pointer;
+}
+
+.headerComp .header-search .filter-div .tab:hover {
+  background-color: #fcf7d6;
+}
+
+.headerComp .header-search .filter-div .tab.last {
+  border: none;
+}
+
+.header-search .tab-slider-bar {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  list-style: none;
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 15px;
+  border: 1px solid rgb(201, 201, 201);
+}
+
+.header-search .tab-slider-bar .tab {
+  font-size: 15px;
+  line-height: 1;
+  text-align: center;
+  padding: 10px 18px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  display: inline-block;
+  transition: color .25s ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.header-search .tab-slider-bar .tab.active {
+  color: #fff;
+}
+
+.header-search .tab-slider-bar.slide:after {
+  left: 50%;
+}
+
+.header-search .tab-slider-bar:after {
+  content: "";
+  width: 50%;
+  background: #4b9ce7;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 15px;
+  transition: all .4s ease-in-out;
 }
 
 /* ================= Search div styles ends here  ================= */
