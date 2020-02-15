@@ -55,6 +55,18 @@
   display: none;
 }
 
+.headerComp .header-base .userInfo-div {
+  display: flex;
+  align-items: center;
+}
+
+.headerComp .header-base .userName {
+  font-weight: bold;
+}
+
+.headerComp .header-base .logout-btn {
+  margin-left: 15px;
+}
 
 /* ================= Search div styles starts here  ================= */
 

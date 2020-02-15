@@ -29,19 +29,19 @@ class LoginSignUpModalComponent extends Component {
         const { showLogin } = this.state
 
         return (
-            <div class="modal modal-login show fade" id="myModal" role="dialog" style={{ display: "block" }}>
-                <div class="modal-dialog modal-md modal-dialog-centered">
-                    <div class="modal-content">
+            <div className="modal modal-login show fade" id="myModal" role="dialog" style={{ display: "block" }}>
+                <div className="modal-dialog modal-md modal-dialog-centered">
+                    <div className="modal-content">
                         <button className="close-btn" onClick={this.closeDialog}>×</button>
                         {
                             showLogin ?
-                                <Login registerCB={this.showRegister} />
+                                <Login registerCB={this.showRegister} closeDialogCB={this.closeDialog} />
                                 :
-                                <Register loginCB={this.showLogin} />
+                                <Register loginCB={this.showLogin} closeDialogCB={this.closeDialog} />
                         }
                     </div>
                 </div>
-                <div class="modal-backdrop fade show"></div>
+                <div className="modal-backdrop fade show"></div>
             </div>
 
         )

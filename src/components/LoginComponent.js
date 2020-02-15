@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+
+import { POST } from '../model/ApiCommunicator'
+import { LOGIN } from '../model/ServiceURLs'
+
+import { storeLoggedUser } from '../state/actions/actions'
 
 class LoginComponent extends Component {
 
@@ -6,6 +12,8 @@ class LoginComponent extends Component {
         super(props);
 
         this.state = {
+            email: "",
+            password: "",
             showPassword: false
         }
     }
@@ -22,6 +30,32 @@ class LoginComponent extends Component {
         this.setState({ showPassword: false })
     }
 
+    onChangeEmail = (e) => {
+        this.setState({ email: e.target.value })
+    }
+
+    onChangePassword = (e) => {
+        this.setState({ password: e.target.value })
+    }
+
+    onClickLogin = () => {
+        let request = {
+            emailId: this.state.email,
+            password: this.state.password
+        }
+        POST(LOGIN, request, this.successRespCBLogin, this.errorRespCBLogin);
+    }
+
+    successRespCBLogin = (response) => {
+        this.props.storeLoggedUser(response.result[0].firstName)
+        this.props.closeDialogCB && this.props.closeDialogCB()
+    }
+
+    errorRespCBLogin = (error) => {
+        console.log('error.message', error)
+        alert(error)
+    }
+
     render() {
         const { showPassword } = this.state
 
@@ -32,7 +66,9 @@ class LoginComponent extends Component {
                         <h3 className="heading">Sign in to Holiday Houses</h3>
                         <div className="input-div">
                             <div className="label">Email Address</div>
-                            <input className="form-control" placeholder="Email Address" />
+                            <input className="form-control" placeholder="Email Address"
+                                onChange={this.onChangeEmail}
+                            />
                             <div class="invalid inside-flex email">
                                 <div><span>Please enter a valid email</span></div>
                             </div>
@@ -46,6 +82,7 @@ class LoginComponent extends Component {
                                 <input type={showPassword ? "text" : "password"}
                                     class="form-control" aria-label="Default"
                                     placeholder="Password" aria-describedby="inputGroup-sizing-default"
+                                    onChange={this.onChangePassword}
                                 />
                                 <div class="input-group-append">
                                     {
@@ -61,7 +98,9 @@ class LoginComponent extends Component {
                             </div>
                         </div>
                         <div className="btn-div">
-                            <button className="btn loginBtn">
+                            <button className="btn loginBtn"
+                                onClick={this.onClickLogin}
+                            >
                                 Sign in to Holiday Houses
                             </button>
                         </div>
@@ -90,4 +129,10 @@ class LoginComponent extends Component {
     }
 }
 
-export default LoginComponent;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        storeLoggedUser: (data) => { dispatch(storeLoggedUser(data)) }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(LoginComponent);

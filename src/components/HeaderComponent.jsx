@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 
 import LoginSignUpModal from './LoginSignUpModalComponent'
 
+import { storeLoggedUser } from '../state/actions/actions'
+
 import { SCREENS } from '../common/Constants'
 
 class HeaderComponent extends Component {
@@ -12,7 +14,7 @@ class HeaderComponent extends Component {
         super(props);
 
         this.state = {
-            menuList: ["Shortlist", "List my house", "Help", "Login"],
+            menuList: ["Shortlist", "List my house", "Help"],
             showMenu: false,
             openLoginModal: false,
             selectedSlideMenu: "map"
@@ -34,11 +36,13 @@ class HeaderComponent extends Component {
     onClickMenu = (menu) => {
         if (menu === "Shortlist") {
             this.props.history.push(SCREENS.SHORTLIST)
-        } else if (menu === "Login") {
-            this.setState({ openLoginModal: true })
         } else if (menu === "Map Test") {
             this.props.history.push(SCREENS.MAP)
         }
+    }
+
+    onClickLogin = () => {
+        this.setState({ openLoginModal: true })
     }
 
     gotoHome = () => {
@@ -52,6 +56,10 @@ class HeaderComponent extends Component {
     onClickSlideMenu = (menu) => {
         this.setState({ selectedSlideMenu: menu })
         this.props.onClickSlideMenuCB && this.props.onClickSlideMenuCB(menu)
+    }
+
+    onClickLogout = () => {
+        this.props.storeLoggedUser("")
     }
 
     render() {
@@ -79,16 +87,29 @@ class HeaderComponent extends Component {
                                 </div>
                             )
                         })}
+                        {
+                            this.props.userName ?
+                                <div className="userInfo-div">
+                                    <div className="userName">Hi {this.props.userName}</div>
+                                    <div className="fa fa-sign-out-alt logout-btn"
+                                        onClick={this.onClickLogout}
+                                    ></div>
+                                </div>
+                                :
+                                <div onClick={this.onClickLogin}>
+                                    Login
+                                </div>
+                        }
                     </div>
                     <div className="sm-view menu-icon-div">
                         {
                             showMenu ?
-                                <i class="fa fa-bars" onClick={this.onClickCloseMenuBtn}>B</i>
+                                <i className="fa fa-bars" onClick={this.onClickCloseMenuBtn}>B</i>
                                 :
-                                <i class="fa fa-bars" onClick={this.onClickMenuBtn}>A</i>
+                                <i className="fa fa-bars" onClick={this.onClickMenuBtn}>A</i>
 
                         }
-                        <i class="fa fa-bars"></i>
+                        <i className="fa fa-bars"></i>
                     </div>
                 </div>
 
@@ -149,10 +170,17 @@ class HeaderComponent extends Component {
 }
 
 
-const mapStateToProps = ({ shortList }) => {
+const mapStateToProps = ({ shortList, login }) => {
     return {
-        houseCount: shortList.houseCount
+        houseCount: shortList.houseCount,
+        userName: login.userName
     }
 }
 
-export default connect(mapStateToProps, null)(withRouter(HeaderComponent));
+const mapDispatchToProps = (dispatch) => {
+    return {
+        storeLoggedUser: (data) => { dispatch(storeLoggedUser(data)) }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HeaderComponent));
