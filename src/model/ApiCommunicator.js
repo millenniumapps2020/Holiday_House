@@ -35,9 +35,9 @@ export const POST = (sub_url, bodyData, successCB, errorCB) => {
         console.log(e)
     })
 }
-export const GET = (sub_url_key, bodyData) => {
-    var sub_url = services.sub_url_key;
-    var base_url = URL + sub_url;
+export const GET = (sub_url, bodyData) => {
+    // var sub_url = services.sub_url_key;
+    var base_url = AppSettings.serviceURL + sub_url;
     // console.log('DELETE_METHOD', base_url, JSON.stringify(bodyData))
 
     var data = {

@@ -11,6 +11,8 @@ import moment from 'moment';
 
 import { SCREENS } from '../../common/Constants'
 import PlacesSearchComponent from '../../components/PlacesSearchComponent';
+import { SUGGESTION } from '../../model/ServiceURLs';
+import { POST } from '../../model/ApiCommunicator';
 
 var suggestionList = [{
     name: "Pet friendly",
@@ -159,7 +161,26 @@ class HomePage extends Component {
         } else {
             this.setState({ [key]: value + 1 })
         }
+    }
+    getSuggestionList() {
+        let request = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            emailId: this.state.emailId,
+            userType: "0",
+            password: this.state.password
+        }
+        POST(SUGGESTION, request, this.successRespCBSuggestion, this.errorRespCBSuggestion);
+    }
 
+    successRespCBSuggestion = (response) => {
+        this.props.storeLoggedUser(response.result[0].firstName)
+        this.props.closeDialogCB && this.props.closeDialogCB()
+    }
+
+    errorRespCBSuggestion = (error) => {
+        console.log('error.message', error)
+        alert(error)
     }
     render() {
         var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;

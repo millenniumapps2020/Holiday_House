@@ -115,14 +115,14 @@ class LoginComponent extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="social-div">
+                    {/* <div className="social-div">
                         <div>Sign in with a different account</div>
                         <div>
                             <button style={{ backgroundImage: "url(https://www.holidayhouses.co.nz/ReactApp/images/social/kev_svg.svg)" }}></button>
                             <button style={{ backgroundImage: "url(https://www.holidayhouses.co.nz/ReactApp/images/social/google_svg.svg)" }}></button>
                             <button style={{ backgroundImage: "url(https://www.holidayhouses.co.nz/ReactApp/images/social/facebook_svg.svg)" }}></button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

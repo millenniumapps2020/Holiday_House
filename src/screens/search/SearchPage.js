@@ -57,7 +57,7 @@ class SearchPage extends Component {
                                 searchList.length ?
                                     searchList.map((item, index) => {
                                         return (
-                                            < div style={{ padding: 0 }} id="house-card-0"
+                                            <div style={{ padding: 0 }} id="house-card-0"
                                                 className={`${selectedSlideMenu === "map" ?
                                                     'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'
                                                     :

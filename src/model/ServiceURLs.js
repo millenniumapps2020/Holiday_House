@@ -1,2 +1,5 @@
 export const LOGIN = "/login"
 export const REGISTER = "/registration"
+export const SUGGESTION = "/suggestions"
+export const DISCOVER = "/suggestions"
+export const PROPERTY_DETAILS = "/propertydetails"

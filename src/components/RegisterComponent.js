@@ -102,14 +102,14 @@ class RegisterComponent extends Component {
                             </button>
                         </div>
                     </div>
-                    <div className="social-div">
+                    {/* <div className="social-div">
                         <div>Sign up with a different account</div>
                         <div>
                             <button style={{ backgroundImage: "url(https://www.holidayhouses.co.nz/ReactApp/images/social/kev_svg.svg)" }}></button>
                             <button style={{ backgroundImage: "url(https://www.holidayhouses.co.nz/ReactApp/images/social/google_svg.svg)" }}></button>
                             <button style={{ backgroundImage: "url(https://www.holidayhouses.co.nz/ReactApp/images/social/facebook_svg.svg)" }}></button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )
