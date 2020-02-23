@@ -6,6 +6,8 @@ import Footer from '../../components/FooterComponent'
 import HouseCard from '../../components/HouseCardComponent'
 
 import { storeShortListedHouseList } from '../../state/actions/actions'
+import { SHORTLIST } from '../../model/ServiceURLs';
+import { POST } from '../../model/ApiCommunicator';
 
 class ShortlistPage extends Component {
 
@@ -13,14 +15,38 @@ class ShortlistPage extends Component {
         super(props);
 
         this.state = {
-            shortListedHouses: [{}, {}, {}, {}, {}, {}]
+            shortlist: []
         }
     }
 
     componentDidMount() {
-        this.props.storeShortListedHouseList(this.state.shortListedHouses.length)
+
+        this.getShortList();
     }
 
+    getShortList = () => {
+        let request = {
+            "userId": "1",
+            "limit": "10",
+            "offset": "0"
+        }
+        POST(SHORTLIST, request, this.successRespCBShortListAction, this.errorRespCBShortListAction);
+    }
+    successRespCBShortListAction = (response) => {
+        console.log('response', response)
+        if (response.result.length > 0) {
+            this.props.storeShortListedHouseList(response.result.length)
+            this.setState({ shortlist: response.result })
+        }
+    }
+
+    errorRespCBShortListAction = (error) => {
+        console.log('response_error', error)
+
+    }
+    onCardClick() {
+
+    }
     render() {
         return (
             <div id="shortList-page" className="shortList-page">
@@ -34,24 +60,13 @@ class ShortlistPage extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <HouseCard />
-                        </div>
-                        <div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <HouseCard />
-                        </div>
-                        <div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <HouseCard />
-                        </div>
-                        <div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <HouseCard />
-                        </div>
-                        <div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <HouseCard />
-                        </div>
-                        <div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                            <HouseCard />
-                        </div>
+                        {this.state.shortlist.map((item) => {
+                            return (<div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                <HouseCard data={item} onCardClick={(item) => this.onCardClick(item)} />
+                            </div>)
+                        })
+
+                        }
 
                     </div>
                 </div>

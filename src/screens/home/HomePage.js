@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import Autosuggest from 'react-autosuggest';
 import images from '../../assets/images'
 import './css/HomePageStyle.css';
@@ -11,28 +10,8 @@ import moment from 'moment';
 
 import { SCREENS } from '../../common/Constants'
 import PlacesSearchComponent from '../../components/PlacesSearchComponent';
-import { SUGGESTION } from '../../model/ServiceURLs';
+import { SUGGESTION, PROPERTY, PERFECTS } from '../../model/ServiceURLs';
 import { POST } from '../../model/ApiCommunicator';
-
-var suggestionList = [{
-    name: "Pet friendly",
-    url: "https://www.holidayhouses.co.nz/ReactApp/images/home/pet-friendly.png",
-    id: "1"
-}, {
-    name: "Luxury",
-    url: "https://www.holidayhouses.co.nz//ReactApp/images/home/luxury.png",
-    id: "2"
-}, {
-    name: "Rarotonga",
-    url: "https://www.holidayhouses.co.nz/ReactApp/images/home/rarotonga.png",
-    id: "3"
-}, {
-    name: "Staff picks",
-    url: "https://www.holidayhouses.co.nz/ReactApp/images/home/staff-picks.png",
-    id: "4"
-}
-]
-
 
 const languages = [
     {
@@ -59,63 +38,54 @@ class HomePage extends Component {
         date: new Date(),
         children: 1,
         adults: 1,
-        holidayList: [
-            {
-                name: "Common searches",
-                url: "https://www.holidayhouses.co.nz/ReactApp/images/home/common-searches.png",
-                type: [{
-                    name: 'Kids'
-                }, {
-                    name: 'Linen available'
-                }, {
-                    name: 'Wifi'
-                }, {
-                    name: 'Pool'
-                }, {
-                    name: 'Spa'
-                }],
-                id: "1"
-            },
-
-            {
-                name: "Hidden gems",
-                url: "https://www.holidayhouses.co.nz/ReactApp/images/home/hidden-gems.png",
-                id: "2",
-                type: [{
-                    name: 'Pohara'
-                }, {
-                    name: 'Kerikeri'
-                }, {
-                    name: 'Whitianga'
-                }, {
-                    name: 'Castlepoint'
-                }, {
-                    name: 'Hanmer Springs'
-                }],
-            },
-            {
-                name: "Pacific retreats",
-                url: "https://www.holidayhouses.co.nz/ReactApp/images/home/pacific-retreats.png",
-                id: "3",
-                type: [{
-                    name: 'Cook Islands'
-                }, {
-                    name: 'Vanuatu'
-                }, {
-                    name: 'Tonga'
-                }, {
-                    name: 'Fiji'
-                }, {
-                    name: 'Western Samoa'
-                }],
-            }
-        ]
+        placeProperties: [],
+        guestCount: '',
+        suggestionList: [],
+        discoverList: [],
+        holidayList: []
     }
 
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside);
+        this.getProperties();
+        this.getSuggestionList();
+        this.getDiscoverList();
+        this.getPerfectList();
     }
+    getProperties = () => {
+        var request = {
+            "userId": "",
+            "limit": "10",
+            "offset": "6"
+        };
+        POST(PROPERTY, request, this.successRespCBProperty, this.errorRespCBProperty);
+    }
+    successRespCBProperty = (data) => {
+        console.log('data', data);
+        if (data.result.length > 0) {
+            this.setState({ placeProperties: data.result });
+        }
+    }
+    errorRespCBProperty = (error) => {
 
+    }
+    getDiscoverList = () => {
+        var request = {
+            "userId": "",
+            "limit": "10",
+            "offset": "6"
+        };
+        POST(PROPERTY, request, this.successRespCBDiscover, this.errorRespDiscover);
+    }
+    successRespCBDiscover = (data) => {
+        if (data.result.length > 0) {
+            console.log('data.result', data.result)
+            this.setState({ discoverList: data.result });
+        }
+    }
+    errorRespCBDiscover = (error) => {
+
+    }
     componentWillUnmount() {
         document.removeEventListener('click', this.handleClickOutside);
     }
@@ -145,9 +115,7 @@ class HomePage extends Component {
     onTextChange = (data) => {
         this.setState({ suggestionListViewValue: data.target.value })
     }
-    clickEvent = () => {
-        alert(1)
-    }
+
 
     onClickSuggestion = (suggestionItem) => {
         this.props.history.push(SCREENS.SEARCH)
@@ -164,23 +132,52 @@ class HomePage extends Component {
     }
     getSuggestionList() {
         let request = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            emailId: this.state.emailId,
-            userType: "0",
-            password: this.state.password
-        }
+            "userId": "",
+            "limit": "4",
+            "offset": "0"
+        };
         POST(SUGGESTION, request, this.successRespCBSuggestion, this.errorRespCBSuggestion);
     }
 
     successRespCBSuggestion = (response) => {
-        this.props.storeLoggedUser(response.result[0].firstName)
-        this.props.closeDialogCB && this.props.closeDialogCB()
+        console.log('response', response)
+        if (response.result.length > 0) {
+            this.setState({ suggestionList: response.result });
+        }
+
     }
 
     errorRespCBSuggestion = (error) => {
         console.log('error.message', error)
-        alert(error)
+    }
+
+    getPerfectList() {
+        let request = {
+            "userId": "1",
+            "limit": "3",
+            "offset": "0"
+        };
+        POST(PERFECTS, request, this.successRespCBPerfectList, this.errorRespCBPerfectList);
+    }
+
+    successRespCBPerfectList = (response) => {
+        console.log('response', response)
+        if (response.result.length > 0) {
+            this.setState({ holidayList: response.result });
+        }
+
+    }
+
+    errorRespCBPerfectList = (error) => {
+        console.log('error.message', error)
+    }
+
+    addGeustDetails() {
+        var count = (this.state.adults + this.state.children)
+        this.setState({ guestDropdownView: false, guestCount: count > 0 ? count : '' })
+    }
+    dicoverCardPressed(item) {
+        this.props.history.push(SCREENS.DETAILS, { propertyId: 1 })
     }
     render() {
         var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;
@@ -190,7 +187,7 @@ class HomePage extends Component {
 
         return (
             <div className="homePage">
-                <HeaderComponent />
+                <HeaderComponent key="homeHeader" />
                 <div className="container-fluid banner">
                     <div className="row">
                         <div className="banner-wrap" style={{ backgroundImage: `url(${images.common.banner_three})` }}>
@@ -198,7 +195,7 @@ class HomePage extends Component {
                                 <div className="search-container">
                                     <h1 className="banner-title">For better places to&nbsp;stay</h1>
                                     <div className="row search-box">
-                                        <PlacesSearchComponent name="homeSearch" />
+                                        <PlacesSearchComponent name="homeSearch" data={this.state.placeProperties} />
                                         <div className="col input-controller date-controller">
                                             <div ref={(node) => this.checkIndateRef = node}>
                                                 <input
@@ -211,6 +208,7 @@ class HomePage extends Component {
                                                 {this.state.checkIndateVisible ?
                                                     <div style={{ position: 'absolute', zIndex: 10000 }}>
                                                         <Calendar
+                                                            minDate={new Date()}
                                                             onChange={(date) => this.setState({ checkIndate: moment(date).format('DD/MM/YYYY') })}
                                                             value={this.state.date}
                                                         />
@@ -227,6 +225,7 @@ class HomePage extends Component {
                                                 {this.state.checkOutdateVisible ?
                                                     <div style={{ position: 'absolute', zIndex: 10000 }}>
                                                         <Calendar
+                                                            minDate={new Date()}
                                                             onChange={(date) => this.setState({ checkOutdate: moment(date).format('DD/MM/YYYY') })}
                                                             value={this.state.date}
                                                         />
@@ -238,7 +237,7 @@ class HomePage extends Component {
                                         <div className="col input-controller location-controller" ref={(node) => this.guestRef = node}>
                                             <input
                                                 onFocus={() => this.onGuestChange(true)}
-                                                value={"Guests"}
+                                                value={this.state.guestCount}
                                                 className="guestInput guest-icon form-control"
                                                 placeholder="Guests"
                                             />
@@ -280,7 +279,7 @@ class HomePage extends Component {
                                                                     <span>Pets</span>
                                                                 </label>
                                                             </div>
-                                                            <button class="btn btn-primary apply-button" onClick={() => this.setState({ guestDropdownView: false })}>Apply</button>
+                                                            <button class="btn btn-primary apply-button" onClick={() => this.addGeustDetails()}>Apply</button>
                                                         </div>
                                                     </div>
                                                 </div> : null}
@@ -301,12 +300,12 @@ class HomePage extends Component {
                     <div className="suggestion-container">
                         <h1 className="suggestion-title">Suggestions</h1>
                         <div className="suggestion-list row">
-                            {suggestionList.map((suggestionItem) => {
+                            {this.state.suggestionList.map((suggestionItem, suggestionIndex) => {
                                 return (
-                                    <div className="suggestion-wrap col-lg-3 col-sm-6"
+                                    <div className="col-lg-3 col-sm-6" key={"suggestionKey" + suggestionIndex}
                                         onClick={() => this.onClickSuggestion(suggestionItem)}
                                     >
-                                        <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.url})` }}>
+                                        <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.imageUrl})` }}>
                                             <h5 className="suggestion-name">{suggestionItem.name}</h5>
                                         </div>
                                     </div>
@@ -321,13 +320,10 @@ class HomePage extends Component {
                             <h1 className="suggestion-title">Discover:<a href="">Titikaveka</a></h1>
                         </div>
                         <div className="discover-list-wrap">
-                            {suggestionList.map((suggestionItem) => {
+                            {this.state.discoverList.map((discoverItem) => {
                                 return (
-                                    <div className="suggestion-wrap col-lg-3 col-sm-6">
-                                        <HouseCard />
-                                        {/* <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.url})` }}>
-                                            <h5 className="suggestion-name">{suggestionItem.name}</h5>
-                                        </div> */}
+                                    <div className="col-lg-3 col-sm-6" >
+                                        <HouseCard data={discoverItem} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
                                     </div>
                                 )
                             })}
@@ -340,13 +336,13 @@ class HomePage extends Component {
                         <div className="holiday-list row">
                             {holidayList.map((holidayItem) => {
                                 return (
-                                    <div className="holiday-wrap col-lg-4 col-sm-6">
-                                        <div className="holiday" style={{ backgroundImage: `url(${holidayItem.url})` }}>
+                                    <div className="col-lg-4 col-sm-6">
+                                        <div className="holiday" style={{ backgroundImage: `url(${holidayItem.imageUrl})` }}>
                                         </div>
                                         <h5 className="holiday-name">{holidayItem.name}</h5>
                                         <ul className="holiday-type-ul">
                                             {holidayItem.type && holidayItem.type.length > 0 ?
-                                                holidayItem.type.map((typeItem) => {
+                                                JSON.parse(holidayItem.search).map((typeItem) => {
                                                     return (<li className="holiday-type-list">{typeItem.name}</li>);
                                                 }) : null}
                                         </ul>

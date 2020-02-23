@@ -20,6 +20,7 @@
     background-repeat: no-repeat;
     background-position: 10px;
 }
+
 .calendar-icon {
     background-image: url('../../../assets/images/icons/calendar_icon.png');
     width: 17px;
@@ -75,6 +76,7 @@
 
 .suggestion-wrap {
     margin-top: 10px;
+    padding: 50px 0px;
 }
 
 .suggestion {
@@ -115,6 +117,7 @@
 
 .holiday-wrap {
     margin-top: 10px;
+    padding: 50px 0px;
 }
 
 .holiday-title {
@@ -141,6 +144,11 @@
     margin-top: 10px;
     color: #000!important;
     font-size: 1.25rem!important;
+}
+
+.holiday-type-ul li:hover {
+    background-color: #ffea3e;
+    transition: .2s ease-in-out;
 }
 
 .holiday-type-list {

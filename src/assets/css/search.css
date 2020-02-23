@@ -4,12 +4,10 @@
 }
 
 .search-base .result-view {
-    flex: 1;
     padding: 10px;
 }
 
 .search-base .map-view {
-    flex: 1;
 }
 
 .search-base .search-header {
@@ -34,12 +32,14 @@
     padding: 10px;
 }
 
-.search-base .map-wrap {
-    position: fixed;
-    backface-visibility: hidden;
-    width: 50%;
-    right: 0;
-    top: 138px;
-    height: 100%;
-    height: calc(100% - 138px);
+.search-map-base{
+    padding: 0px!important;
+}
+.map-div{
+    height:84vh
+}
+.map-div div:first-child{
+    position: relative!important;
+}
+.map-div .gm-style{
 }

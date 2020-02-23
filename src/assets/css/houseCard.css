@@ -69,8 +69,7 @@
 .simple-image-gallery .image.next {
     z-index: 1;
 }
-
-.house-card .img-container .house-card__shortlist {
+.shortlist-button-wrap {
     position: absolute;
     top: 0;
     right: 0;

@@ -7,61 +7,16 @@ class PlacesSearchComponent extends Component {
         suggestions: [],
         suggestionListView: false,
         suggestionListViewValue: '',
-        holidayList: [
-            {
-                name: "Common searches",
-                url: "https://www.holidayhouses.co.nz/ReactApp/images/home/common-searches.png",
-                type: [{
-                    name: 'Kids'
-                }, {
-                    name: 'Linen available'
-                }, {
-                    name: 'Wifi'
-                }, {
-                    name: 'Pool'
-                }, {
-                    name: 'Spa'
-                }],
-                id: "1"
-            },
-
-            {
-                name: "Hidden gems",
-                url: "https://www.holidayhouses.co.nz/ReactApp/images/home/hidden-gems.png",
-                id: "2",
-                type: [{
-                    name: 'Pohara'
-                }, {
-                    name: 'Kerikeri'
-                }, {
-                    name: 'Whitianga'
-                }, {
-                    name: 'Castlepoint'
-                }, {
-                    name: 'Hanmer Springs'
-                }],
-            },
-            {
-                name: "Pacific retreats",
-                url: "https://www.holidayhouses.co.nz/ReactApp/images/home/pacific-retreats.png",
-                id: "3",
-                type: [{
-                    name: 'Cook Islands'
-                }, {
-                    name: 'Vanuatu'
-                }, {
-                    name: 'Tonga'
-                }, {
-                    name: 'Fiji'
-                }, {
-                    name: 'Western Samoa'
-                }],
-            }
-        ]
+        filterLocation: [],
     }
 
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside);
+    }
+
+    componentWillReceiveProps = (nexProps) => {
+        console.log('nexProps', nexProps);
+
     }
 
     componentWillUnmount() {
@@ -78,14 +33,19 @@ class PlacesSearchComponent extends Component {
     }
 
     onTextChange = (data) => {
-        this.setState({ suggestionListViewValue: data.target.value })
+        var filterArrayList = [];
+        var value = data.target.value;
+        if (data.target.value != '') {
+            filterArrayList = this.props.data.filter((item) => ((item.name.toLowerCase()).includes(value.toLowerCase()) || (item.address.toLowerCase()).includes(value.toLowerCase())));
+        }
+        this.setState({ suggestionListViewValue: value, filterLocation: filterArrayList })
     }
-    clickEvent = () => {
-        this.setState({ suggestionListViewValue: 'Queenstown/wanaka' })
+    clickEvent = (data) => {
+        this.setState({ suggestionListViewValue: data.name })
         this.onFocusChange(false)
     }
     render() {
-        var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;
+        var { suggestionListView, suggestionListViewValue } = this.state;
 
         return (
             <div className="col input-controller location-controller" ref={(node) => this.searchRef = node}>
@@ -104,23 +64,26 @@ class PlacesSearchComponent extends Component {
                         </div>
                         <div className="autosuggest-list">
                             {suggestionListViewValue == '' ?
-                                <div className="top-list" onClick={this.clickEvent}>
-                                    <div className="list">
-                                        <h6>Queenstown</h6>
-                                        <p>Queenstown/wanaka</p>
-                                    </div>
-
-                                    <div className="list">
-                                        <h6>Queenstown</h6>
-                                        <p>Queenstown/wanaka</p>
-                                    </div>
+                                <div className="top-list">
+                                    {this.props.data.map((propertyItem, propertyIndex) => {
+                                        return (
+                                            <div className="list" onClick={() => this.clickEvent(propertyItem)}>
+                                                <h6>{propertyItem.name}</h6>
+                                                <p>{propertyItem.address}</p>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                                 :
                                 <div className="search-list">
-                                    <div className="list">
-                                        <h6>Queenstown</h6>
-                                        <p>Queenstown/wanaka</p>
-                                    </div>
+                                    {this.state.filterLocation.map((propertyItem, propertyIndex) => {
+                                        return (
+                                            <div className="list" onClick={() => this.clickEvent(propertyItem)}>
+                                                <h6>{propertyItem.name}</h6>
+                                                <p>{propertyItem.address}</p>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             }
                         </div>

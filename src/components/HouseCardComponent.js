@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { POST } from '../model/ApiCommunicator';
+import { ADD_REMOVE_SHORTLIST } from '../model/ServiceURLs';
 
 class HouseCardComponent extends Component {
 
@@ -9,68 +11,94 @@ class HouseCardComponent extends Component {
 
         }
     }
+    addShortList = () => {
+        let request = {
+            "userId": "1",
+            "propertyId": this.props.data.propertyId
+        }
+        POST(ADD_REMOVE_SHORTLIST, request, this.successRespCBShortListAction, this.errorRespCBShortListAction);
+    }
+
+    successRespCBShortListAction = (response) => {
+        console.log('response', response)
+    }
+
+    errorRespCBShortListAction = (error) => {
+        console.log('response_error', error)
+
+    }
 
     render() {
+        var data = this.props.data;
         return (
-            <div className="house-card ">
+            !data ? <div className="house-card " >
                 <div className="house-card__inner ">
                     <div className="img-container">
-                        <div className="simple-image-gallery">
-                            <div className="arrow arrow-prev"></div>
-                            <div className="image current"
-                                style={{ backgroundImage: 'url("https://holidayhouses.tmcdn.co.nz/hh/full/48/864848.jpg")' }}
+                    </div> :
+                </div> :
+
+                    </div> :
+                <div className="house-card " >
+                    <div className="house-card__inner ">
+                        <div className="img-container">
+                            <div className="simple-image-gallery" onClick={() => this.props.onCardClick(this.props.data)}>
+                                <div className="arrow arrow-prev"></div>
+                                <img src={data.Image} className="image current"
+                                    style={{ backgroundImage: data.Image }}
+                                >
+
+                                </img>
+                                {/* <div className="image next"
+                                style={{ backgroundImage: data.Image }}
                             >
                             </div>
-                            <div className="image next"
-                                style={{ backgroundImage: 'url("https://holidayhouses.tmcdn.co.nz/hh/full/87/2647587.jpg")' }}
-                            >
+                            <div className="image"></div>
+                            <div className="image"></div>
+                            <div className="image"></div>
+                            <div className="image"></div>
+                            <div className="image"></div>
+                            <div className="image"></div>
+                            <div className="image"></div>
+                            */}
+                                <div className="image previous"></div>
+                                <div className="arrow arrow-next"></div>
                             </div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image previous"></div>
-                            <div className="arrow arrow-next"></div>
+                            <div className="shortlist-button-wrap" onClick={this.addShortList}>
+                                <i className={(data.status == "1" ? "far" : "fas") + " fa-heart"}></i>
+                            </div>
+                            <div className="flag house-card-flag instant" onClick={() => this.props.onCardClick(this.props.data)}>
+                                <span>Instant booking</span>
+                            </div>
+                            <div className="house-card__rate" onClick={() => this.props.onCardClick(this.props.data)}>
+                                <small>From </small>Rs {data.amount}<small> per night</small>
+                            </div>
                         </div>
-                        <div className="house-card__shortlist">
-                            <i className="far fa-heart"></i>
-                        </div>
-                        <div className="flag house-card-flag instant">
-                            <span>Instant booking</span>
-                        </div>
-                        <div className="house-card__rate">
-                            <small>From </small>Rs 1300<small> per night</small>
-                        </div>
-                    </div>
-                    <div className="info-container">
-                        <div className="house-card__location">
-                            <small>Mt Maunganui</small>
-                        </div>
-                        <div className="house-card__name">Oceanside Twin Towers  Beachside Apartment</div>
-                        <div className="flex-align">
-                            <div className="house-card__rating">
-                                <div className="rating-star">
-                                    <div>
-                                        <div className="rating-star__img filled d-inline-flex"></div>
-                                        <div className="rating-star__img filled d-inline-flex"></div>
-                                        <div className="rating-star__img filled d-inline-flex"></div>
-                                        <div className="rating-star__img filled d-inline-flex"></div>
-                                        <div className="rating-star__img empty d-inline-flex"></div>
-                                    </div></div></div>
-                            <div>
-                                <ul className="house-card__specs">
-                                    <li><div className="house-card__img guest"></div><span>6</span></li>
-                                    <li><div className="house-card__img bed"></div><span>3</span></li>
-                                    <li><div className="house-card__img bath"></div><span>2</span></li>
-                                </ul>
+                        <div className="info-container" onClick={() => this.props.onCardClick(this.props.data)}>
+                            <div className="house-card__location">
+                                <small>{data.name}</small>
+                            </div>
+                            <div className="house-card__name">{data.address}</div>
+                            <div className="flex-align">
+                                <div className="house-card__rating">
+                                    <div className="rating-star">
+                                        <div>
+                                            <div className="rating-star__img filled d-inline-flex"></div>
+                                            <div className="rating-star__img filled d-inline-flex"></div>
+                                            <div className="rating-star__img filled d-inline-flex"></div>
+                                            <div className="rating-star__img filled d-inline-flex"></div>
+                                            <div className="rating-star__img empty d-inline-flex"></div>
+                                        </div></div></div>
+                                <div>
+                                    <ul className="house-card__specs">
+                                        <li><div className="house-card__img guest"></div><span>{data.maximumGuests}</span></li>
+                                        <li><div className="house-card__img bed"></div><span>{data.bedRooms}</span></li>
+                                        <li><div className="house-card__img bath"></div><span>{data.bathRooms}</span></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div >
         )
     }
 }
