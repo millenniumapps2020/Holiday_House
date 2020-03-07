@@ -7,6 +7,11 @@ import LoginSignUpModal from './LoginSignUpModalComponent'
 import { storeLoggedUser } from '../state/actions/actions'
 
 import { SCREENS } from '../common/Constants'
+import PlacesSearchComponent from './PlacesSearchComponent';
+import GuestCountComponent from './GuestCountComponent';
+import PriceComponent from './PriceComponent';
+import DateComponent from './DateComponent';
+
 
 class HeaderComponent extends Component {
 
@@ -17,7 +22,7 @@ class HeaderComponent extends Component {
             menuList: ["Shortlist", "List my house", "Help"],
             showMenu: false,
             openLoginModal: false,
-            selectedSlideMenu: "map"
+            selectedSlideMenu: "gallery"
         }
     }
 
@@ -61,7 +66,9 @@ class HeaderComponent extends Component {
     onClickLogout = () => {
         this.props.storeLoggedUser("")
     }
-
+    searchCallBack(location){
+        
+    }
     render() {
         const { menuList, showMenu, openLoginModal } = this.state;
 
@@ -132,13 +139,15 @@ class HeaderComponent extends Component {
                     this.props.showSearch ?
                         <div className="header-search">
                             <div className="filter-div">
-                                <input type="text" className="search-input"
-                                    placeholder="Where would you like to go?"
-                                />
-                                <div className="tab">Dates</div>
-                                <div className="tab">Guests</div>
-                                <div className="tab">Price</div>
-                                <div className="tab last">Filters</div>
+                                <div style={{ width: 250 }}>
+                                    <PlacesSearchComponent key={this.props.key} name="homeSearch"  onCallBack={(location) => this.searchCallBack(location)}  />
+                                </div>
+                                <div style={{ width: 250 }}>
+                                    <DateComponent setDate={(date, key) => { this.setState({ [key]: date }) }} />
+                                </div>
+                                <GuestCountComponent name="headerPage" />
+                                <PriceComponent name="headerPage" />
+                                <div className="tab last">Online Payment</div>
                             </div>
                             <div className="map-galary">
                                 <div className={`tab-slider-bar ${this.state.selectedSlideMenu === 'gallery' ? 'slide' : ''}`}>

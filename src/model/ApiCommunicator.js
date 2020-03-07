@@ -18,21 +18,20 @@ export const POST = (sub_url, bodyData, successCB, errorCB) => {
         },
         body: JSON.stringify(bodyData)
     }
-    console.log(base_url,data)
 
     return fetch(base_url, data).then((response) => {
         return response.json();
     }).then((responseData) => {
-        console.log('responseData ',responseData)
-
+        console.log(base_url, data)
         if (responseData.status_code == "200") {
+            console.log('successCB ', responseData)
             successCB(responseData);
         } else {
+            console.log('errorCB ', responseData.message)
             errorCB(responseData.message);
         }
     }).catch((e) => {
-        errorCB('error', e);
-        console.log(e)
+        errorCB(e);
     })
 }
 export const GET = (sub_url, bodyData) => {

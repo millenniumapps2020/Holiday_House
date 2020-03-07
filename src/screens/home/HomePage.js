@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
-import images from '../../assets/images'
+import images from '../../assets/images';
+import appstore from '../../assets/appstore';
 import './css/HomePageStyle.css';
 import HeaderComponent from '../../components/HeaderComponent';
 import FooterComponent from '../../components/FooterComponent';
-import HouseCard from '../../components/HouseCardComponent';
-import Calendar from 'react-calendar';
-import moment from 'moment';
+import HouseCardComponent from '../../components/HouseCardComponent';
+import DateComponent from '../../components/DateComponent';
 
 import { SCREENS } from '../../common/Constants'
 import PlacesSearchComponent from '../../components/PlacesSearchComponent';
-import { SUGGESTION, PROPERTY, PERFECTS } from '../../model/ServiceURLs';
+import { SUGGESTION, PROPERTY, PERFECTS, DISCOVER } from '../../model/ServiceURLs';
 import { POST } from '../../model/ApiCommunicator';
+import GuestCountComponent from '../../components/GuestCountComponent';
 
 const languages = [
     {
@@ -31,51 +32,33 @@ class HomePage extends Component {
         focused: false,
         date: null,
         value: '',
-        suggestions: [],
+        suggestions: appstore["property"],
         suggestionListView: false,
         suggestionListViewValue: '',
         guestDropdownView: false,
         date: new Date(),
-        children: 1,
-        adults: 1,
         placeProperties: [],
         guestCount: '',
-        suggestionList: [],
-        discoverList: [],
-        holidayList: []
+        suggestionList: appstore["suggestion"],
+        discoverList: appstore["discover"],
+        holidayList: appstore["perfects"],
+        location: '',
+        guest_details: {}
     }
 
     componentDidMount() {
-        document.addEventListener('click', this.handleClickOutside);
-        this.getProperties();
         this.getSuggestionList();
         this.getDiscoverList();
         this.getPerfectList();
     }
-    getProperties = () => {
-        var request = {
-            "userId": "",
-            "limit": "10",
-            "offset": "6"
-        };
-        POST(PROPERTY, request, this.successRespCBProperty, this.errorRespCBProperty);
-    }
-    successRespCBProperty = (data) => {
-        console.log('data', data);
-        if (data.result.length > 0) {
-            this.setState({ placeProperties: data.result });
-        }
-    }
-    errorRespCBProperty = (error) => {
 
-    }
     getDiscoverList = () => {
         var request = {
-            "userId": "",
-            "limit": "10",
-            "offset": "6"
+            "userId": "1",
+            "limit": "9",
+            "offset": "0"
         };
-        POST(PROPERTY, request, this.successRespCBDiscover, this.errorRespDiscover);
+        POST(DISCOVER, request, this.successRespCBDiscover, this.errorRespDiscover);
     }
     successRespCBDiscover = (data) => {
         if (data.result.length > 0) {
@@ -86,21 +69,6 @@ class HomePage extends Component {
     errorRespCBDiscover = (error) => {
 
     }
-    componentWillUnmount() {
-        document.removeEventListener('click', this.handleClickOutside);
-    }
-    handleClickOutside = (event) => {
-        var target = event.target;
-        if (this.guestRef && !this.guestRef.contains(target)) {
-            this.onGuestChange(false)
-        }
-        if (this.checkIndateRef && !this.checkIndateRef.contains(target)) {
-            this.setState({ checkIndateVisible: false })
-        }
-        if (this.checkOutdateRef && !this.checkOutdateRef.contains(target)) {
-            this.setState({ checkOutdateVisible: false })
-        }
-    }
     onDateChange = (date) => {
         this.setState({ date });
     }
@@ -108,27 +76,14 @@ class HomePage extends Component {
     onFocusChange = (suggestionListView) => {
         this.setState({ suggestionListView });
     }
-    onGuestChange = (guestDropdownView) => {
-        this.setState({ guestDropdownView })
-    }
-
     onTextChange = (data) => {
         this.setState({ suggestionListViewValue: data.target.value })
     }
 
 
     onClickSuggestion = (suggestionItem) => {
-        this.props.history.push(SCREENS.SEARCH)
-    }
-    changeGuest(key, type) {
-        var value = this.state[key];
-        if (type == "minus") {
-            if (value !== 0) {
-                this.setState({ [key]: value - 1 })
-            }
-        } else {
-            this.setState({ [key]: value + 1 })
-        }
+        var { location, checkIndate, checkOutdate, guest_details } = this.state;
+        this.props.history.push(SCREENS.SEARCH, { passvalue: { location, checkIndate, checkOutdate, guest_details } })
     }
     getSuggestionList() {
         let request = {
@@ -172,12 +127,13 @@ class HomePage extends Component {
         console.log('error.message', error)
     }
 
-    addGeustDetails() {
-        var count = (this.state.adults + this.state.children)
-        this.setState({ guestDropdownView: false, guestCount: count > 0 ? count : '' })
-    }
+
     dicoverCardPressed(item) {
-        this.props.history.push(SCREENS.DETAILS, { propertyId: 1 })
+        this.props.history.push(SCREENS.DETAILS, { propertyId: item.propertyId })
+    }
+    searchCallBack(location) {
+        console.log('location', location)
+        this.setState({ location })
     }
     render() {
         var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;
@@ -195,95 +151,9 @@ class HomePage extends Component {
                                 <div className="search-container">
                                     <h1 className="banner-title">For better places to&nbsp;stay</h1>
                                     <div className="row search-box">
-                                        <PlacesSearchComponent name="homeSearch" data={this.state.placeProperties} />
-                                        <div className="col input-controller date-controller">
-                                            <div ref={(node) => this.checkIndateRef = node}>
-                                                <input
-                                                    onClick={() => this.setState({ checkIndateVisible: true })}
-                                                    type="text"
-                                                    value={this.state.checkIndate}
-                                                    className="guestInput calendar-icon start-date form-control"
-                                                    placeholder="Check in"
-                                                />
-                                                {this.state.checkIndateVisible ?
-                                                    <div style={{ position: 'absolute', zIndex: 10000 }}>
-                                                        <Calendar
-                                                            minDate={new Date()}
-                                                            onChange={(date) => this.setState({ checkIndate: moment(date).format('DD/MM/YYYY') })}
-                                                            value={this.state.date}
-                                                        />
-                                                    </div> : null}
-                                            </div>
-                                            <div ref={(node) => this.checkOutdateRef = node}>
-                                                <input
-                                                    onClick={() => this.setState({ checkOutdateVisible: true })}
-                                                    type="text"
-                                                    value={this.state.checkOutdate}
-                                                    className="guestInput end-date form-control"
-                                                    placeholder="Check out"
-                                                />
-                                                {this.state.checkOutdateVisible ?
-                                                    <div style={{ position: 'absolute', zIndex: 10000 }}>
-                                                        <Calendar
-                                                            minDate={new Date()}
-                                                            onChange={(date) => this.setState({ checkOutdate: moment(date).format('DD/MM/YYYY') })}
-                                                            value={this.state.date}
-                                                        />
-                                                    </div>
-
-                                                    : null}
-                                            </div>
-                                        </div>
-                                        <div className="col input-controller location-controller" ref={(node) => this.guestRef = node}>
-                                            <input
-                                                onFocus={() => this.onGuestChange(true)}
-                                                value={this.state.guestCount}
-                                                className="guestInput guest-icon form-control"
-                                                placeholder="Guests"
-                                            />
-                                            {guestDropdownView ?
-                                                <div className="guest-drowndown-wrap">
-                                                    <div className="guest-wrap">
-                                                        <h6>Adults</h6>
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <button id="" class="btn btn-action btn-number" onClick={() => this.changeGuest('adults', 'minus')}> - </button>
-                                                            </div>
-                                                            <input type="text" name="adults" class="form-control text-center" value={this.state.adults} />
-                                                            <div class="input-group-append">
-                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number" onClick={() => this.changeGuest('adults', 'plus')} > + </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="guest-wrap">
-                                                        <div className="row-spaceBetween">
-                                                            <h6>children</h6>
-                                                            <p>ages 3 to 16</p>
-                                                        </div>
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <button id="" class="btn btn-action btn-number" onClick={() => this.changeGuest('children', 'minus')}> - </button>
-                                                            </div>
-                                                            <input type="text" value={this.state.children} name="adults" class="form-control text-center" />
-                                                            <div class="input-group-append">
-                                                                <button id="searchUpAdultsBtn" class="btn btn-action btn-number" onClick={() => this.changeGuest('children', 'plus')}> + </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="guest-wrap">
-                                                        <div className="row-spaceBetween">
-                                                            <div class="position-relative form-check">
-                                                                <label class="form-check-label">
-                                                                    <input type="checkbox" class="form-check-input" />
-                                                                    <span>Pets</span>
-                                                                </label>
-                                                            </div>
-                                                            <button class="btn btn-primary apply-button" onClick={() => this.addGeustDetails()}>Apply</button>
-                                                        </div>
-                                                    </div>
-                                                </div> : null}
-                                        </div>
+                                        <PlacesSearchComponent name="homeSearch" onCallBack={(location) => this.searchCallBack(location)} />
+                                        <DateComponent setDate={(date, key) => { this.setState({ [key]: date }) }} />
+                                        <GuestCountComponent onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
                                         <div className="col-auto input-controller">
                                             <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block" onClick={this.onClickSuggestion}>
                                                 {/* <span class="d-sm-none fas fa-search"></span> */}
@@ -296,62 +166,68 @@ class HomePage extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="container suggestion-wrap">
-                    <div className="suggestion-container">
-                        <h1 className="suggestion-title">Suggestions</h1>
-                        <div className="suggestion-list row">
-                            {this.state.suggestionList.map((suggestionItem, suggestionIndex) => {
-                                return (
-                                    <div className="col-lg-3 col-sm-6" key={"suggestionKey" + suggestionIndex}
-                                        onClick={() => this.onClickSuggestion(suggestionItem)}
-                                    >
-                                        <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.imageUrl})` }}>
-                                            <h5 className="suggestion-name">{suggestionItem.name}</h5>
+                {this.state.suggestionList.length > 0 ?
+                    <div className="container suggestion-wrap">
+                        <div className="suggestion-container">
+                            <h1 className="suggestion-title">Suggestions</h1>
+                            <div className="suggestion-list row">
+                                {this.state.suggestionList.map((suggestionItem, suggestionIndex) => {
+                                    return (
+                                        <div className="col-lg-3 col-sm-6" key={"suggestionKey" + suggestionIndex}
+                                            onClick={() => this.onClickSuggestion(suggestionItem)}
+                                        >
+                                            <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.imageUrl})` }}>
+                                                <h5 className="suggestion-name">{suggestionItem.name}</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })}
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="container-fluid discover-wrap">
-                    <div className="row">
-                        <div className="container">
-                            <h1 className="suggestion-title">Discover:<a href="">Titikaveka</a></h1>
-                        </div>
-                        <div className="discover-list-wrap">
-                            {this.state.discoverList.map((discoverItem) => {
-                                return (
-                                    <div className="col-lg-3 col-sm-6" >
-                                        <HouseCard data={discoverItem} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
-                <div className="container holiday-wrap">
-                    <div className="holiday-container">
-                        <h1 className="holiday-title">Find the perfect holiday</h1>
-                        <div className="holiday-list row">
-                            {holidayList.map((holidayItem) => {
-                                return (
-                                    <div className="col-lg-4 col-sm-6">
-                                        <div className="holiday" style={{ backgroundImage: `url(${holidayItem.imageUrl})` }}>
+                    : null}
+                {this.state.discoverList.length > 0 ?
+                    <div className="container-fluid discover-wrap">
+                        <div className="row">
+                            <div className="container">
+                                <h1 className="suggestion-title">Discover:<a href="">Titikaveka</a></h1>
+                            </div>
+                            <div className="discover-list-wrap">
+                                {this.state.discoverList.map((discoverItem) => {
+                                    return (
+                                        <div className="col-lg-3 col-sm-6" >
+                                            <HouseCardComponent data={discoverItem} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
                                         </div>
-                                        <h5 className="holiday-name">{holidayItem.name}</h5>
-                                        <ul className="holiday-type-ul">
-                                            {holidayItem.type && holidayItem.type.length > 0 ?
-                                                JSON.parse(holidayItem.search).map((typeItem) => {
-                                                    return (<li className="holiday-type-list">{typeItem.name}</li>);
-                                                }) : null}
-                                        </ul>
-                                    </div>
-                                )
-                            })}
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
+                    : null}
+                {this.state.holidayList.length > 0 ?
+                    <div className="container holiday-wrap">
+                        <div className="holiday-container">
+                            <h1 className="holiday-title">Find the perfect holiday</h1>
+                            <div className="holiday-list row">
+                                {this.state.holidayList.map((holidayItem) => {
+                                    return (
+                                        <div className="col-lg-4 col-sm-6">
+                                            <div className="holiday" style={{ backgroundImage: `url(${holidayItem.imageUrl})` }}>
+                                            </div>
+                                            <h5 className="holiday-name">{holidayItem.name}</h5>
+                                            <ul className="holiday-type-ul">
+                                                {holidayItem.type && holidayItem.type.length > 0 ?
+                                                    JSON.parse(holidayItem.search).map((typeItem) => {
+                                                        return (<li className="holiday-type-list">{typeItem.name}</li>);
+                                                    }) : null}
+                                            </ul>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                    : null}
                 <FooterComponent />
             </div >
         )

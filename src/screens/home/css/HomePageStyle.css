@@ -151,6 +151,12 @@
     transition: .2s ease-in-out;
 }
 
+.discover-list-wrap::-webkit-scrollbar {
+    width: 0 !important;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
 .holiday-type-list {
     border-bottom: 1px solid #eee;
     color: gray;

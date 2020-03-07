@@ -30,6 +30,7 @@ class HouseCardComponent extends Component {
 
     render() {
         var data = this.props.data;
+        console.log('data.Image ',data)
         return (
             !data ? <div className="house-card " >
                 <div className="house-card__inner ">
@@ -43,9 +44,7 @@ class HouseCardComponent extends Component {
                         <div className="img-container">
                             <div className="simple-image-gallery" onClick={() => this.props.onCardClick(this.props.data)}>
                                 <div className="arrow arrow-prev"></div>
-                                <img src={data.Image} className="image current"
-                                    style={{ backgroundImage: data.Image }}
-                                >
+                                <img src={data.Image} className="image current"style={{ backgroundImage: data.Image }}>
 
                                 </img>
                                 {/* <div className="image next"

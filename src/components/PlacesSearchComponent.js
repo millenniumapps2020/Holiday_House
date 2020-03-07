@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { POST } from '../model/ApiCommunicator';
+import { PROPERTY } from '../model/ServiceURLs';
 
 class PlacesSearchComponent extends Component {
 
@@ -8,16 +10,51 @@ class PlacesSearchComponent extends Component {
         suggestionListView: false,
         suggestionListViewValue: '',
         filterLocation: [],
+        placeProperties: []
     }
 
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside);
+        if (this.props.key == "homeSearch") {
+            this.getProperties('Hibiscus');
+        }
     }
 
     componentWillReceiveProps = (nexProps) => {
         console.log('nexProps', nexProps);
 
     }
+    getProperties = (searchValue) => {
+        var request = {
+            "userId": "",
+            "search": searchValue,
+            "sortBy": "",
+            "fromDate": "",
+            "toDate": "",
+            "adults": "",
+            "children": "",
+            "pets": "",
+            "latitude": "",
+            "longitude": "",
+            "minPrice": "",
+            "maxPrice": "",
+            "payment": "",
+            "minBed": "",
+            "basics": "",
+            "limit": "10",
+            "offset": "0"
+        };
+        POST(PROPERTY, request, this.successRespCBProperty, this.errorRespCBProperty);
+    }
+    successRespCBProperty = (data) => {
+        if (data.result.length > 0) {
+            this.setState({ placeProperties: data.result });
+        }
+    }
+    errorRespCBProperty = (error) => {
+
+    }
+
 
     componentWillUnmount() {
         document.removeEventListener('click', this.handleClickOutside);
@@ -36,12 +73,15 @@ class PlacesSearchComponent extends Component {
         var filterArrayList = [];
         var value = data.target.value;
         if (data.target.value != '') {
-            filterArrayList = this.props.data.filter((item) => ((item.name.toLowerCase()).includes(value.toLowerCase()) || (item.address.toLowerCase()).includes(value.toLowerCase())));
+            filterArrayList = this.state.placeProperties.filter((item) => ((item.name.toLowerCase()).includes(value.toLowerCase()) || (item.address.toLowerCase()).includes(value.toLowerCase())));
         }
         this.setState({ suggestionListViewValue: value, filterLocation: filterArrayList })
+        this.props.onCallBack(data);
     }
     clickEvent = (data) => {
         this.setState({ suggestionListViewValue: data.name })
+
+        this.props.onCallBack(data.name);
         this.onFocusChange(false)
     }
     render() {
@@ -65,7 +105,7 @@ class PlacesSearchComponent extends Component {
                         <div className="autosuggest-list">
                             {suggestionListViewValue == '' ?
                                 <div className="top-list">
-                                    {this.props.data.map((propertyItem, propertyIndex) => {
+                                    {this.state.placeProperties.map((propertyItem, propertyIndex) => {
                                         return (
                                             <div className="list" onClick={() => this.clickEvent(propertyItem)}>
                                                 <h6>{propertyItem.name}</h6>

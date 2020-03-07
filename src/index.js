@@ -8,7 +8,7 @@ import store from './state/store'
 import 'react-dates/lib/css/_datepicker.css';
 import './index.css';
 import './assets/css/bootstrap.min.css';
-
+import 'rheostat/initialize';
 
 
 ReactDOM.render(<Provider store={store}>

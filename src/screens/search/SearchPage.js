@@ -4,6 +4,9 @@ import Header from '../../components/HeaderComponent'
 import Footer from '../../components/FooterComponent'
 import HouseCard from '../../components/HouseCardComponent'
 import MapComponent from '../../components/MapComponent'
+import { PROPERTY } from '../../model/ServiceURLs'
+import { POST } from '../../model/ApiCommunicator'
+import { SCREENS } from '../../common/Constants'
 
 class SearchPage extends Component {
 
@@ -15,21 +18,58 @@ class SearchPage extends Component {
                 "Featured first", "lowest price", "Highest price",
                 "Lowest no. bedrooms", "Highest no. bedrooms"
             ],
-            selectedSlideMenu: "",
+            selectedSlideMenu: "map",
             searchList: [{}, {}, {}, {}, {}, {}, {}, {}]
         }
     }
+    componentWillMount() {
+        this.fetchSearchList()
+    }
+    fetchSearchList() {
+        console.log('this.props.location', this.props.location)
+        var { location, checkIndate, checkOutdate } = this.props.location.state.passvalue;
 
+        var request = {
+            "userId": "",
+            "search": location,
+            "sortBy": "",
+            "fromDate": "",
+            "toDate": "",
+            "adults": "",
+            "children": "",
+            "pets": "",
+            "latitude": "",
+            "longitude": "",
+            "minPrice": "",
+            "maxPrice": "",
+            "payment": "",
+            "minBed": "",
+            "basics": "",
+            "limit": "10",
+            "offset": "0"
+        };
+        POST(PROPERTY, request, this.successRespCBProperty, this.errorRespCBProperty);
+    }
+    successRespCBProperty = (res) => {
+        this.setState({ searchList: res.result })
+    }
+    errorRespCBProperty = (error) => {
+        console.log('errorRespCBProperty', error)
+    }
     onClickSlideMenu = (menu) => {
         this.setState({ selectedSlideMenu: menu })
     }
 
+    dicoverCardPressed(item) {
+        this.props.history.push(SCREENS.DETAILS, { propertyId: item.propertyId })
+    }
     render() {
-        const { sortOptions, selectedSlideMenu, searchList } = this.state
+        const { sortOptions, selectedSlideMenu, searchList } = this.state;
+        console.log('selectedSlideMenu ', selectedSlideMenu)
 
         return (
             <div>
-                <Header showSearch={true}
+                <Header key="searchHeader" showSearch={true}
                     onClickSlideMenuCB={this.onClickSlideMenu}
                 />
                 {selectedSlideMenu != "map" ?
@@ -39,13 +79,11 @@ class SearchPage extends Component {
                                 <div className="left flex-align-center">
                                     <span>Sort :</span>
                                     <select className="sort-select">
-                                        {
-                                            sortOptions.map((item, index) => {
-                                                return (
-                                                    <option value={item}>{item}</option>
-                                                )
-                                            })
-                                        }
+                                        {sortOptions.map((item, index) => {
+                                            return (
+                                                <option value={item}>{item}</option>
+                                            )
+                                        })}
                                     </select>
                                 </div>
                                 <div className="right flex-align-center">
@@ -63,7 +101,7 @@ class SearchPage extends Component {
                                                         'col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'
                                                         :
                                                         'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3'}`}>
-                                                    <HouseCard />
+                                                    <HouseCard data={item} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
                                                 </div>
                                             )
                                         })
@@ -74,9 +112,9 @@ class SearchPage extends Component {
                     </div>
                     :
                     null}
-                {selectedSlideMenu === "map" ?
+                {selectedSlideMenu == "map" ?
                     <div className="search-map-base col-12 col">
-                        <MapComponent />
+                        <MapComponent maplist={searchList} />
                     </div>
                     : null
                 }

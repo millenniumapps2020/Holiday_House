@@ -7,8 +7,6 @@
 @import 'map.css';
 @import 'search.css';
 @import 'placesSearchComponent.css';
-
-
 :root {
   --primary_color: #ffea3e;
   --secondary_color: #1b2c3b;
@@ -32,6 +30,10 @@ h1 {
   font-weight: 700;
   font-size: 28px;
   line-height: normal;
+}
+
+input {
+  font-size: 14px!important;
 }
 
 h4 {
@@ -65,7 +67,6 @@ h5 {
   align-items: center;
 }
 
-
 .flex-justify-content {
   display: flex;
   justify-content: center;
@@ -73,6 +74,33 @@ h5 {
 
 button {
   cursor: pointer;
+}
+
+.price_input_button {
+  border: 0;
+  font-size: 16px!important;
+  border-bottom: 1px solid black;
+  width: 60px
+}
+
+.Rheostat {
+  padding: 20px;
+  background: #dadada;
+}
+
+
+.gm-style-iw-d {
+  max-width: 300px!important;
+  max-height: 300px!important;
+  padding: 0px!important;
+  z-index: 30000;
+
+}
+
+.gm-style-iw-c {
+  max-width: 300px!important;
+  max-height: 300px!important;
+  z-index: 30000;
 }
 
 @media screen and (max-width: 765px) {
