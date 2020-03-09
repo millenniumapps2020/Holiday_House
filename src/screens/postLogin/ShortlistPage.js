@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 
 import Header from '../../components/HeaderComponent'
 import Footer from '../../components/FooterComponent'
-import HouseCard from '../../components/HouseCardComponent'
+import HouseCardComponent from '../../components/HouseCardComponent'
 
 import { storeShortListedHouseList } from '../../state/actions/actions'
 import { SHORTLIST } from '../../model/ServiceURLs';
 import { POST } from '../../model/ApiCommunicator';
+import { SCREENS } from '../../common/Constants';
 
 class ShortlistPage extends Component {
 
@@ -44,8 +45,10 @@ class ShortlistPage extends Component {
         console.log('response_error', error)
 
     }
-    onCardClick() {
 
+
+    dicoverCardPressed(item) {
+        this.props.history.push(SCREENS.DETAILS, { propertyId: item.propertyId })
     }
     render() {
         return (
@@ -62,7 +65,7 @@ class ShortlistPage extends Component {
                     <div className="row">
                         {this.state.shortlist.map((item) => {
                             return (<div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <HouseCard data={item} onCardClick={(item) => this.onCardClick(item)} />
+                                <HouseCardComponent data={item} onCardClick={(item) => this.dicoverCardPressed(item)} />
                             </div>)
                         })
 

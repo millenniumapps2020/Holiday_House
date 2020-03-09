@@ -14,6 +14,7 @@ import HouseCardComponent from '../../components/HouseCardComponent';
 import DateComponent from '../../components/DateComponent';
 import GuestCountComponent from '../../components/GuestCountComponent';
 import MapComponent from '../../components/MapComponent';
+import { SCREENS } from '../../common/Constants';
 
 var settings = {
     dots: true,
@@ -97,6 +98,10 @@ class DetailsPage extends Component {
         if (this.checkOutdateRef && !this.checkOutdateRef.contains(target)) {
             this.setState({ checkOutdateVisible: false })
         }
+    }
+
+    dicoverCardPressed(item) {
+        this.props.history.push(SCREENS.DETAILS, { propertyId: item.propertyId })
     }
 
     render() {
@@ -212,10 +217,10 @@ class DetailsPage extends Component {
                                                 </div>
                                             </div>
                                             <div style={{ marginTop: 30 }}>
-                                                <DateComponent />
+                                                <DateComponent  setDate={(date, key) => { this.setState({ [key]: date }) }} />
                                             </div>
                                             <div style={{ marginTop: 30 }}>
-                                                <GuestCountComponent />
+                                                <GuestCountComponent onSetGuestDetails={(details) => this.setState({ guest_details: details })}  />
                                             </div>
                                             <div style={{ marginTop: 30 }}>
                                                 <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block" onClick={this.onClickSuggestion}>
@@ -232,7 +237,8 @@ class DetailsPage extends Component {
                             </div>
                         </div>
                         <div className="container details-body">
-                            <MapComponent />
+                        {Object.keys(this.state.propertyDetails).length>0?
+                            <MapComponent maplist={[this.state.propertyDetails]} /> :null}
                         </div>
                     </div> : null
                 }

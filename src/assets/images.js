@@ -10,6 +10,7 @@ import pets_no from './images/icons/pets_no.png';
 import calendar_icon from './images/icons/calendar_icon.png';
 import search_location from './images/icons/search_location.png';
 import search_guests from './images/icons/search_guests.png';
+import nz_logo from './images/icons/nz_logo.png';
 
 
 const images = {
@@ -19,6 +20,7 @@ const images = {
         "banner_three": banner_three,
     },
     "icons": {
+        "nz_logo": nz_logo,
         "active_star": active_star,
         "inactive_star": inactive_star,
         "child": child,

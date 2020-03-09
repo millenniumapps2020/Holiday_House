@@ -15,7 +15,8 @@ class PlacesSearchComponent extends Component {
 
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside);
-        if (this.props.key == "homeSearch") {
+        console.log('getProperties',this.props.name)
+        if (this.props.name == "homeSearch") {
             this.getProperties('Hibiscus');
         }
     }

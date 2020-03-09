@@ -11,6 +11,7 @@ import PlacesSearchComponent from './PlacesSearchComponent';
 import GuestCountComponent from './GuestCountComponent';
 import PriceComponent from './PriceComponent';
 import DateComponent from './DateComponent';
+import images from '../assets/images';
 
 
 class HeaderComponent extends Component {
@@ -66,8 +67,8 @@ class HeaderComponent extends Component {
     onClickLogout = () => {
         this.props.storeLoggedUser("")
     }
-    searchCallBack(location){
-        
+    searchCallBack(location) {
+
     }
     render() {
         const { menuList, showMenu, openLoginModal } = this.state;
@@ -76,8 +77,9 @@ class HeaderComponent extends Component {
             <div className="headerComp">
                 <div className="header-base">
                     <div >
-                        <img className="logo"
-                            src="https://www.holidayhouses.co.nz/ReactApp/images/brand/hh-full-dark.svg"
+                        <img 
+                        className="logo"
+                            src={images.icons.nz_logo}
                             onClick={this.gotoHome}
                         />
                     </div>
@@ -140,12 +142,12 @@ class HeaderComponent extends Component {
                         <div className="header-search">
                             <div className="filter-div">
                                 <div style={{ width: 250 }}>
-                                    <PlacesSearchComponent key={this.props.key} name="homeSearch"  onCallBack={(location) => this.searchCallBack(location)}  />
+                                    <PlacesSearchComponent name={this.props.key} name="homeSearch" onCallBack={(location) => this.searchCallBack(location)} />
                                 </div>
                                 <div style={{ width: 250 }}>
                                     <DateComponent setDate={(date, key) => { this.setState({ [key]: date }) }} />
                                 </div>
-                                <GuestCountComponent name="headerPage" />
+                                <GuestCountComponent name="headerPage" onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
                                 <PriceComponent name="headerPage" />
                                 <div className="tab last">Online Payment</div>
                             </div>

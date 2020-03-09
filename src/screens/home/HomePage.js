@@ -58,7 +58,7 @@ class HomePage extends Component {
             "limit": "9",
             "offset": "0"
         };
-        POST(DISCOVER, request, this.successRespCBDiscover, this.errorRespDiscover);
+        POST(DISCOVER, request, this.successRespCBDiscover, this.errorRespCBDiscover);
     }
     successRespCBDiscover = (data) => {
         if (data.result.length > 0) {
@@ -83,6 +83,7 @@ class HomePage extends Component {
 
     onClickSuggestion = (suggestionItem) => {
         var { location, checkIndate, checkOutdate, guest_details } = this.state;
+        location = location != '' ? location : 'Hibiscus';
         this.props.history.push(SCREENS.SEARCH, { passvalue: { location, checkIndate, checkOutdate, guest_details } })
     }
     getSuggestionList() {
@@ -218,7 +219,10 @@ class HomePage extends Component {
                                             <ul className="holiday-type-ul">
                                                 {holidayItem.type && holidayItem.type.length > 0 ?
                                                     JSON.parse(holidayItem.search).map((typeItem) => {
-                                                        return (<li className="holiday-type-list">{typeItem.name}</li>);
+                                                        return (<li className="holiday-type-list" onClick={() => {
+                                                            var location = 'Hibiscus';
+                                                            this.props.history.push(SCREENS.SEARCH, { passvalue: { location, checkIndate: '', checkOutdate: '', guest_details: '' } })
+                                                        }}>{typeItem.name}</li>);
                                                     }) : null}
                                             </ul>
                                         </div>

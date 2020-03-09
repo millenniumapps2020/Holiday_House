@@ -30,7 +30,6 @@ class HouseCardComponent extends Component {
 
     render() {
         var data = this.props.data;
-        console.log('data.Image ',data)
         return (
             !data ? <div className="house-card " >
                 <div className="house-card__inner ">
