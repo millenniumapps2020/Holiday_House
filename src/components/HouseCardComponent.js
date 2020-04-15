@@ -8,8 +8,11 @@ class HouseCardComponent extends Component {
         super(props);
 
         this.state = {
-
+            data: {}
         }
+    }
+    componentWillMount() {
+        this.setState({ data: this.props.data })
     }
     addShortList = () => {
         let request = {
@@ -20,7 +23,13 @@ class HouseCardComponent extends Component {
     }
 
     successRespCBShortListAction = (response) => {
-        console.log('response', response)
+        var data = this.state.data;
+        if (response.message == "Removed short List") {
+            data.status = "0";
+        } else {
+            data.status = "1";
+        }
+        this.setState({ data: data })
     }
 
     errorRespCBShortListAction = (error) => {
@@ -29,7 +38,8 @@ class HouseCardComponent extends Component {
     }
 
     render() {
-        var data = this.props.data;
+        var data = this.state.data;
+        console.log('render_data', data)
         return (
             !data ? <div className="house-card " >
                 <div className="house-card__inner ">
@@ -43,26 +53,13 @@ class HouseCardComponent extends Component {
                         <div className="img-container">
                             <div className="simple-image-gallery" onClick={() => this.props.onCardClick(this.props.data)}>
                                 <div className="arrow arrow-prev"></div>
-                                <img src={data.Image} className="image current"style={{ backgroundImage: data.Image }}>
-
+                                <img src={data.Image} className="image current" style={{ backgroundImage: data.Image }}>
                                 </img>
-                                {/* <div className="image next"
-                                style={{ backgroundImage: data.Image }}
-                            >
-                            </div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            <div className="image"></div>
-                            */}
                                 <div className="image previous"></div>
                                 <div className="arrow arrow-next"></div>
                             </div>
                             <div className="shortlist-button-wrap" onClick={this.addShortList}>
-                                <i className={(data.status == "1" ? "far" : "fas") + " fa-heart"}></i>
+                                <i className={(data.status == "1" ? "red-color fas" : "far") + " fa-heart"}></i>
                             </div>
                             <div className="flag house-card-flag instant" onClick={() => this.props.onCardClick(this.props.data)}>
                                 <span>Instant booking</span>

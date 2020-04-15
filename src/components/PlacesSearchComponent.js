@@ -15,7 +15,7 @@ class PlacesSearchComponent extends Component {
 
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside);
-        console.log('getProperties',this.props.name)
+        console.log('getProperties', this.props.name)
         if (this.props.name == "homeSearch") {
             this.getProperties('Hibiscus');
         }
@@ -74,10 +74,37 @@ class PlacesSearchComponent extends Component {
         var filterArrayList = [];
         var value = data.target.value;
         if (data.target.value != '') {
-            filterArrayList = this.state.placeProperties.filter((item) => ((item.name.toLowerCase()).includes(value.toLowerCase()) || (item.address.toLowerCase()).includes(value.toLowerCase())));
+            this.getSearchProperties(data.target.value);
         }
         this.setState({ suggestionListViewValue: value, filterLocation: filterArrayList })
         this.props.onCallBack(data);
+    }
+    getSearchProperties = (searchValue) => {
+        var request = {
+            "userId": "",
+            "search": searchValue,
+            "sortBy": "",
+            "fromDate": "",
+            "toDate": "",
+            "adults": "",
+            "children": "",
+            "pets": "",
+            "latitude": "",
+            "longitude": "",
+            "minPrice": "",
+            "maxPrice": "",
+            "payment": "",
+            "minBed": "",
+            "basics": "",
+            "limit": "10",
+            "offset": "0"
+        };
+        POST(PROPERTY, request, this.successSearchRespCBProperty, this.errorRespCBProperty);
+    }
+    successSearchRespCBProperty = (data) => {
+        if (data.result.length > 0) {
+            this.setState({ filterLocation: data.result });
+        }
     }
     clickEvent = (data) => {
         this.setState({ suggestionListViewValue: data.name })

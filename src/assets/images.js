@@ -11,6 +11,8 @@ import calendar_icon from './images/icons/calendar_icon.png';
 import search_location from './images/icons/search_location.png';
 import search_guests from './images/icons/search_guests.png';
 import nz_logo from './images/icons/nz_logo.png';
+import close from './images/icons/close.png';
+import menu from './images/icons/menu.png';
 
 
 const images = {
@@ -24,7 +26,9 @@ const images = {
         "active_star": active_star,
         "inactive_star": inactive_star,
         "child": child,
-        "pets_no": pets_no
+        "pets_no": pets_no,
+        "menu": menu,
+        "close": close
     }
 }
 export default images;

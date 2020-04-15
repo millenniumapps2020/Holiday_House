@@ -1,0 +1,75 @@
+.DateRangePickerInput .DateInput__block {
+    width: 100%;
+    padding-right: 42px;
+}
+
+.DateRangePickerInput .SingleDatePickerInput_calendarIcon {
+    position: absolute;
+    right: 0;
+    padding: 0 10px;
+    line-height: 50px;
+}
+
+.DateRangePicker {
+    width: 100%;
+}
+
+.DateRangePickerInput_arrow {
+    display: none;
+}
+
+.DateRangePicker .DateRangePickerInput {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    border-radius: .25rem;
+    height: calc(2.25rem + 2px);
+}
+
+.DateRangePicker .DateRangePickerInput .DateInput:first-of-type {
+    border-right: 1px solid #cacccd;
+}
+
+.DateRangePicker .DateRangePickerInput .DateInput .DateInput_input {
+    height: 38px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px 8px 6px;
+    font-weight: 400;
+    color: #000;
+    background-color: transparent;
+}
+
+.DateRangePicker .DateRangePickerInput .DateInput_input__focused {
+    border-bottom: 2px solid #ffea3e;
+}
+
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+    background: #ffea3e!important;
+}
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover, .CalendarDay__selected_span {
+    background: #ffea3e!important;
+    border: 1px solid #fff!important;
+    color: #555!important;
+}
+
+.CalendarDay__hovered_span, .CalendarDay__hovered_span:active, .CalendarDay__hovered_span:hover, .CalendarDay__hovered_span_span {
+    background: #fff5aa!important;
+    border: 1px solid #fff!important;
+    color: #555!important;
+}
+
+.CalendarDay__selected_end, .CalendarDay__selected_end:active, .CalendarDay__selected_end:hover {
+    background: linear-gradient(-45deg,#f9f9f9 50%,#ffea3e 50%)!important;
+}
+
+.CalendarDay__selected_start, .CalendarDay__selected_start:active, .CalendarDay__selected_start:hover {
+    background: linear-gradient(-45deg,#ffea3e 50%,#f9f9f9 50%)!important;
+}
+.CalendarDay__selected_span:active, .CalendarDay__selected_span:hover {
+    background: #fff5aa!important;
+    border: 1px solid #fff!important;
+    color: #555!important;
+}
+
+

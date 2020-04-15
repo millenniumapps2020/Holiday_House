@@ -27,17 +27,17 @@ class SearchPage extends Component {
     }
     fetchSearchList() {
         console.log('this.props.location', this.props.location)
-        var { location, checkIndate, checkOutdate } = this.props.location.state.passvalue;
+        var { location, checkIndate, checkOutdate, guest_details } = this.props.location.state.passvalue;
 
         var request = {
             "userId": "",
             "search": location,
             "sortBy": "",
-            "fromDate": "",
-            "toDate": "",
-            "adults": "",
-            "children": "",
-            "pets": "",
+            "fromDate": checkIndate,
+            "toDate": checkOutdate,
+            "adults": guest_details.adults,
+            "children": guest_details.children,
+            "pets": guest_details.isPets,
             "latitude": "",
             "longitude": "",
             "minPrice": "",

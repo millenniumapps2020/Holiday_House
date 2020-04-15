@@ -1,12 +1,35 @@
-import React, { Component } from 'react'
-import Calendar from 'react-calendar';
+import React, { Component } from 'react';
+import { DateRangePicker, SingleDatePicker, DateRangePickerPhrases, DateRangePickerShape, DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
-import images from '.././assets/images'
+import { withStyles } from 'react-with-styles';
+import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
+import DefaultTheme from 'react-dates/lib/theme/DefaultTheme';
 
+import './DateComponent.css';
 
+ThemedStyleSheet.registerTheme({
+    reactDates: {
+        ...DefaultTheme.reactDates,
+        color: {
+            ...DefaultTheme.reactDates.color,
+            highlighted: {
+                backgroundColor: '#82E0AA',
+                backgroundColor_active: '#58D68D',
+                backgroundColor_hover: '#58D68D',
+                color: '#186A3B',
+                color_active: '#186A3B',
+                color_hover: '#186A3B',
+            },
+        },
+    },
+});
 class DateComponent extends Component {
+
     state = {
         guestDropdownView: false,
+        startDate: null,
+        endDate: null,
+        focusedInput: null,
     }
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside);
@@ -30,51 +53,55 @@ class DateComponent extends Component {
     }
 
     setDate(date, key) {
-        var fomatDate = moment(date).format('DD/MM/YYYY');
-        this.setState({ [key]: fomatDate })
-        this.props.setDate(fomatDate,key)
+        var fomatDate = date ? date.format('DD/MM/YYYY') : '';
+        console.log('fomatDate', fomatDate);
+        this.props.setDate(fomatDate, key)
     }
+
+
+
+
+    onDatesChange({ startDate, endDate }) {
+        const { stateDateWrapper } = this.props;
+        this.setState({
+            startDate: startDate && stateDateWrapper(startDate),
+            endDate: endDate && stateDateWrapper(endDate),
+        });
+    }
+
+    onFocusChange(focusedInput) {
+        this.setState({ focusedInput });
+    }
+
     render() {
         return (
-            <div className="col input-controller date-controller">
-                <div ref={(node) => this.checkIndateRef = node}>
-                    <input
-                        onClick={() => this.setState({ checkIndateVisible: true })}
-                        type="text"
-                        value={this.state.checkIndate}
-                        className="guestInput calendar-icon start-date form-control"
-                        placeholder="Check in"
-                    />
-                    {this.state.checkIndateVisible ?
-                        <div style={{ position: 'absolute', zIndex: 10000 }}>
-                            <Calendar
-                                minDate={new Date()}
-                                onChange={(date) => this.setDate(date,'checkIndate')}
-                                value={this.state.date}
-                            />
-                        </div> : null}
-                </div>
-                <div ref={(node) => this.checkOutdateRef = node}>
-                    <input
-                        onClick={() => this.setState({ checkOutdateVisible: true })}
-                        type="text"
-                        value={this.state.checkOutdate}
-                        className="guestInput end-date form-control"
-                        placeholder="Check out"
-                    />
-                    {this.state.checkOutdateVisible ?
-                        <div style={{ position: 'absolute', zIndex: 10000 }}>
-                            <Calendar
-                                minDate={new Date()}
-                                onChange={(date) => this.setDate(date, 'checkOutdate')}
-                                value={this.state.date}
-                            />
-                        </div>
+            <div className="d-none d-md-inline col input-controller date-controller">
+                <DateRangePicker
+                    orientation="horizontal"
+                    startDatePlaceholderText="Check in"
+                    endDatePlaceholderText="Check out"
+                    showDefaultInputIcon={true}
+                    showClearDates={true}
+                    small={true}
+                    monthFormat={"MMM YYYY"}
+                    displayFormat={"DD/MM/YYYY"}
+                    numberOfMonths={1}
+                    startDateId="startDate"
+                    endDateId="endDate"
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
+                    onDatesChange={({ startDate, endDate }) => {
+                        this.setState({ startDate, endDate }, () => {
+                            this.setDate(startDate, 'checkIndate')
+                            this.setDate(endDate, 'checkOutdate')
 
-                        : null}
-                </div>
+                        })
+                    }}
+                    focusedInput={this.state.focusedInput}
+                    onFocusChange={(focusedInput) => { this.setState({ focusedInput }) }}
+                />
             </div>
         );
     }
 }
-export default DateComponent;
+export default withStyles(() => (ThemedStyleSheet))(DateComponent);

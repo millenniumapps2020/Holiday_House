@@ -8,7 +8,7 @@
 }
 
 .header-base .logo {
-  height:120px;
+  height: 120px;
   cursor: pointer;
 }
 
@@ -49,6 +49,17 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.22);
   z-index: 1000;
+  animation-name: menuAnimation;
+  animation-duration: 0.5s;
+}
+
+@keyframes menuAnimation {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 100%;
+  }
 }
 
 .headerComp .dropdown-content.hide {
@@ -156,6 +167,12 @@
   left: 0;
   border-radius: 15px;
   transition: all .4s ease-in-out;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  resize: contain;
 }
 
 /* ================= Search div styles ends here  ================= */

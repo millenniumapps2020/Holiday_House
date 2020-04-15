@@ -32,12 +32,9 @@ class HeaderComponent extends Component {
     }
 
     onClickMenuBtn = () => {
-        this.setState({ showMenu: true })
+        this.setState({ showMenu: !this.state.showMenu })
     }
 
-    onClickCloseMenuBtn = () => {
-        this.setState({ showMenu: false })
-    }
 
     onClickMenu = (menu) => {
         if (menu === "Shortlist") {
@@ -77,8 +74,8 @@ class HeaderComponent extends Component {
             <div className="headerComp">
                 <div className="header-base">
                     <div >
-                        <img 
-                        className="logo"
+                        <img
+                            className="logo"
                             src={images.icons.nz_logo}
                             onClick={this.gotoHome}
                         />
@@ -113,16 +110,23 @@ class HeaderComponent extends Component {
                     <div className="sm-view menu-icon-div">
                         {
                             showMenu ?
-                                <i className="fa fa-bars" onClick={this.onClickCloseMenuBtn}>B</i>
+                                <img
+                                    className="icon"
+                                    src={images.icons.close}
+                                    onClick={this.gotoHome}
+                                    onClick={this.onClickMenuBtn}
+                                />
                                 :
-                                <i className="fa fa-bars" onClick={this.onClickMenuBtn}>A</i>
-
+                                <img
+                                    className="icon"
+                                    src={images.icons.menu}
+                                    onClick={this.onClickMenuBtn}
+                                />
                         }
-                        <i className="fa fa-bars"></i>
                     </div>
                 </div>
 
-                <div className={`dropdown-content ${showMenu ? 'show' : 'hide'}`}>
+                <div className={`dropdown-content ${showMenu ? 'sm-view show' : 'hide'}`}>
                     {menuList.map((item, index) => {
                         return (
                             <div className="menu-item" onClick={() => this.onClickMenu(item)}>

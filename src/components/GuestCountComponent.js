@@ -5,7 +5,17 @@ class GuestCountComponent extends Component {
         guestDropdownView: false,
         children: 1,
         adults: 1,
-        isPets:'false'
+        isPets: false
+    }
+    componentWillMount() {
+        var guest_details = this.props.initial;
+        if (guest_details && Object.keys(guest_details).langth > 0) {
+            this.setState({
+                children: guest_details.children ? guest_details.children : 1,
+                adults: guest_details.adults ? guest_details.adults : 1,
+                isPets: guest_details.isPets ? true : false
+            })
+        }
     }
     componentDidMount() {
         document.addEventListener('click', this.handleClickOutside);
@@ -37,18 +47,19 @@ class GuestCountComponent extends Component {
     }
     addGeustDetails() {
         var count = (this.state.adults + this.state.children)
-        this.setState({ guestDropdownView: false, guestCount: count > 0 ? count : '' })
-        var details={
-            'adults':this.state.adults,
-            'children':this.state.children,
-            isPets:this.state.isPets
+        console.log('isPets', this.state.isPets)
+        this.setState({ guestDropdownView: false, guestCount: count > 0 ? ((count + ' Guests') + (this.state.isPets == true ? ', Pets' : '')) : '' })
+        var details = {
+            'adults': this.state.adults,
+            'children': this.state.children,
+            isPets: this.state.isPets
         };
         this.props.onSetGuestDetails(details);
     }
     render() {
         var { guestDropdownView } = this.state;
         return (
-            <div className="col input-controller location-controller" ref={(node) => this.guestRef = node}>
+            <div className="col d-none d-lg-block input-controller location-controller" ref={(node) => this.guestRef = node}>
                 {this.props.name == "headerPage" ? <div className="tab" onClick={() => this.onGuestChange(true)}>Guest</div> :
                     <input
                         onFocus={() => this.onGuestChange(true)}
@@ -58,7 +69,7 @@ class GuestCountComponent extends Component {
                     />
                 }
                 {guestDropdownView ?
-                    <div className="guest-drowndown-wrap" style={{minWidth:250}}>
+                    <div className="guest-drowndown-wrap" style={{ minWidth: 250 }}>
                         <div className="guest-wrap">
                             <h6>Adults</h6>
                             <div class="input-group">
@@ -91,7 +102,9 @@ class GuestCountComponent extends Component {
                             <div className="row-spaceBetween">
                                 <div class="position-relative form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input"  value={this.state.isPets} onChange={(bool)=>this.setState({isPets:bool})}/>
+                                        <input type="checkbox" class="form-check-input" checked={this.state.isPets} onChange={(event) => this.setState({
+                                            isPets: event.target.checked
+                                        })} />
                                         <span>Pets</span>
                                     </label>
                                 </div>

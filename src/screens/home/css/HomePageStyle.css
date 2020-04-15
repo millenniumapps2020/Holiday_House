@@ -6,7 +6,7 @@
 }
 
 .banner-cover {
-    padding: 12% 5%;
+    padding: 12% 15%;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -30,6 +30,10 @@
     background-position: 10px;
 }
 
+.search-container {
+    width: 100%;
+}
+
 .search-box {
     background-color: rgba(0, 0, 0, .5);
     border-radius: 4px;
@@ -39,6 +43,7 @@
 .banner-title {
     color: #fff;
     font-size: 52px;
+    font-weight: 700;
 }
 
 .input-controller {
@@ -80,8 +85,9 @@
 }
 
 .suggestion {
+    margin-top: 10px;
     display: flex;
-    height: 350px;
+    padding-top: 150%;
     align-items: flex-end;
     background-repeat: no-repeat;
     background-size: cover;
@@ -92,6 +98,19 @@
     padding-left: 15px;
     padding-right: 15px;
     cursor: pointer;
+}
+
+
+@media screen and (min-width: 800px) {
+    .suggestion-name {
+        font-size: 20px!important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .suggestion-name {
+        font-size: 15px!important;
+    }
 }
 
 .suggestion:hover {
@@ -214,6 +233,11 @@
     font-weight: 500!important;
     font-size: 14px!important;
     padding: 5px 20px!important;
+}
+
+.suggestion-container, .holiday-container {
+    max-width: 1024px;
+    margin: auto;
 }
 
 .guestInput:focus {

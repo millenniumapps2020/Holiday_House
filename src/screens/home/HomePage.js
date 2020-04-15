@@ -41,6 +41,7 @@ class HomePage extends Component {
         guestCount: '',
         suggestionList: appstore["suggestion"],
         discoverList: appstore["discover"],
+        discoverName: 'Orewa',
         holidayList: appstore["perfects"],
         location: '',
         guest_details: {}
@@ -62,8 +63,8 @@ class HomePage extends Component {
     }
     successRespCBDiscover = (data) => {
         if (data.result.length > 0) {
-            console.log('data.result', data.result)
-            this.setState({ discoverList: data.result });
+            console.log('data.result', data)
+            this.setState({ discoverList: data.result, discoverName: data.message });
         }
     }
     errorRespCBDiscover = (error) => {
@@ -154,10 +155,10 @@ class HomePage extends Component {
                                     <div className="row search-box">
                                         <PlacesSearchComponent name="homeSearch" onCallBack={(location) => this.searchCallBack(location)} />
                                         <DateComponent setDate={(date, key) => { this.setState({ [key]: date }) }} />
-                                        <GuestCountComponent onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
+                                        <GuestCountComponent initial={this.state.guest_details} onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
                                         <div className="col-auto input-controller">
                                             <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block" onClick={this.onClickSuggestion}>
-                                                {/* <span class="d-sm-none fas fa-search"></span> */}
+                                                <span class="d-sm-none fas fa-search"></span>
                                                 <span class="d-none d-sm-inline">Search</span>
                                             </button>
                                         </div>
@@ -168,13 +169,13 @@ class HomePage extends Component {
                     </div>
                 </div>
                 {this.state.suggestionList.length > 0 ?
-                    <div className="container suggestion-wrap">
+                    <div className="container-fluid suggestion-wrap">
                         <div className="suggestion-container">
                             <h1 className="suggestion-title">Suggestions</h1>
                             <div className="suggestion-list row">
                                 {this.state.suggestionList.map((suggestionItem, suggestionIndex) => {
                                     return (
-                                        <div className="col-lg-3 col-sm-6" key={"suggestionKey" + suggestionIndex}
+                                        <div className="col-6 col-sm-3" key={"suggestionKey" + suggestionIndex}
                                             onClick={() => this.onClickSuggestion(suggestionItem)}
                                         >
                                             <div className="suggestion" style={{ backgroundImage: `url(${suggestionItem.imageUrl})` }}>
@@ -191,7 +192,7 @@ class HomePage extends Component {
                     <div className="container-fluid discover-wrap">
                         <div className="row">
                             <div className="container">
-                                <h1 className="suggestion-title">Discover:<a href="">Titikaveka</a></h1>
+                                <h1 className="suggestion-title">Discover: <a href="">{this.state.discoverName}</a></h1>
                             </div>
                             <div className="discover-list-wrap">
                                 {this.state.discoverList.map((discoverItem) => {
@@ -206,13 +207,13 @@ class HomePage extends Component {
                     </div>
                     : null}
                 {this.state.holidayList.length > 0 ?
-                    <div className="container holiday-wrap">
+                    <div className="container-fluid holiday-wrap">
                         <div className="holiday-container">
                             <h1 className="holiday-title">Find the perfect holiday</h1>
                             <div className="holiday-list row">
                                 {this.state.holidayList.map((holidayItem) => {
                                     return (
-                                        <div className="col-lg-4 col-sm-6">
+                                        <div className="col-12 col-sm-4">
                                             <div className="holiday" style={{ backgroundImage: `url(${holidayItem.imageUrl})` }}>
                                             </div>
                                             <h5 className="holiday-name">{holidayItem.name}</h5>
@@ -220,7 +221,7 @@ class HomePage extends Component {
                                                 {holidayItem.type && holidayItem.type.length > 0 ?
                                                     JSON.parse(holidayItem.search).map((typeItem) => {
                                                         return (<li className="holiday-type-list" onClick={() => {
-                                                            var location = 'Hibiscus';
+                                                            var location = typeItem.name;
                                                             this.props.history.push(SCREENS.SEARCH, { passvalue: { location, checkIndate: '', checkOutdate: '', guest_details: '' } })
                                                         }}>{typeItem.name}</li>);
                                                     }) : null}
