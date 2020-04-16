@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Slider from "react-slick";
 import Autosuggest from 'react-autosuggest';
 import images from '../../assets/images';
 import appstore from '../../assets/appstore';
@@ -14,6 +15,7 @@ import { SUGGESTION, PROPERTY, PERFECTS, DISCOVER } from '../../model/ServiceURL
 import { POST } from '../../model/ApiCommunicator';
 import GuestCountComponent from '../../components/GuestCountComponent';
 
+
 const languages = [
     {
         name: 'C',
@@ -24,6 +26,19 @@ const languages = [
         year: 2012
     },
 ];
+
+
+// function SamplePrevArrow(props) {
+//     const { className, style, onClick } = props;
+//     return (
+//         <div
+//             style={{ ...style, display: "block", background: 'rgba(56,56,56,.9)' }}
+//             onClick={onClick}
+//         ></div>
+//     );
+// }
+
+
 
 class HomePage extends Component {
 
@@ -140,8 +155,38 @@ class HomePage extends Component {
     render() {
         var { suggestionListView, suggestionListViewValue, guestDropdownView, holidayList } = this.state;
 
-        // autoFocus and initialDate are helper props for the example wrapper but are not
-        // props on the SingleDatePicker itself and thus, have to be omitted.
+        const settings = {
+            dots: false,
+            infinite: false,
+            arrows: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: <div><div className="arrow-carosoul">hi</div></div>,
+            nextArrow: <div><div className="arrow-carosoul"><div className="arrow-next"></div></div></div>,
+            responsive: [
+                {
+                    breakpoint: 900,
+                    settings: {
+                        slidesToShow: 3,
+                    }
+                },
+                {
+                    breakpoint: 750,
+                    settings: {
+                        arrows: false,
+                        slidesToShow: 2,
+                    }
+                },
+                {
+                    breakpoint: 500,
+                    settings: {
+                        arrows: false,
+                        slidesToShow: 1,
+                    }
+                },
+            ]
+        };
+
 
         return (
             <div className="homePage">
@@ -188,51 +233,47 @@ class HomePage extends Component {
                         </div>
                     </div>
                     : null}
-                {this.state.discoverList.length > 0 ?
-                    <div className="container-fluid discover-wrap">
-                        <div className="row">
-                            <div className="container">
-                                <h1 className="suggestion-title">Discover: <a href="">{this.state.discoverName}</a></h1>
-                            </div>
-                            <div className="discover-list-wrap">
-                                {this.state.discoverList.map((discoverItem) => {
-                                    return (
-                                        <div className="col-lg-3 col-sm-6" >
-                                            <HouseCardComponent data={discoverItem} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
+                <div className="container-fluid discover-wrap">
+                    <div className="container">
+                        <h1 className="suggestion-title">Discover: <a href="">{this.state.discoverName}</a></h1>
                     </div>
-                    : null}
-                {this.state.holidayList.length > 0 ?
-                    <div className="container-fluid holiday-wrap">
-                        <div className="holiday-container">
-                            <h1 className="holiday-title">Find the perfect holiday</h1>
-                            <div className="holiday-list row">
-                                {this.state.holidayList.map((holidayItem) => {
-                                    return (
-                                        <div className="col-12 col-sm-4">
-                                            <div className="holiday" style={{ backgroundImage: `url(${holidayItem.imageUrl})` }}>
+                    <Slider {...settings}>
+                        {this.state.discoverList.map((discoverItem, index) => {
+                            return (
+                                <HouseCardComponent key={'discoverList' + index} data={discoverItem} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
+                            )
+                        })}
+                    </Slider>
+                </div>
+                {
+                    this.state.holidayList.length > 0 ?
+                        <div className="container-fluid holiday-wrap">
+                            <div className="holiday-container">
+                                <h1 className="holiday-title">Find the perfect holiday</h1>
+                                <div className="holiday-list row">
+                                    {this.state.holidayList.map((holidayItem) => {
+                                        return (
+                                            <div className="col-12 col-sm-4">
+                                                <div className="holiday" style={{ backgroundImage: `url(${holidayItem.imageUrl})` }}>
+                                                </div>
+                                                <h5 className="holiday-name">{holidayItem.name}</h5>
+                                                <ul className="holiday-type-ul">
+                                                    {holidayItem.type && holidayItem.type.length > 0 ?
+                                                        JSON.parse(holidayItem.search).map((typeItem) => {
+                                                            return (<li className="holiday-type-list" onClick={() => {
+                                                                var location = typeItem.name;
+                                                                this.props.history.push(SCREENS.SEARCH, { passvalue: { location, checkIndate: '', checkOutdate: '', guest_details: '' } })
+                                                            }}>{typeItem.name}</li>);
+                                                        }) : null}
+                                                </ul>
                                             </div>
-                                            <h5 className="holiday-name">{holidayItem.name}</h5>
-                                            <ul className="holiday-type-ul">
-                                                {holidayItem.type && holidayItem.type.length > 0 ?
-                                                    JSON.parse(holidayItem.search).map((typeItem) => {
-                                                        return (<li className="holiday-type-list" onClick={() => {
-                                                            var location = typeItem.name;
-                                                            this.props.history.push(SCREENS.SEARCH, { passvalue: { location, checkIndate: '', checkOutdate: '', guest_details: '' } })
-                                                        }}>{typeItem.name}</li>);
-                                                    }) : null}
-                                            </ul>
-                                        </div>
-                                    )
-                                })}
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    : null}
+                        : null
+                }
                 <FooterComponent />
             </div >
         )

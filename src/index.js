@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import App from './App';
 import store from './state/store'

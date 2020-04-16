@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <svg width="34px" height="52px" viewBox="0 0 34 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow-left</title>
+    <desc>HolidayHouses left arrow</desc>
+    <defs>
+      <path d="M161.120856,518.878406 C159.948309,517.707198 158.047611,517.707198 156.875064,518.878406 L140.981872,534.758254 L125.08868,518.878406 C123.910491,517.741429 122.037701,517.757689 120.879466,518.914952 C119.72123,520.072216 119.704956,521.943433 120.842889,523.120633 L138.858976,541.121594 C140.031523,542.292802 141.932221,542.292802 143.104768,541.121594 L161.120856,523.120633 C162.293048,521.949071 162.293048,520.049968 161.120856,518.878406 L161.120856,518.878406 Z" id="path-1"></path>
+      <filter x="-25.0%" y="-35.4%" width="140.5%" height="170.8%" filterUnits="objectBoundingBox" id="filter-2">
+        <feOffset dx="-2" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+        <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+        <feColorMatrix values="0 0 0 0 0.315821641   0 0 0 0 0.315821641   0 0 0 0 0.315821641  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+      </filter>
+    </defs>
+    <g id="Listing-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="ListingPage" transform="translate(-124.000000, -506.000000)" fill-rule="nonzero">
+        <g id="arrow-left" transform="translate(141.000000, 530.000000) scale(1, -1) rotate(90.000000) translate(-141.000000, -530.000000) ">
+          <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+          <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+        </g>
+      </g>
+    </g>
+  </svg>
