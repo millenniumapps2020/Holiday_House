@@ -46,6 +46,14 @@ class HouseCardComponent extends Component {
     render() {
         var data = this.state.data;
         console.log('render_data', data)
+        var activeStar = [
+            [0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0],
+            [1, 1, 1, 0, 0],
+            [1, 1, 1, 1, 0],
+            [1, 1, 1, 1, 1],
+        ]
         return (
             !data ? <div className="house-card" >
                 <div className="house-card__inner ">
@@ -87,12 +95,13 @@ class HouseCardComponent extends Component {
                             <div className="flex-align">
                                 <div className="house-card__rating">
                                     <div className="rating-star">
+                                        {console.log('data.rating', data.rating)}
+                                        {console.log('data.rating', (data.rating != undefined && (activeStar[(+data.rating)])))}
                                         <div>
-                                            <div className="rating-star__img filled d-inline-flex"></div>
-                                            <div className="rating-star__img filled d-inline-flex"></div>
-                                            <div className="rating-star__img filled d-inline-flex"></div>
-                                            <div className="rating-star__img filled d-inline-flex"></div>
-                                            <div className="rating-star__img empty d-inline-flex"></div>
+                                            {data.rating != undefined && (activeStar[(+data.rating)]).map(item => {
+                                                return (<div className={"rating-star__img d-inline-flex " + (item == 1 ? "filled" : "empty")}></div>);
+                                            })}
+
                                         </div></div></div>
                                 <div>
                                     <ul className="house-card__specs">

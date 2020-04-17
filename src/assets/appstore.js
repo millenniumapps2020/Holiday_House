@@ -182,7 +182,7 @@ const appstore = {
             "longitude": "14.00",
             "amount": "195.00",
             "minimumDay": "1",
-            "maximumGuests": "1",
+            "maximumGuests": "4",
             "bedRooms": "1",
             "bathRooms": "1",
             "Image": "https://holidayhouses.tmcdn.co.nz/hh/full/16/4045016.jpg",
@@ -194,7 +194,9 @@ const appstore = {
             "luxury": "0",
             "rarotonga": "0",
             "staffPicks": "0",
-            "bachcare": "0"
+            "bachcare": "0",
+            "favourite": "0",
+            "rating": "0"
         },
         {
             "propertyId": "2",
@@ -205,7 +207,7 @@ const appstore = {
             "longitude": "14.00",
             "amount": "195.00",
             "minimumDay": "1",
-            "maximumGuests": "1",
+            "maximumGuests": "7",
             "bedRooms": "1",
             "bathRooms": "1",
             "Image": "https://holidayhouses.tmcdn.co.nz/hh/full/16/4045016.jpg",
@@ -217,7 +219,9 @@ const appstore = {
             "luxury": "0",
             "rarotonga": "0",
             "staffPicks": "0",
-            "bachcare": "0"
+            "bachcare": "0",
+            "favourite": "0",
+            "rating": "0"
         },
         {
             "propertyId": "3",
@@ -229,8 +233,8 @@ const appstore = {
             "amount": "195.00",
             "minimumDay": "1",
             "maximumGuests": "1",
-            "bedRooms": "1",
-            "bathRooms": "1",
+            "bedRooms": "2",
+            "bathRooms": "2",
             "Image": "https://holidayhouses.tmcdn.co.nz/hh/full/16/4045016.jpg",
             "status": "1",
             "createdDate": "2020-02-11 22:41:33",
@@ -240,7 +244,9 @@ const appstore = {
             "luxury": "0",
             "rarotonga": "0",
             "staffPicks": "0",
-            "bachcare": "0"
+            "bachcare": "0",
+            "favourite": "0",
+            "rating": "0"
         },
         {
             "propertyId": "4",
@@ -263,7 +269,9 @@ const appstore = {
             "luxury": "0",
             "rarotonga": "0",
             "staffPicks": "0",
-            "bachcare": "0"
+            "bachcare": "0",
+            "favourite": "0",
+            "rating": "0"
         },
         {
             "propertyId": "5",
@@ -286,7 +294,9 @@ const appstore = {
             "luxury": "0",
             "rarotonga": "0",
             "staffPicks": "0",
-            "bachcare": "0"
+            "bachcare": "0",
+            "favourite": "0",
+            "rating": "0"
         },
         {
             "propertyId": "6",
@@ -297,7 +307,7 @@ const appstore = {
             "longitude": "14.00",
             "amount": "195.00",
             "minimumDay": "1",
-            "maximumGuests": "1",
+            "maximumGuests": "4",
             "bedRooms": "1",
             "bathRooms": "1",
             "Image": "https://holidayhouses.tmcdn.co.nz/hh/full/16/4045016.jpg",
@@ -309,7 +319,9 @@ const appstore = {
             "luxury": "0",
             "rarotonga": "0",
             "staffPicks": "0",
-            "bachcare": "0"
+            "bachcare": "0",
+            "favourite": "0",
+            "rating": "0"
         },
         {
             "propertyId": "7",
@@ -332,7 +344,9 @@ const appstore = {
             "luxury": "0",
             "rarotonga": "0",
             "staffPicks": "0",
-            "bachcare": "0"
+            "bachcare": "0",
+            "favourite": "0",
+            "rating": "0"
         }
     ],
 

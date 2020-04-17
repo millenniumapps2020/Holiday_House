@@ -28,17 +28,6 @@ const languages = [
 ];
 
 
-// function SamplePrevArrow(props) {
-//     const { className, style, onClick } = props;
-//     return (
-//         <div
-//             style={{ ...style, display: "block", background: 'rgba(56,56,56,.9)' }}
-//             onClick={onClick}
-//         ></div>
-//     );
-// }
-
-
 
 class HomePage extends Component {
 
