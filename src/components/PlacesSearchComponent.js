@@ -123,13 +123,14 @@ class PlacesSearchComponent extends Component {
                     value={suggestionListViewValue}
                     onChange={this.onTextChange}
                     className="search-icon form-control"
-                    placeholder="Where would you like to go?"
+                    placeholder={this.props.name == "headerSearch" ? "Where are you going?" : "Where would you like to go?"}
                 />
                 {suggestionListView ?
                     <div className="autosuggest-wrap">
-                        <div className="autosuggest-header">
-                            <p>{suggestionListViewValue == '' ? "Top Locations" : "Locations"}</p>
-                        </div>
+                        {this.state.placeProperties.length > 0 || this.state.filterLocation.length>0?
+                            <div className="autosuggest-header">
+                                <p>{suggestionListViewValue == '' ? "Top Locations" : "Locations"}</p>
+                            </div> : null}
                         <div className="autosuggest-list">
                             {suggestionListViewValue == '' ?
                                 <div className="top-list">

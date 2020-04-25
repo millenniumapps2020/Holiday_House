@@ -1,0 +1,74 @@
+.property-image-gallery .image-gallery-icon svg {
+    vertical-align: middle;
+    z-index: 105;
+    width: 60px;
+    height: 60px;
+    background-size: 50%;
+    opacity: .5;
+}
+
+.property-image-gallery .image-gallery-icon svg:hover {
+    opacity: 1;
+}
+
+.image-gallery-icon:hover {
+    color: #fff!important;
+}
+
+.property-image-gallery {
+    background-color: #1b2c3b;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.property-image-gallery .arrow.arrow-prev {
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/arrow-left.svg")!important;
+}
+
+.property-image-gallery .arrow.arrow-next {
+    background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/arrow-right.svg")!important;
+}
+
+.property-image-gallery .arrow {
+    vertical-align: middle;
+    z-index: 105;
+    width: 40px;
+    background-size: 50%;
+    opacity: .5;
+}
+
+.property-image-gallery .arrow, .property-image-gallery .image {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.property-image-gallery .image.current {
+    z-index: 2;
+    opacity: 1;
+}
+
+.property-image-gallery .image {
+    width: 100%;
+    background-size: cover;
+    transition: opacity .3s ease-in;
+    z-index: 100;
+    opacity: 0;
+}
+
+.property-image-gallery .image.next {
+    z-index: 1;
+}
+
+.property-image-gallery .image-gallery-image {
+    object-fit: cover!important;
+}
+
+.image-gallery, .image-gallery-content, .image-gallery-slide-wrapper, .image-gallery-swipe, .image-gallery-slides, .image-gallery-slide, .image-gallery-slide div, .image-gallery-slide img {
+    height: 100%;
+}

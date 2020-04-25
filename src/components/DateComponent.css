@@ -23,7 +23,6 @@
     align-items: center;
     width: 100%;
     border-radius: .25rem;
-    height: calc(2.25rem + 2px);
 }
 
 .DateRangePicker .DateRangePickerInput .DateInput:first-of-type {

@@ -75,9 +75,10 @@ class DateComponent extends Component {
 
     render() {
         return (
-            <div className="d-none d-md-inline col input-controller date-controller">
+            <div className={("col input-controller date-controller" + (this.props.name != 'subheaderDate' ? 'd-none d-md-inline' : ''))}>
                 <DateRangePicker
-                    orientation="horizontal"
+                    // orientation="horizontal"
+                    reopenPickerOnClearDates={true}
                     startDatePlaceholderText="Check in"
                     endDatePlaceholderText="Check out"
                     showDefaultInputIcon={true}

@@ -39,7 +39,7 @@ class DetailsPage extends Component {
     }
     getPerpertyDetails() {
         var request = {
-            "userId": "",
+            "userId": "1",
             "propertyId": this.props.location.state.propertyId
         };
         POST(PROPERTY_DETAILS, request, this.successRespCBDetails, this.errorRespCBDetails);
@@ -217,10 +217,10 @@ class DetailsPage extends Component {
                                                 </div>
                                             </div>
                                             <div style={{ marginTop: 30 }}>
-                                                <DateComponent  setDate={(date, key) => { this.setState({ [key]: date }) }} />
+                                                <DateComponent setDate={(date, key) => { this.setState({ [key]: date }) }} />
                                             </div>
                                             <div style={{ marginTop: 30 }}>
-                                                <GuestCountComponent onSetGuestDetails={(details) => this.setState({ guest_details: details })}  />
+                                                <GuestCountComponent onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
                                             </div>
                                             <div style={{ marginTop: 30 }}>
                                                 <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block" onClick={this.onClickSuggestion}>
@@ -237,8 +237,8 @@ class DetailsPage extends Component {
                             </div>
                         </div>
                         <div className="container details-body">
-                        {Object.keys(this.state.propertyDetails).length>0?
-                            <MapComponent maplist={[this.state.propertyDetails]} /> :null}
+                            {Object.keys(this.state.propertyDetails).length > 0 ?
+                                <MapComponent maplist={[this.state.propertyDetails]} /> : null}
                         </div>
                     </div> : null
                 }

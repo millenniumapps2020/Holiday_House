@@ -60,6 +60,10 @@ h5 {
   align-items: center;
 }
 
+/* .form-control{
+  height:100%!important;
+} */
+
 .flex-center {
   display: flex;
   align-items: center;
@@ -125,6 +129,29 @@ button {
   }
   .sm-view {
     display: none !important;
+  }
+}
+
+.header-search-suggestion {
+  width: 260px;
+}
+
+
+@media screen and (min-width: 750px) {
+  .header-search-suggestion {
+    display: none;
+  }
+  .subheader-search-suggestion {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .header-search-suggestion {
+    display: block;
+  }
+  .subheader-search-suggestion {
+    display: none;
   }
 }
 

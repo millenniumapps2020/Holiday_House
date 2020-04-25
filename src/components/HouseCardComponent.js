@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { POST } from '../model/ApiCommunicator';
 import { ADD_REMOVE_SHORTLIST } from '../model/ServiceURLs';
+import ImageGallery from 'react-image-gallery';
+
+import './HouseCardComponentStyle.css';
+
 
 class HouseCardComponent extends Component {
 
@@ -22,10 +26,10 @@ class HouseCardComponent extends Component {
             "userId": "1",
             "propertyId": this.props.data.propertyId
         }
+        POST(ADD_REMOVE_SHORTLIST, request, this.successRespCBShortListAction, this.errorRespCBShortListAction);
         var data = this.state.data;
         data.favourite = data.favourite == "1" ? "0" : "1"
         this.setState({ data: data })
-        POST(ADD_REMOVE_SHORTLIST, request, this.successRespCBShortListAction, this.errorRespCBShortListAction);
     }
 
     successRespCBShortListAction = (response) => {
@@ -34,6 +38,10 @@ class HouseCardComponent extends Component {
             data.favourite = "0";
         } else {
             data.favourite = "1";
+        }
+        console.log('this.props.shortActioncallback', this.props.shortActioncallback)
+        if (this.props.shortActioncallback) {
+            this.props.shortActioncallback(response.message)
         }
         this.setState({ data: data })
     }
@@ -54,6 +62,13 @@ class HouseCardComponent extends Component {
             [1, 1, 1, 1, 0],
             [1, 1, 1, 1, 1],
         ]
+        const galleryImages = data.images && data.images.length > 0 ? data.images.map((item) => {
+            return {
+                original: item.imageUrl,
+                thumbnail: item.imageUrl,
+            };
+        }) : [];
+
         return (
             !data ? <div className="house-card" >
                 <div className="house-card__inner ">
@@ -65,18 +80,22 @@ class HouseCardComponent extends Component {
                 <div className="house-card " >
                     <div className="house-card__inner ">
                         <div className="img-container">
-                            <div className="simple-image-gallery" onClick={() => this.props.onCardClick(this.props.data)}>
+                            <div className="property-image-gallery" >
                                 {this.props.arrow ?
                                     <div className="arrow arrow-prev"></div> : null
                                 }
-                                <img src={data.Image} className="image current" style={{ backgroundImage: data.Image }}>
-                                </img>
-                                <div className="image previous"></div>
-                                {this.props.arrow ?
-                                    <div className="arrow arrow-next"></div>
-                                    : null
+                                {galleryImages.length > 0 ?
+                                    <ImageGallery
+                                        onClick={()=>this.props.onCardClick(this.props.data)}
+                                        showThumbnails={false}
+                                        showFullscreenButton={false}
+                                        items={galleryImages}
+                                        showPlayButton={false}
+                                    /> :
+                                    <img src={data.Image} className="image current" style={{ backgroundImage: data.Image }} onClick={() => this.props.onCardClick(this.props.data)}/>
                                 }
                             </div>
+
                             <div className="shortlist-button-wrap" onClick={this.addShortList}>
                                 <i className={(data.favourite == "1" ? "red-color fas" : "far") + " fa-heart"}></i>
                             </div>

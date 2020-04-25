@@ -57,13 +57,13 @@ class GuestCountComponent extends Component {
         this.props.onSetGuestDetails(details);
     }
     render() {
-        var { guestDropdownView } = this.state;
+        var { guestDropdownView,guestCount } = this.state;
         return (
-            <div className="col d-none d-lg-block input-controller location-controller" ref={(node) => this.guestRef = node}>
-                {this.props.name == "headerPage" ? <div className="tab" onClick={() => this.onGuestChange(true)}>Guest</div> :
+            <div className="col input-controller location-controller" ref={(node) => this.guestRef = node}>
+                {this.props.name == "headerPage" ? <div className={"tab btn btn-basic"+(guestCount?" selected-search-btn":"")} onClick={() => this.onGuestChange(true)}>{guestCount?guestCount:'Guests'}</div> :
                     <input
                         onFocus={() => this.onGuestChange(true)}
-                        value={this.state.guestCount}
+                        value={guestCount}
                         className="guestInput guest-icon form-control"
                         placeholder="Guests"
                     />

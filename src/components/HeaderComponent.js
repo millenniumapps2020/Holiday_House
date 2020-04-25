@@ -12,6 +12,7 @@ import GuestCountComponent from './GuestCountComponent';
 import PriceComponent from './PriceComponent';
 import DateComponent from './DateComponent';
 import images from '../assets/images';
+import './HeaderComponentStyle.css'
 
 
 class HeaderComponent extends Component {
@@ -23,7 +24,9 @@ class HeaderComponent extends Component {
             menuList: ["Shortlist", "List my house", "Help"],
             showMenu: false,
             openLoginModal: false,
-            selectedSlideMenu: "gallery"
+            selectedSlideMenu: "gallery",
+            location: '',
+            online_payment: false
         }
     }
 
@@ -65,10 +68,32 @@ class HeaderComponent extends Component {
         this.props.storeLoggedUser("")
     }
     searchCallBack(location) {
+        this.setState({ location: location }, () => {
+            this.searchUpdate();
+        })
+    }
+    searchUpdate = () => {
+        var { location, checkIndate, checkOutdate, guest_details, online_payment, priceRange } = this.state;
+        var data = {
+            location: location,
+            checkIndate: checkIndate,
+            checkOutdate: checkOutdate,
+            guest_details: guest_details,
+            payment: online_payment ? 'Online Payment' : "",
+            price: priceRange
 
+        }
+        if (this.props.searchCallback(data)) {
+            this.props.searchCallback(data)
+        }
+    }
+    updatePriceDetails = (data) => {
+        this.setState({ priceRange: data }, () => {
+            this.searchUpdate()
+        })
     }
     render() {
-        const { menuList, showMenu, openLoginModal } = this.state;
+        const { menuList, showMenu, openLoginModal, online_payment } = this.state;
 
         return (
             <div className="headerComp">
@@ -80,6 +105,9 @@ class HeaderComponent extends Component {
                             onClick={this.gotoHome}
                         />
                     </div>
+                    {this.props.name == "searchHeader" ? <div className="header-search-suggestion">
+                        <PlacesSearchComponent name="headerSearch" onCallBack={(location) => this.searchCallBack(location)} />
+                    </div> : null}
                     <div className="lg-view-flex menus">
                         {menuList.map((item, index) => {
                             return (
@@ -145,17 +173,27 @@ class HeaderComponent extends Component {
                     this.props.showSearch ?
                         <div className="header-search">
                             <div className="filter-div">
-                                <div style={{ width: 250 }}>
-                                    <PlacesSearchComponent name={this.props.key} name="homeSearch" onCallBack={(location) => this.searchCallBack(location)} />
+                                <div className="searchinput-border-wrap subheader-search-suggestion">
+                                    <PlacesSearchComponent name={this.props.key} name="subheaderSearch" onCallBack={(location) => this.searchCallBack(location)} />
                                 </div>
-                                <div style={{ width: 250 }}>
-                                    <DateComponent setDate={(date, key) => { this.setState({ [key]: date }) }} />
+                                <div className="searchinput-border-wrap">
+                                    <DateComponent name="subheaderDate" setDate={(date, key) => {
+                                        this.setState({ [key]: date }, () => {
+                                            if (key == "checkOutdate") {
+                                                this.searchUpdate()
+                                            }
+                                        })
+                                    }} />
                                 </div>
-                                <GuestCountComponent name="headerPage" onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
-                                <PriceComponent name="headerPage" />
-                                <div className="tab last">Online Payment</div>
+                                <GuestCountComponent name="headerPage" onSetGuestDetails={(details) => this.setState({ guest_details: details }, () => {
+                                    this.searchUpdate()
+                                })} />
+                                <PriceComponent name="headerPage" onCallBack={(data) => this.updatePriceDetails(data)} />
+                                <div className={"tab last d-none d-xl-block btn btn-basic " + (online_payment ? "selected-search-btn" : "")} onClick={() => this.setState({ online_payment: !online_payment }, () => {
+                                    this.searchUpdate()
+                                })}>Online Payment {online_payment ? <img className="payment-tick-icon" src={images.icons.circle_tick}></img> : null}</div>
                             </div>
-                            <div className="map-galary">
+                            <div className="map-galary d-none d-lg-block">
                                 <div className={`tab-slider-bar ${this.state.selectedSlideMenu === 'gallery' ? 'slide' : ''}`}>
                                     <div className={`tab ${this.state.selectedSlideMenu === "map" ? 'active' : ''}`}
                                         onClick={() => this.onClickSlideMenu('map')}
@@ -179,7 +217,7 @@ class HeaderComponent extends Component {
                         : null
                 }
 
-            </div>
+            </div >
         )
     }
 }

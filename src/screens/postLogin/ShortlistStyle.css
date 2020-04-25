@@ -1,0 +1,22 @@
+.empty-shortlist .icon-symbol {
+    width: 180px;
+    height: 130px;
+    resize: contain;
+}
+
+.empty-shortlist .heading {
+    margin-top: 10px!important;
+    color: #000!important;
+}
+
+.empty-shortlist .search-button {
+    border-radius: 4px;
+    font-weight: 500;
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 5px 20px;
+}
+.shortlist-loader-size{
+    height: 200px;
+    width: 100%;
+}

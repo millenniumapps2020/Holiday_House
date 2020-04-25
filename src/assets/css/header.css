@@ -79,10 +79,15 @@
   margin-left: 15px;
 }
 
+.form-control{
+  height:  calc(2.25rem + 4px)!important;;
+}
+
 /* ================= Search div styles starts here  ================= */
 
 .headerComp .header-search {
   padding: 5px 10px;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -105,7 +110,13 @@
 
 .headerComp .header-search .filter-div .tab {
   border-right: 1px solid rgb(230, 230, 230);
-  padding: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.searchinput-border-wrap{
+  width: 280px;
+  border-right: 1px solid rgb(230, 230, 230);
+  padding: 0px 10px;
   cursor: pointer;
 }
 
@@ -129,7 +140,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-radius: 15px;
+  border-radius: 30px;
   border: 1px solid rgb(201, 201, 201);
 }
 

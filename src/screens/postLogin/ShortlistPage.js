@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 import Header from '../../components/HeaderComponent'
 import Footer from '../../components/FooterComponent'
 import HouseCardComponent from '../../components/HouseCardComponent'
+import LoaderComponent from '../../components/LoaderComponent'
 
 import { storeShortListedHouseList } from '../../state/actions/actions'
 import { SHORTLIST } from '../../model/ServiceURLs';
 import { POST } from '../../model/ApiCommunicator';
 import { SCREENS } from '../../common/Constants';
+import images from '../../assets/images';
+import './ShortlistStyle.css'
 
 class ShortlistPage extends Component {
 
@@ -16,7 +19,8 @@ class ShortlistPage extends Component {
         super(props);
 
         this.state = {
-            shortlist: []
+            shortlist: [],
+            loader: true
         }
     }
 
@@ -29,7 +33,7 @@ class ShortlistPage extends Component {
         let request = {
             "userId": "1",
             "limit": "10",
-            "offset": "0"
+            "offset": "0",
         }
         POST(SHORTLIST, request, this.successRespCBShortListAction, this.errorRespCBShortListAction);
     }
@@ -39,9 +43,11 @@ class ShortlistPage extends Component {
             this.props.storeShortListedHouseList(response.result.length)
             this.setState({ shortlist: response.result })
         }
+        this.setState({ loader: false })
     }
 
     errorRespCBShortListAction = (error) => {
+        this.setState({ loader: false })
         console.log('response_error', error)
 
     }
@@ -50,11 +56,20 @@ class ShortlistPage extends Component {
     dicoverCardPressed(item) {
         this.props.history.push(SCREENS.DETAILS, { propertyId: item.propertyId })
     }
+    onClickSearchButton = () => {
+        this.props.history.push(SCREENS.SEARCH, { passvalue: { location: 'Hibiscus' } });
+    }
+
+    shortcallback = (msg) => {
+        console.log('shortListcallback', msg);
+        if (this.state.shortlist.length == 1) {
+            this.setState({ shortlist: [] })
+        }
+    }
     render() {
         return (
             <div id="shortList-page" className="shortList-page">
                 <Header />
-
                 <div className="shortList-container container">
                     <div class="row header">
                         <div class="col">
@@ -62,20 +77,37 @@ class ShortlistPage extends Component {
                             <h4>Houses you've liked</h4>
                         </div>
                     </div>
-                    <div className="row">
-                        {this.state.shortlist.map((item) => {
-                            return (<div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <HouseCardComponent data={item} onCardClick={(item) => this.dicoverCardPressed(item)} />
-                            </div>)
-                        })
 
-                        }
-
-                    </div>
+                    {this.state.loader ?
+                        <div className="shortlist-loader-size">
+                            <LoaderComponent />
+                        </div> :
+                        <div className="row">
+                            {this.state.shortlist.map((item) => {
+                                return (<div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                                    <HouseCardComponent data={item} shortActioncallback={this.shortcallback} onCardClick={(item) => this.dicoverCardPressed(item)} />
+                                </div>)
+                            })}
+                            {this.state.shortlist.length == 0 ?
+                                <div className="col empty-shortlist">
+                                    <img src={images.common.no_houses_image} className="icon-symbol" />
+                                    <h5 className="heading">Your shortlist is empty</h5>
+                                    <p>
+                                        You can shortlist houses by clicking the heart icon on listings cards
+                                    <br />
+                                    or the "Add to Shortlist" button on listings.
+                                </p>
+                                    <button class=".btn.btn-primary search-button" onClick={this.onClickSearchButton}>
+                                        Search Holiday Houses
+                                </button>
+                                </div>
+                                :
+                                null}
+                        </div>}
                 </div>
 
                 <Footer />
-            </div>
+            </div >
         )
     }
 }

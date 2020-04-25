@@ -13,6 +13,11 @@ import search_guests from './images/icons/search_guests.png';
 import nz_logo from './images/icons/nz_logo.png';
 import close from './images/icons/close.png';
 import menu from './images/icons/menu.png';
+import circle_tick from './images/icons/circle_tick.svg';
+
+// ShortList 
+import no_houses_image from './images/common/no_houses_image.svg';
+
 
 
 const images = {
@@ -20,6 +25,7 @@ const images = {
         "banner_one": banner_one,
         "banner_two": banner_two,
         "banner_three": banner_three,
+        "no_houses_image": no_houses_image
     },
     "icons": {
         "nz_logo": nz_logo,
@@ -28,7 +34,8 @@ const images = {
         "child": child,
         "pets_no": pets_no,
         "menu": menu,
-        "close": close
-    }
+        "close": close,
+        "circle_tick": circle_tick
+    },
 }
 export default images;
