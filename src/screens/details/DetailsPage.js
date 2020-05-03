@@ -247,7 +247,7 @@ class DetailsPage extends Component {
                         <div className="container-fluid discover-wrap details-dicover">
                             <div className="row">
                                 <div className="container">
-                                    <h1 className="suggestion-title">More Holiday Houses near Martinborough</h1>
+                                    <h1 className="suggestion-title">More NZStays near Martinborough</h1>
                                 </div>
                                 <div className="discover-list-wrap">
                                     {this.state.discoverList.map((discoverItem) => {

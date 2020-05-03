@@ -63,7 +63,7 @@ class LoginComponent extends Component {
             <div className="login-base">
                 <div className="body">
                     <div className="details-div">
-                        <h3 className="heading">Sign in to Holiday Houses</h3>
+                        <h3 className="heading">Sign in to NZStays</h3>
                         <div className="input-div">
                             <div className="label">Email Address</div>
                             <input className="form-control" placeholder="Email Address"
@@ -101,7 +101,7 @@ class LoginComponent extends Component {
                             <button className="btn loginBtn"
                                 onClick={this.onClickLogin}
                             >
-                                Sign in to Holiday Houses
+                                Sign in to NZStays
                             </button>
                         </div>
                         <div className="option-div">

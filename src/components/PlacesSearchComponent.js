@@ -43,7 +43,8 @@ class PlacesSearchComponent extends Component {
             "minBed": "",
             "basics": "",
             "limit": "10",
-            "offset": "0"
+            "offset": "0",
+            "instantBooking":''
         };
         POST(PROPERTY, request, this.successRespCBProperty, this.errorRespCBProperty);
     }
@@ -97,7 +98,9 @@ class PlacesSearchComponent extends Component {
             "minBed": "",
             "basics": "",
             "limit": "10",
-            "offset": "0"
+            "offset": "0",
+            "instantBooking":''
+
         };
         POST(PROPERTY, request, this.successSearchRespCBProperty, this.errorRespCBProperty);
     }

@@ -65,12 +65,10 @@ class MapComponent extends Component {
         }) : <div></div>;
     }
     dicoverCardPressed(item) {
-        console.log('item',item)
         this.props.history.push(SCREENS.DETAILS, { propertyId: item.propertyId })
     }
     render() {
         var coordinates = this.props.maplist ? { lat: this.props.maplist[0].latitude, lng: this.props.maplist[0].longitude } : {}
-        console.log('coordinates', coordinates)
         return (
             <div className="map-base">
                 <div className="map-div">

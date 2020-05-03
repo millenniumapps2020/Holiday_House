@@ -51,12 +51,37 @@
     border-bottom: none!important;
     box-shadow: 0 3px #dcdcdc!important;
 }
-.search-page-wrap{
+
+.search-page-wrap {
     padding-bottom: 30px;
 }
-.btn-disabled{
+
+.btn-disabled {
     opacity: 0.5;
 }
-.pagination-wrap-button{
+
+.pagination-wrap-button {
     margin-top: 10px!important;
+}
+
+
+.search-map-base {
+    position: fixed!important;
+    height: 100vh;
+    right: 0;
+    bottom: 0;
+}
+
+
+.map-base {
+    width: 100%;
+    height: calc(100% - 110px);
+    margin-top:  110px;
+}
+.loader-search-wrap{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100vh;
+    z-index: 40000;
 }

@@ -98,7 +98,7 @@ class ShortlistPage extends Component {
                                     or the "Add to Shortlist" button on listings.
                                 </p>
                                     <button class=".btn.btn-primary search-button" onClick={this.onClickSearchButton}>
-                                        Search Holiday Houses
+                                        Search NZStays
                                 </button>
                                 </div>
                                 :

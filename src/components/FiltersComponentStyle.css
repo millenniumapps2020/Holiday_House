@@ -1,0 +1,57 @@
+.filter-controller .modal-title {
+    margin-top: 10px!important;
+}
+
+.bedroom {
+    margin-top: 20px;
+}
+
+.bedroom .label {
+    margin-right: 10px;
+    color: var(--accent_text_color);
+    font-weight: 500;
+}
+
+.basics .title, .keywords .title {
+    margin-top: 10px;
+    color: var(--accent_text_color)!important;
+}
+
+.filter-controller .modal-content {
+    padding: 10px;
+}
+
+.basics .radio-button input {
+    margin-left: 0px;
+}
+
+.basics .radio-button label {
+    margin-left: 20px;
+}
+
+.filter-buttons {
+    margin-top: 20px!important;
+    text-align: right;
+}
+
+.filter-buttons .primry-button, .filter-buttons .primry-button:hover {
+    color: #333!important;
+    background-color: #ffea3e;
+    box-shadow: 0 3px #f3dd29;
+    border: 0;
+    top: 0;
+    font-size: 14px;
+}
+.filter-count{
+    top: -6px;
+    position: absolute;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(0, 189, 130);
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+}

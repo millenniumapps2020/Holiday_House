@@ -4,8 +4,7 @@ import './LoaderComponent.css'
 
 export default class LoaderComponent extends Component {
     render() {
-        console.log('this.props.height',this.props.height)
-        return <div className="loader-wrap"  style={{height:this.props.height?this.props.height:"100%"}}>
+        return <div className="loader-wrap"  style={{height:this.props.height?this.props.height:"100%",backgroundColor:'tranparent'}}>
             <div class="loader"></div>
         </div>;
     }

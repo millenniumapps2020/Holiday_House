@@ -13,6 +13,7 @@ import PriceComponent from './PriceComponent';
 import DateComponent from './DateComponent';
 import images from '../assets/images';
 import './HeaderComponentStyle.css'
+import FiltersComponent from './FiltersComponent';
 
 
 class HeaderComponent extends Component {
@@ -24,14 +25,16 @@ class HeaderComponent extends Component {
             menuList: ["Shortlist", "List my house", "Help"],
             showMenu: false,
             openLoginModal: false,
-            selectedSlideMenu: "gallery",
+            selectedSlideMenu: "Map",
             location: '',
-            online_payment: false
+            online_payment: false,
+            filterDetails: {
+                basicsRadioButton: {
+                },
+                bedroom: 1,
+                keywords: '',
+            }
         }
-    }
-
-    componentDidMount() {
-        this.props.onClickSlideMenuCB && this.props.onClickSlideMenuCB(this.state.selectedSlideMenu)
     }
 
     onClickMenuBtn = () => {
@@ -73,15 +76,15 @@ class HeaderComponent extends Component {
         })
     }
     searchUpdate = () => {
-        var { location, checkIndate, checkOutdate, guest_details, online_payment, priceRange } = this.state;
+        var { location, checkIndate, checkOutdate, guest_details, online_payment, priceRange, filterDetails } = this.state;
         var data = {
             location: location,
             checkIndate: checkIndate,
             checkOutdate: checkOutdate,
             guest_details: guest_details,
             payment: online_payment ? 'Online Payment' : "",
-            price: priceRange
-
+            price: priceRange,
+            filterDetails: filterDetails
         }
         if (this.props.searchCallback(data)) {
             this.props.searchCallback(data)
@@ -89,6 +92,11 @@ class HeaderComponent extends Component {
     }
     updatePriceDetails = (data) => {
         this.setState({ priceRange: data }, () => {
+            this.searchUpdate()
+        })
+    }
+    filterDetails = (data) => {
+        this.setState({ filterDetails: data }, () => {
             this.searchUpdate()
         })
     }
@@ -189,18 +197,19 @@ class HeaderComponent extends Component {
                                     this.searchUpdate()
                                 })} />
                                 <PriceComponent name="headerPage" onCallBack={(data) => this.updatePriceDetails(data)} />
-                                <div className={"tab last d-none d-xl-block btn btn-basic " + (online_payment ? "selected-search-btn" : "")} onClick={() => this.setState({ online_payment: !online_payment }, () => {
+                                <div className={"tab  d-none d-xl-block btn btn-basic " + (online_payment ? "selected-search-btn" : "")} onClick={() => this.setState({ online_payment: !online_payment }, () => {
                                     this.searchUpdate()
                                 })}>Online Payment {online_payment ? <img className="payment-tick-icon" src={images.icons.circle_tick}></img> : null}</div>
+                                <FiltersComponent name="subHeader" onCallBack={(data) => this.filterDetails(data)} />
                             </div>
                             <div className="map-galary d-none d-lg-block">
                                 <div className={`tab-slider-bar ${this.state.selectedSlideMenu === 'gallery' ? 'slide' : ''}`}>
-                                    <div className={`tab ${this.state.selectedSlideMenu === "map" ? 'active' : ''}`}
+                                    <div className={`tab ${this.state.selectedSlideMenu == "map" ? 'active' : ''}`}
                                         onClick={() => this.onClickSlideMenu('map')}
                                     >
                                         Map
                                     </div>
-                                    <div className={`tab ${this.state.selectedSlideMenu === "gallery" ? 'active' : ''}`}
+                                    <div className={`tab ${this.state.selectedSlideMenu == "gallery" ? 'active' : ''}`}
                                         onClick={() => this.onClickSlideMenu('gallery')}
                                     >
                                         Gallery

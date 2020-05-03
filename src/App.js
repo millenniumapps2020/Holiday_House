@@ -30,6 +30,9 @@ class App extends Component {
   render() {
     return (
       <div>
+        <style>
+          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" />
+        </style>
         <BrowserRouter>
           <Switch>
             <Route exact path={SCREENS.HOME} component={HomePage} />

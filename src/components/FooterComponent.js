@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import images from '../assets/images';
 
 class FooterComponent extends Component {
     render() {
@@ -11,16 +12,17 @@ class FooterComponent extends Component {
                                 <div className="col-lg-6 foot-home-logo">
                                     <div>
                                         <img className="footer-logo1"
-                                            src="https://www.holidayhouses.co.nz/ReactApp/images/brand/hh-footer-light.svg"
+                                            src={images.icons.nz_logo}
+                                            className="logo"
                                         />
                                     </div>
                                 </div>
                                 <div className="col-lg-6  foot-home-logo">
-                                    <div>
+                                    {/* <div>
                                         <img className="footer-logo2"
                                             src="https://www.holidayhouses.co.nz/ReactApp/images/brand/trademe.svg"
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

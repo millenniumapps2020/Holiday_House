@@ -7,8 +7,7 @@
     padding: 10px;
 }
 
-.search-base .map-view {
-}
+.search-base .map-view {}
 
 .search-base .search-header {
     height: 50px;
@@ -32,14 +31,12 @@
     padding: 10px;
 }
 
-.search-map-base{
-    padding: 0px!important;
+.map-div {
+    height: 84vh
 }
-.map-div{
-    height:84vh
-}
-.map-div div:first-child{
+
+.map-div div:first-child {
     position: relative!important;
 }
-.map-div .gm-style{
-}
+
+.map-div .gm-style {}

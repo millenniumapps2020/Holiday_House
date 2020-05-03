@@ -56,7 +56,7 @@ class RegisterComponent extends Component {
                         <div>
                             <span className="goto-login-btn" onClick={this.gotoLogin}>Back to sign in</span>
                         </div>
-                        <h3 className="heading">Register with Holiday Houses</h3>
+                        <h3 className="heading">Register with NZStays</h3>
                         <div className="info-content">Required fields are marked with a star *</div>
                         <div className="input-div">
                             <div className="label">First name *</div>
