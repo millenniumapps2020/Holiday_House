@@ -153,7 +153,6 @@ class DetailsPage extends Component {
                         </div >
                         <Slider {...settings}>
                             {[propertyDetails.Image].map((item) => {
-                                console.log('item', item)
                                 return (
                                     <div>
                                         <img src={item} resizeMode="contain" style={{ width: '100%', height: 450 }} />

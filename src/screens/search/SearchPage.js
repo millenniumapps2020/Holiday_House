@@ -10,6 +10,7 @@ import { SCREENS } from '../../common/Constants'
 import './SearchStyle.css';
 import images from '../../assets/images'
 import LoaderComponent from '../../components/LoaderComponent'
+import TripleCardWidthSlider from './TripleCardWidthSlider';
 
 class SearchPage extends Component {
 
@@ -128,6 +129,7 @@ class SearchPage extends Component {
         var endPage = ((+request.offset) + searchList.length);
         var pageOffset = starting + ' - ' + endPage;
         var count = (+request.offset) / 24;
+        console.log('searchList', searchList)
         return (
             <div className="search-page-wrap">
                 <div className="search-top-header">
@@ -167,7 +169,9 @@ class SearchPage extends Component {
                                         Showing <span style={{ marginLeft: 5, fontWeight: "bold", marginRight: 5 }}>{pageOffset}</span> of <span style={{ marginLeft: 5, marginRight: 5, fontWeight: "bold" }}> {totalCount} </span> results
                                             </div>
                                 </div>
-
+                                {/* <div className="row result-content"> */}
+                                    <TripleCardWidthSlider data={searchList} />
+                                {/* </div> */}
                                 <div className="row result-content">
                                     {
                                         searchList.length ?

@@ -50,7 +50,9 @@ class HouseCardComponent extends Component {
         console.log('response_error', error)
 
     }
+    booking = () => {
 
+    }
     render() {
         var data = this.state.data;
         var activeStar = [
@@ -70,28 +72,28 @@ class HouseCardComponent extends Component {
 
         return (
             !data ? <div className="house-card" >
-                <div className="house-card__inner ">
+                <div className="house-card__inner " >
                     <div className="img-container">
                     </div> :
                 </div> :
 
                     </div> :
-                <div className="house-card " >
+                <div className="house-card">
                     <div className="house-card__inner ">
-                        <div className="img-container">
+                        <div className="img-container" style={this.props.name == "sliderHouseHold" ? { paddingBottom: '35.6%', width: '60%', float: 'left' } : {}}>
                             <div className="property-image-gallery" >
                                 {this.props.arrow ?
                                     <div className="arrow arrow-prev"></div> : null
                                 }
                                 {galleryImages.length > 0 ?
                                     <ImageGallery
-                                        onClick={()=>this.props.onCardClick(this.props.data)}
+                                        onClick={() => this.props.onCardClick(this.props.data)}
                                         showThumbnails={false}
                                         showFullscreenButton={false}
                                         items={galleryImages}
                                         showPlayButton={false}
                                     /> :
-                                    <img src={data.Image} className="image current" style={{ backgroundImage: data.Image }} onClick={() => this.props.onCardClick(this.props.data)}/>
+                                    <img src={data.Image} className="image current" style={{ backgroundImage: data.Image }} onClick={() => this.props.onCardClick(this.props.data)} />
                                 }
                             </div>
 
@@ -105,11 +107,15 @@ class HouseCardComponent extends Component {
                                 <small>From </small>Rs {data.amount}<small> per night</small>
                             </div>
                         </div>
-                        <div className="info-container" onClick={() => this.props.onCardClick(this.props.data)}>
+                        <div className="info-container" onClick={() => this.props.onCardClick(this.props.data)} style={this.props.name == "sliderHouseHold" ? { height: 300 } : {}}>
                             <div className="house-card__location">
                                 <small>{data.name}</small>
                             </div>
                             <div className="house-card__name">{data.address}</div>
+                            {this.props.name == "sliderHouseHold" ?
+                                <div class="house-card__description">
+                                    {data.description}
+                                </div> : null}
                             <div className="flex-align">
                                 <div className="house-card__rating">
                                     <div className="rating-star">
@@ -128,6 +134,9 @@ class HouseCardComponent extends Component {
                                     </ul>
                                 </div>
                             </div>
+                            {this.props.name == "sliderHouseHold" ?
+                                <button class="btn btn-block btn-primary cardView-button" onClick={() => this.booking()}>Instant Book</button>
+                                : null}
                         </div>
                     </div>
                 </div >

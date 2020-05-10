@@ -47,3 +47,26 @@
     line-height: 21;
     padding-bottom: 2px
 }
+
+.house-card__description {
+    overflow: hidden;
+    height: 6rem;
+    line-height: 1.2rem;
+    font-size: .8rem;
+    font-weight: 300;
+    color: #5e5e5e;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cardView-button {
+    margin-top: 30px;
+    color: #333!important;
+    background-color: #ffea3e!important;
+    box-shadow: 0 3px #f3dd29!important;
+    border: 0!important;
+    top: 0!important;
+    font-weight: 500!important;
+    font-size: 14px!important;
+    padding: 5px 30px!important;
+}
