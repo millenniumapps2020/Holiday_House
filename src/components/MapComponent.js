@@ -77,7 +77,7 @@ class MapComponent extends Component {
                             className={'map'}
                             google={this.props.google}
                             center={coordinates}
-                            zoom={4}
+                            zoom={10}
                             initialCenter={coordinates}
                             style={mapStyles}
                             onDragend={this.centerMoved}
@@ -85,10 +85,11 @@ class MapComponent extends Component {
                         >
                             {this.displayMarkers()}
                             <InfoWindow
+                                options={{ margin: 0 }}
                                 marker={this.state.activeStore}
                                 visible={this.state.showingInfoWindow}
                             >
-                                <div style={{ width: '100%', height: '100%' }}>
+                                <div style={{ width: '100%', height: '100%', height: 270 }}>
                                     <HouseCard data={this.props.maplist[this.state.selectedPlace.id]} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
                                 </div>
                             </InfoWindow>

@@ -106,3 +106,19 @@
         display: none;
     }
 }
+
+.arrows-button {
+    background-color: #fff;
+    border: 1px solid #dcdcdc!important;
+    border-bottom: none!important;
+    padding: 5px 20px!important;
+    box-shadow: 0 3px #dcdcdc;
+    color: #222;
+}
+
+.arrowButton-wrap {
+    background-color: #f9f9f9;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}

@@ -169,7 +169,7 @@ class SearchPage extends Component {
                                         Showing <span style={{ marginLeft: 5, fontWeight: "bold", marginRight: 5 }}>{pageOffset}</span> of <span style={{ marginLeft: 5, marginRight: 5, fontWeight: "bold" }}> {totalCount} </span> results
                                             </div>
                                 </div>
-                                <TripleCardWidthSlider data={searchList} type={this.state.selectedSlideMenu == "map" ? "single" : ""} />
+                                <TripleCardWidthSlider data={searchList} history={this.props.history} type={this.state.selectedSlideMenu == "map" ? "single" : ""} />
                                 <div className="row result-content">
                                     {
                                         searchList.length ?

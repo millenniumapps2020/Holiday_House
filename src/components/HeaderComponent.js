@@ -25,7 +25,7 @@ class HeaderComponent extends Component {
             menuList: ["Shortlist", "List my house", "Help"],
             showMenu: false,
             openLoginModal: false,
-            selectedSlideMenu: "Map",
+            selectedSlideMenu: "map",
             location: '',
             online_payment: false,
             filterDetails: {
@@ -202,9 +202,10 @@ class HeaderComponent extends Component {
                                 })}>Online Payment {online_payment ? <img className="payment-tick-icon" src={images.icons.circle_tick}></img> : null}</div>
                                 <FiltersComponent name="subHeader" onCallBack={(data) => this.filterDetails(data)} />
                             </div>
+                            {console.log('this.state.selectedSlideMenu',this.state.selectedSlideMenu)}
                             <div className="map-galary d-none d-lg-block">
                                 <div className={`tab-slider-bar ${this.state.selectedSlideMenu === 'gallery' ? 'slide' : ''}`}>
-                                    <div className={`tab ${this.state.selectedSlideMenu == "map" ? 'active' : ''}`}
+                                    <div className={("tab " + (this.state.selectedSlideMenu == "map" ? 'active' : ''))}
                                         onClick={() => this.onClickSlideMenu('map')}
                                     >
                                         Map
