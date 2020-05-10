@@ -35,8 +35,27 @@
     height: 84vh
 }
 
-.map-div div:first-child {
-    position: relative!important;
+
+/* .gm-style-iw-d {
+    padding: 0px!important;
+    width: 320px!important;
+    height: 320px!important;
+    max-width: 320px!important;
+    max-height: 320px!important;
+    box-shadow: none!important;
+    background-color: transparent!important;
 }
 
-.map-div .gm-style {}
+.gm-style-iw-t .gm-style-iw-c {
+    padding: 0px!important;
+    width: 300px!important;
+    height: 300px!important;
+    max-width: 300px!important;
+    max-height: 300px!important;
+    box-shadow: none!important;
+    background-color: transparent!important;
+} */
+
+.gm-ui-hover-effect {
+    display: none!important;
+}

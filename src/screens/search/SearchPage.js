@@ -147,7 +147,7 @@ class SearchPage extends Component {
 
                 {searchList.length > 0 ?
                     <div className="search-body row">
-                        <div className={("search-base " + (selectedSlideMenu != "map" ? "col-12" : "col-6"))}>
+                        <div className={("search-base " + (selectedSlideMenu != "map" ? "col-12" : "d-none d-md-block col-6 col"))}>
                             <div className={"col"}>
                                 <div className="search-header">
                                     <div className="left flex-align-center">
@@ -204,8 +204,8 @@ class SearchPage extends Component {
                             </div>
                         </div>
                         {selectedSlideMenu == "map" ?
-                            <div className="search-map-base col-6">
-                                <MapComponent maplist={searchList} />
+                            <div className="search-map-base col-xs-12 col-md-6 col">
+                                <MapComponent maplist={searchList} history={this.props.history} />
                             </div>
                             : null
                         }

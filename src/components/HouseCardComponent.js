@@ -69,7 +69,6 @@ class HouseCardComponent extends Component {
                 thumbnail: item.imageUrl,
             };
         }) : [];
-
         return (
             !data ? <div className="house-card" >
                 <div className="house-card__inner " >
@@ -78,10 +77,10 @@ class HouseCardComponent extends Component {
                 </div> :
 
                     </div> :
-                <div className="house-card">
+                <div className="house-card" style={this.props.name == "mapComponent" ? { width: 300, margin: 0,zIndex:200000 } : null} >
                     <div className="house-card__inner ">
                         <div className="img-container" style={this.props.name == "sliderHouseHold" ? { paddingBottom: this.props.type == "single" ? '46%' : '35.6%', width: '60%', float: 'left' } : {}}>
-                            <div className="property-image-gallery" >
+                            <div className="property-image-gallery" style={{ position: 'absolute!important' }} >
                                 {this.props.arrow ?
                                     <div className="arrow arrow-prev"></div> : null
                                 }

@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ReactDOM from "react-dom";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-
-import Header from './HeaderComponent'
-import HouseCard from './HouseCardComponent'
+import HouseCardComponent from './HouseCardComponent'
 import { SCREENS } from '../common/Constants';
 
 const mapStyles = {
@@ -59,7 +58,7 @@ class MapComponent extends Component {
             }}
                 name={city.name}
                 onClick={this.onClickCity}
-                onMouseover={() => this.onMouseoverCity(index)}
+                // onMouseover={() => this.onMouseoverCity(index)}
                 icon="https://www.holidayhouses.co.nz/ReactApp/images/search/house_marker.png"
             />
         }) : <div></div>;
@@ -80,20 +79,34 @@ class MapComponent extends Component {
                             zoom={10}
                             initialCenter={coordinates}
                             style={mapStyles}
-                            onDragend={this.centerMoved}
+                            // onDragend={this.centerMoved}
                             onClick={this.onMapClicked}
                         >
                             {this.displayMarkers()}
                             <InfoWindow
-                                options={{ margin: 0 }}
+                                options={{
+                                    closeBoxURL: '',
+                                    enableEventPropagation: true,
+                                }}
+                                style={{
+                                    width: '320px!important',
+                                    height: '320px!important',
+                                    padding: '0px!important'
+                                }}
                                 marker={this.state.activeStore}
                                 visible={this.state.showingInfoWindow}
+                                onOpen={(e) => {
+                                    const _houseCardComponent = <HouseCardComponent name="mapComponent" data={this.props.maplist[this.state.selectedPlace.id]} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
+                                    ReactDOM.render(
+                                        React.Children.only(_houseCardComponent),
+                                        document.getElementById("infoWindowHouseCard")
+                                    );
+                                }}
                             >
-                                <div style={{ width: '100%', height: '100%', height: 270 }}>
-                                    <HouseCard data={this.props.maplist[this.state.selectedPlace.id]} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
-                                </div>
+                                <div id="infoWindowHouseCard" />
                             </InfoWindow>
-                        </Map> : null}
+                        </Map> : null
+                    }
                 </div>
             </div >
         )

@@ -17,7 +17,7 @@
 
 .property-image-gallery {
     background-color: #1b2c3b;
-    position: absolute;
+    position: absolute!important;
     top: 0;
     bottom: 0;
     left: 0;
@@ -41,7 +41,7 @@
 }
 
 .property-image-gallery .arrow, .property-image-gallery .image {
-    position: absolute;
+    position: absolute!important;
     top: 0;
     height: 100%;
     background-position: center;
@@ -65,7 +65,7 @@
     z-index: 1;
 }
 
-.property-image-gallery .image-gallery-image {
+.image-gallery-image {
     object-fit: cover!important;
 }
 
