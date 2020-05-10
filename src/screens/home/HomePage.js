@@ -150,8 +150,8 @@ class HomePage extends Component {
             arrows: true,
             slidesToShow: 4,
             slidesToScroll: 1,
-            prevArrow: <div><div className="arrow-carosoul">hi</div></div>,
-            nextArrow: <div><div className="arrow-carosoul"><div className="arrow-next"></div></div></div>,
+            // prevArrow: <div><div className="arrow-carosoul">hi</div></div>,
+            // nextArrow: <div><div className="arrow-carosoul"><div className="arrow-next"></div></div></div>,
             responsive: [
                 {
                     breakpoint: 900,

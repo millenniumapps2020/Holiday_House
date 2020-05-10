@@ -141,12 +141,12 @@
 }
 
 .slick-prev {
-    background-image: url('../../../assets/images/icons/arrow-left.svg');
+    background-image: url('../../../assets/images/icons/arrow-left.svg')!important;
     left: 2%!important;
 }
 
 .slick-next {
-    background-image: url('../../../assets/images/icons/arrow-right.svg');
+    background-image: url('../../../assets/images/icons/arrow-right.svg')!important;
     right: 2%!important;
 }
 
@@ -170,13 +170,15 @@
     resize: contain;
 }
 
-.slick-prev:hover {
-    background-image: url('../../../assets/images/icons/arrow-left.svg');
+.slick-prev:hover, .slick-prev:focus {
+    background-image: url('../../../assets/images/icons/arrow-left.svg')!important;
+    background-size: 35px 35px!important;
     cursor: pointer!important;
 }
 
-.slick-next:hover {
-    background-image: url('../../../assets/images/icons/arrow-right.svg');
+.slick-next:hover, .slick-next:focus {
+    background-image: url('../../../assets/images/icons/arrow-right.svg')!important;
+    background-size: 35px 35px!important;
     cursor: pointer!important;
 }
 

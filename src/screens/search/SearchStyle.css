@@ -89,6 +89,20 @@
     width: 864px!important;
     height: 300px!important;
 }
-.variable-width .slick-next{
-    
+
+.singleSlider {
+    width: 100%!important;
+    height: 300px!important;
+}
+
+@media (min-width: 1000px) {
+    .searchPage-slider {
+        display: block;
+    }
+}
+
+@media (max-width: 1000px) {
+    .searchPage-slider {
+        display: none;
+    }
 }

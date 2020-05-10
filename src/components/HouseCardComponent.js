@@ -80,7 +80,7 @@ class HouseCardComponent extends Component {
                     </div> :
                 <div className="house-card">
                     <div className="house-card__inner ">
-                        <div className="img-container" style={this.props.name == "sliderHouseHold" ? { paddingBottom: '35.6%', width: '60%', float: 'left' } : {}}>
+                        <div className="img-container" style={this.props.name == "sliderHouseHold" ? { paddingBottom: this.props.type == "single" ? '46%' : '35.6%', width: '60%', float: 'left' } : {}}>
                             <div className="property-image-gallery" >
                                 {this.props.arrow ?
                                     <div className="arrow arrow-prev"></div> : null
