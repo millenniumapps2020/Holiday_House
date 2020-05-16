@@ -15,6 +15,7 @@ import DateComponent from '../../components/DateComponent';
 import GuestCountComponent from '../../components/GuestCountComponent';
 import MapComponent from '../../components/MapComponent';
 import { SCREENS } from '../../common/Constants';
+import RatingStartComponent from '../../components/RatingStartComponent';
 
 var settings = {
     dots: true,
@@ -103,7 +104,10 @@ class DetailsPage extends Component {
     dicoverCardPressed(item) {
         this.props.history.push(SCREENS.DETAILS, { propertyId: item.propertyId })
     }
-
+    pageNavigation = (location) => {
+        location = location != '' ? location : 'Hibiscus';
+        this.props.history.push(SCREENS.SEARCH, { passvalue: { location } })
+    }
     render() {
         const settings = {
             Center: true,
@@ -121,33 +125,30 @@ class DetailsPage extends Component {
                     <div>
                         <div className="container details-header">
                             <div className="row">
-                                <div className="col-md-8 col-sm-12">
+                                <div className="col-md-6 col-sm-12">
                                     <div class="bread-crumbs title-section">
-                                        <a ><span>Canterbury</span></a>
-                                        <span>&nbsp;/&nbsp;</span><a ><span>Christchurch</span></a>
-                                        <span>&nbsp;/&nbsp;</span><a ><span>St Albans</span></a>
+                                        <a className="breadcum-link" onClick={() => this.pageNavigation(propertyDetails.location)}><span>{propertyDetails.location}</span></a>
+                                        <span>&nbsp;/&nbsp;</span>
+                                        <a className="breadcum-link" onClick={() => this.pageNavigation(propertyDetails.address)}><span>{propertyDetails.address}</span></a>
                                     </div>
                                     <div className="title-section">
                                         <h1 className="placeText">{propertyDetails.name}</h1>
                                         <p className="locationText">{propertyDetails.address}</p>
                                     </div>
                                 </div>
-                                <div className="col-md-4 col-sm-12 review-section">
-                                    <div className="rate-review">
-                                        <div className="star">
-                                            <img src={images.icons.active_star} className="starImage" />
-                                            <img src={images.icons.active_star} className="starImage" />
-                                            <img src={images.icons.active_star} className="starImage" />
-                                            <img src={images.icons.inactive_star} className="starImage" />
-                                            <img src={images.icons.inactive_star} className="starImage" />
+                                <div className="col-md-6 col-sm-12 review-section">
+                                    <span className="d-none d-md-block ">
+                                        <div className="rate-review">
+                                            <RatingStartComponent rating={propertyDetails.rating} />
+                                            <div className="reviews">
+                                                <a href="#reviews" className="breadcum-link">{propertyDetails.ratingDetails.length} reviews</a>
+                                            </div>
                                         </div>
-                                        <div className="reviews">
-                                            <a>1 &nbsp;&nbsp;review</a>
+                                        <div className="addButton-wrap">
+                                            <button type="button" class="btn btn-outline-secondary btn-block addButton" onClick={() => this.addShortList()}>Add to Shortlist   <i className={"far fa-heart ml-3"}></i></button>
+                                            {/* (data.favourite == "1" ? "red-color fas" : "far") +  */}
                                         </div>
-                                    </div>
-                                    <div className="addButton-wrap">
-                                        <button type="button" class="btn btn-outline-secondary btn-block addButton" onClick={() => this.addShortList()}>Add to Shortlist </button>
-                                    </div>
+                                    </span>
                                 </div>
                             </div>
                         </div >

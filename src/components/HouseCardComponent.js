@@ -4,6 +4,7 @@ import { ADD_REMOVE_SHORTLIST } from '../model/ServiceURLs';
 import ImageGallery from 'react-image-gallery';
 
 import './HouseCardComponentStyle.css';
+import RatingStartComponent from './RatingStartComponent';
 
 
 class HouseCardComponent extends Component {
@@ -55,14 +56,7 @@ class HouseCardComponent extends Component {
     }
     render() {
         var data = this.state.data;
-        var activeStar = [
-            [0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0],
-            [1, 1, 0, 0, 0],
-            [1, 1, 1, 0, 0],
-            [1, 1, 1, 1, 0],
-            [1, 1, 1, 1, 1],
-        ]
+
         const galleryImages = data && data.images && data.images.length > 0 ? data.images.map((item) => {
             return {
                 original: item.imageUrl,
@@ -77,7 +71,7 @@ class HouseCardComponent extends Component {
                 </div> :
 
                     </div> :
-                <div className="house-card" style={this.props.name == "mapComponent" ? { width: 300, margin: 0,zIndex:200000 } : null} >
+                <div className="house-card" style={this.props.name == "mapComponent" ? { width: 300, margin: 0, zIndex: 200000 } : null} >
                     <div className="house-card__inner ">
                         <div className="img-container" style={this.props.name == "sliderHouseHold" ? { paddingBottom: this.props.type == "single" ? '46%' : '35.6%', width: '60%', float: 'left' } : {}}>
                             <div className="property-image-gallery" style={{ position: 'absolute!important' }} >
@@ -117,13 +111,7 @@ class HouseCardComponent extends Component {
                                 </div> : null}
                             <div className="flex-align">
                                 <div className="house-card__rating">
-                                    <div className="rating-star">
-                                        <div>
-                                            {data.rating != undefined && (activeStar[(+data.rating)]).map(item => {
-                                                return (<div className={"rating-star__img d-inline-flex " + (item == 1 ? "filled" : "empty")}></div>);
-                                            })}
-                                        </div>
-                                    </div>
+                                    <RatingStartComponent rating={data.rating} />
                                 </div>
                                 <div>
                                     <ul className="house-card__specs">

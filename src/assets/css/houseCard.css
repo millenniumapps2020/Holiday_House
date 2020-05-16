@@ -99,10 +99,6 @@
     font-size: 8px;
 }
 
-.rating-star {
-    margin: auto;
-}
-
 .rating-star .rating-star__img.filled {
     background-image: url("https://www.holidayhouses.co.nz/ReactApp/images/review/star-filled.svg");
 }

@@ -31,21 +31,18 @@
 .review-section {
     align-items: flex-end;
     justify-content: center;
-    display: flex;
+    display: flex!important;
     flex-direction: column;
 }
 
 .rate-review {
     display: flex;
-    /* flex-direction: row; */
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .feature-wrap {
     padding: 20px 0px 20px 0px;
-}
-
-.reviews {
-    margin-left: 80px;
 }
 
 .decription-section {
@@ -85,6 +82,7 @@
 .addButton {
     width: 230px!important;
     margin-top: 10px;
+    font-size: 14px;
     color: #5e5e5e!important;
     padding: 3px!important;
 }
@@ -150,4 +148,11 @@
     font-size: 14px;
     color: #5e5e5e;
     text-align: center;
+}
+
+.breadcum-link {
+    color: var(--link)!important;
+    text-decoration: none;
+    font-style: normal;
+    cursor: pointer;
 }
