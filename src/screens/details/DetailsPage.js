@@ -346,7 +346,7 @@ class DetailsPage extends Component {
                                             <p>1 Super King(s), 1 Super King(s), 1 Super King(s), 1 Cot(s), 2 Extra bed(s) available</p>
                                         </div>
 
-                                        <div className="decription-section ">
+                                        <div className="decription-section" id="reviews">
                                             <div className="d-md-flex justify-content-md-between align-items-md-center">
                                                 <h2 className="title">Reviews</h2>
                                                 <div>
@@ -392,7 +392,7 @@ class DetailsPage extends Component {
                                                     <tbody>
                                                         <tr>
                                                             <td>15 May 2020 - 03 Sep 2020</td>
-                                                            <td>${propertyDetails.amount} / Night</td>
+                                                            <td>${+(propertyDetails.amount) * 2} / Night</td>
                                                             <td>2 Nights</td>
                                                         </tr>
                                                     </tbody>
