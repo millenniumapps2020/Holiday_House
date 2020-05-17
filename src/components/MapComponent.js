@@ -44,11 +44,14 @@ class MapComponent extends Component {
     }
 
     onClickCity = (props, marker, e) => {
-        this.setState({
-            selectedPlace: props,
-            activeStore: marker,
-            showingInfoWindow: true,
-        });
+        if (!this.props.name == "detailsComponent") {
+            this.setState({
+                selectedPlace: props,
+                activeStore: marker,
+                showingInfoWindow: true,
+            });
+        }
+
     }
     displayMarkers = () => {
         return this.props.maplist ? this.props.maplist.map((city, index) => {
@@ -69,11 +72,12 @@ class MapComponent extends Component {
     render() {
         var coordinates = this.props.maplist ? { lat: this.props.maplist[0].latitude, lng: this.props.maplist[0].longitude } : {}
         return (
-            <div className="map-base">
+
+            <div className="map-base" style={this.props.name == "detailsComponent" ? { marginTop: 30, height:'300!important', } : null}>
                 <div className="map-div">
                     {Object.keys(coordinates).length > 0 ?
                         <Map
-                            className={'map'}
+                            className={this.props.name == "detailsComponent" ? 'mapV2' : 'map'}
                             google={this.props.google}
                             center={coordinates}
                             zoom={10}
