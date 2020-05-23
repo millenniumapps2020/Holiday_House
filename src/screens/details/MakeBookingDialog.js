@@ -16,8 +16,8 @@ class MakeBookingDialog extends Component {
     }
 
     componentWillReceiveProps(props) {
-        if(props.show){
-        this.setState({ show: props.show, errorMsg:{} })
+        if (props.show) {
+            this.setState({ show: props.show, errorMsg: {}, values: {} })
         }
     }
 
