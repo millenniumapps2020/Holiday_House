@@ -2,12 +2,13 @@
 .modal {
   overflow-x: hidden !important;
   overflow-y: auto !important;
+  z-index: 2010 !important;
 }
 
 .modal-login .modal-dialog {
   width: 500px;
   max-width: 800px;
-  z-index: 1050;
+  z-index: 2050;
 }
 
 .modal button {

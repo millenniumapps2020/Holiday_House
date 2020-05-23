@@ -6,6 +6,7 @@ import FooterComponent from '../../components/FooterComponent';
 import DateRangeComponent from '../../components/DateRangeComponent';
 import images from '../../assets/images';
 import './css/DetailsPageStyle.css';
+import './css/makeBookingDialog.css';
 
 import { PROPERTY_DETAILS, DISCOVER, ADD_REMOVE_SHORTLIST } from '../../model/ServiceURLs';
 import { POST } from '../../model/ApiCommunicator';
@@ -17,6 +18,7 @@ import { SCREENS } from '../../common/Constants';
 import RatingStartComponent from '../../components/RatingStartComponent';
 import GalleryPage from './GalleryPage';
 import LoaderComponent from '../../components/LoaderComponent';
+import MakeBookingDialog from './MakeBookingDialog';
 
 var settings = {
     dots: true,
@@ -33,7 +35,8 @@ class DetailsPage extends Component {
         loader: true,
         fullAmentiesView: false,
         fullReviewView: false,
-        showGallery: false
+        showGallery: false,
+        showMakebookingDialog: false
     }
     componentWillMount() {
         document.addEventListener('click', this.handleClickOutside);
@@ -114,6 +117,11 @@ class DetailsPage extends Component {
     reviewViewChange = () => {
         this.setState({ fullReviewView: !this.state.fullReviewView });
     }
+
+    onClickBook = () => {
+        this.setState({ showMakebookingDialog: true })
+    }
+
     render() {
         const settings = {
             className: "slider variable-width",
@@ -124,7 +132,7 @@ class DetailsPage extends Component {
             slidesToScroll: 1,
             variableWidth: true,
         };
-        var { propertyDetails, loader, fullAmentiesView, fullReviewView, showGallery } = this.state;
+        var { propertyDetails, loader, fullAmentiesView, fullReviewView, showGallery, showMakebookingDialog } = this.state;
         return (
             <div className="detailsPage">
                 <HeaderComponent />
@@ -421,7 +429,10 @@ class DetailsPage extends Component {
                                                     <GuestCountComponent onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
                                                 </div>
                                                 <div style={{ marginTop: 30 }}>
-                                                    <button type="submit" id="submitSearchBtn" class="search-button btn btn-primary btn-block" onClick={this.onClickSuggestion}>
+                                                    <button type="submit" id="submitSearchBtn"
+                                                        className="search-button btn btn-primary btn-block"
+                                                        onClick={this.onClickBook}
+                                                    >
                                                         <span class="d-none d-sm-inline">Book</span>
                                                     </button>
                                                 </div>
@@ -459,8 +470,12 @@ class DetailsPage extends Component {
                             }
                         </div> : null
                 }
-                {!loader ?
-                    <FooterComponent /> : null}
+                {
+                    !loader ?
+                        <FooterComponent />
+                        : null
+                }
+                <MakeBookingDialog show={showMakebookingDialog} />
             </div >
         );
     }

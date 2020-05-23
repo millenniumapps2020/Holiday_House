@@ -1,0 +1,103 @@
+.makeBooking-dialog {
+
+}
+
+.makeBooking-dialog .content {
+    display: flex;
+    padding: 25px;
+    color: #5e5e5e !important;
+    font-weight: 500 !important;
+}
+
+.modal-makeBooking .modal-dialog {
+    width: 800px;
+    max-width: 800px;
+    z-index: 2050;
+  }
+  
+.modal-makeBooking .modal-dialog .close-btn {
+    cursor: pointer;
+    line-height: 18px;
+    font-size: 30px;
+    border: 0;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: var(--primary_color);
+    color: #5e5e5e;
+    position: absolute;
+    top: -20px;
+    right: -16px;
+    z-index: 100;
+}
+
+.makeBooking-dialog .content .inputFields-div {
+    flex: 65;
+    padding: 10px 0px;
+}
+
+.makeBooking-dialog .content .inputFields-div #heading {
+    color: black !important;
+    font-weight: 400;
+}
+
+.makeBooking-dialog .content .inputFields-div #heading2 {
+    color: #aaa !important;
+    font-weight: 300;
+}
+
+.makeBooking-dialog .content .datePick-div {
+    flex: 35;
+}
+
+.makeBooking-dialog .inputRow {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.makeBooking-dialog .hasError {
+    position: relative;
+}
+
+.makeBooking-dialog .hasError .invalid {
+    display: block;
+    bottom: 48px;
+    left: 20%;
+}
+
+.makeBooking-dialog .hasError input {
+    border: 1px solid #f05755;
+}
+
+.makeBooking-dialog .inputRow.first {
+    padding-top: 10px !important;
+}
+
+.makeBooking-dialog .inputRow.lowWidth input,
+.makeBooking-dialog .inputRow.lowWidth button {
+    width: 75%;
+}
+
+.makeBooking-dialog .inputRow.lowWidth textarea {
+    width: 80%;
+}
+
+.makeBooking-dialog .inputRow .label {
+    font-size: 15px;
+}
+
+.makeBooking-dialog .inputRow .inputDiv {
+    display: flex;
+    padding-top: 10px;
+    position: relative;
+}
+
+.makeBooking-dialog .inputRow .inputDiv input.second {
+    margin-left: 20px;
+}
+
+.makeBooking-dialog .inputRow .inputDiv textarea {
+    resize: none;
+    white-space: pre-wrap;
+    height: 100px !important;
+}

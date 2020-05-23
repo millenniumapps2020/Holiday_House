@@ -13,3 +13,9 @@ export const getKey = () => {
 
     return decryptData
 }
+
+export const isValidEmail = (email) => {
+    let isValid = false
+
+    return isValid
+}
