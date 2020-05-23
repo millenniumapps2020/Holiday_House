@@ -11,6 +11,7 @@ export const SCREENS = {
     SHORTLIST: "/shortlist",
     MAP: "/map",
     SEARCH: "/search",
+    LISTMYHOUSE: "/listmyhouse",
 }
 
 export const LOCAL_STORAGE = {

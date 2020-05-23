@@ -8,7 +8,7 @@ import PostLoginNavigation from './navigation/PostLoginNavigation'
 import HomePage from './screens/home/HomePage'
 import ShortList from './screens/postLogin/ShortlistPage'
 import Maps from './components/MapComponent'
-
+import ListMyHouse from './screens/listmyhouse/listmyhouse'
 
 import { SCREENS, LOCAL_STORAGE } from './common/Constants'
 import { getItemFromSessionStorage, storeToSessionStorage } from './common/LocalStorage'
@@ -42,6 +42,7 @@ class App extends Component {
             <Route exact path={SCREENS.SEARCH} component={SearchPage} />
             <Route exact path={SCREENS.BASE} render={(props) => <BaseRouter {...props} loginStatus={this.state.loginStatus} />} />
             <Route path={SCREENS.PRELOGIN} component={PreLoginNavigation} />
+            <Route exact path={SCREENS.LISTMYHOUSE} component={ListMyHouse} />
             {/* <Authorized path={SCREENS.HOME} component={PostLoginNavigation} /> */}
           </Switch>
         </BrowserRouter>

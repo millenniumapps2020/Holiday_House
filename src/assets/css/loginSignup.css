@@ -1,6 +1,3 @@
-.login-base, .register-base {
-    
-}
 
 .login-base .details-div {
     margin: 50px 65px;
@@ -12,6 +9,7 @@
 
 .login-base .body .heading {
     padding-bottom: 20px;
+    color: #000!important;
 }
 
 .register-base .body .heading {
@@ -19,16 +17,16 @@
 }
 
 .login-base .body .input-div, .register-base .body .input-div {
-  padding-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 .login-base .body .input-div .label, .register-base .body .input-div .label {
     padding-bottom: 5px;
     font-weight: 500;
-  }
+}
 
 .login-base .body .input-div input, .register-base .body .input-div input {
-  height: 50px;
+    height: 50px;
 }
 
 .input-div .password-label {
@@ -41,10 +39,10 @@
 }
 
 .login-base .body .loginBtn, .register-base .body .registerBtn {
-  width: 100%;
-  color: #333 !important;
-  background-color: var(--primary_color);
-  box-shadow: 0 3px #f3dd29;
+    width: 100%;
+    color: #333 !important;
+    background-color: var(--primary_color);
+    box-shadow: 0 3px #f3dd29;
 }
 
 .register-base .body .registerBtn {
@@ -88,7 +86,7 @@
     justify-content: space-evenly;
 }
 
-.login-base .body .social-div button, .register-base .body .social-div button{
+.login-base .body .social-div button, .register-base .body .social-div button {
     cursor: pointer;
     height: 48px!important;
     width: 81px!important;
@@ -100,7 +98,6 @@
     background-repeat: no-repeat;
 }
 
-
 .register-base .info-content {
     font-size: 19px;
     color: #aaa;
@@ -108,20 +105,19 @@
 }
 
 .invalid.inside-flex.email {
-    transform: translate(80%,-285%);
+    transform: translate(80%, -285%);
 }
 
-.invalid.inside-flex.r-fname, .invalid.inside-flex.r-lname,
-.invalid.inside-flex.r-password {
-    transform: translate(80%,-285%);
+.invalid.inside-flex.r-fname, .invalid.inside-flex.r-lname, .invalid.inside-flex.r-password {
+    transform: translate(80%, -285%);
 }
 
 .invalid.inside-flex.r-email {
-    transform: translate(93%,-285%);
+    transform: translate(93%, -285%);
 }
 
 .invalid.inside-flex.password {
-    transform: translate(70%,-340%);
+    transform: translate(70%, -340%);
 }
 
 .invalid {
@@ -134,7 +130,7 @@
     line-height: 1;
     color: #fff;
     background-color: #f05755;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
     border-radius: .2rem;
 }
 

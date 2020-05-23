@@ -5,6 +5,7 @@ import { POST } from '../model/ApiCommunicator'
 import { LOGIN } from '../model/ServiceURLs'
 
 import { storeLoggedUser } from '../state/actions/actions'
+import images from '../assets/images';
 
 class LoginComponent extends Component {
 
@@ -85,11 +86,14 @@ class LoginComponent extends Component {
                                     onChange={this.onChangePassword}
                                 />
                                 <div class="input-group-append">
-                                    {
-                                        showPassword ?
-                                            <button class="input-group-text show-pass-btn" onClick={this.hidePassword}>Hide</button>
-                                            :
-                                            <button class="input-group-text hide-pass-btn" onClick={this.showPassword}>Show</button>
+                                    {showPassword ?
+                                        <button class="input-group-text show-pass-btn" onClick={this.hidePassword}>
+                                            <img src={images.icons.visible_off} className="icon-symbol" />
+                                        </button>
+                                        :
+                                        <button class="input-group-text hide-pass-btn" onClick={this.showPassword}>
+                                            <img src={images.icons.visible_svg} className="icon-symbol" />
+                                        </button>
                                     }
                                 </div>
                             </div>

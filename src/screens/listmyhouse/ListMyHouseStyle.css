@@ -1,0 +1,50 @@
+.banner-wrap {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+}
+.backGroundImage {
+    min-height: 600px;
+    background-position: center;
+    background-attachment: fixed;
+}
+.logoImage {
+    height: 90px;
+    position: fixed;
+    /* justify-content: center;
+    align-items: center;
+    display: flex;
+    position: fixed; */
+}
+.logoSection {
+    /* padding: 12% 5%; */
+    margin-top : 200px;
+    /* width: 60%; */
+    /* justify-content: center;
+    align-items: center;
+    display: flex;
+    position: fixed; */
+}
+.formSection {
+    /* padding: 30% 5%; */
+    margin-top: 100px;
+    height: 1000px;
+    /* justify-content: center;
+    align-items: center;
+    display: flex; */
+    background-color: rgba(0, 0, 0, .2);
+}
+.formTitle {
+    color: white;
+    padding: 50px 5px 15px 20px;
+}
+
+/* .pSection {
+    color: white;
+    padding: 23px 5px 15px 20px;
+} */ 
+.inputTag {
+    margin-bottom: 20px;
+}
