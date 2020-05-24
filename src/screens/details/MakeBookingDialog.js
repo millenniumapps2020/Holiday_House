@@ -156,7 +156,7 @@ class MakeBookingDialog extends Component {
                                         <div className="calendar-heading">
                                             Availability
                                         </div>
-                                        <div style={{marginLeft:-20}}>
+                                        <div style={{ marginLeft: -20 }}>
                                             <DateRangeComponent key="popUpDatemodel" name="popUpDatemodel" numberMonth={1} />
                                         </div>
                                     </div>

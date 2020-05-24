@@ -39,7 +39,8 @@ class DetailsPage extends Component {
         checkIndate: '',
         checkOutdate: '',
         dateError: false,
-        showMakebookingDialog: false
+        showMakebookingDialog: false,
+        bookingPopUpModel: false,
     }
     componentWillMount() {
         document.addEventListener('click', this.handleClickOutside);
@@ -143,6 +144,14 @@ class DetailsPage extends Component {
     setDateValue(date, key) {
         this.setState({ [key]: date, dateError: false })
     }
+    bookingModel = () => {
+        this.setState({ bookingPopUpModel: true })
+    }
+
+    closeDialog = () => {
+        this.setState({ bookingPopUpModel: false })
+    }
+
     render() {
         const settings = {
             className: "slider variable-width",
@@ -157,6 +166,63 @@ class DetailsPage extends Component {
 
         var dates = this.getDateDifferents(this.state.checkIndate, this.state.checkOutdate);
         var total = (+propertyDetails.amount) * (dates);
+        var bookingComponent = <div className="booking-section">
+            <div className="container">
+                <div class="rate-section">
+                    <div >
+                        <span>From</span>
+                    </div>
+                    <div>
+                        <div class="rate-row">
+                            <span class="rate">${propertyDetails.amount}<sup ></sup></span>
+                            <span>per night</span>
+                        </div>
+                    </div>
+                </div>
+                {dateError ?
+                    <div className="date-error-wrap">
+                        <p className="text-danger">Please select a check in and check out date</p>
+                    </div>
+                    : null}
+                <div style={{ marginTop: 30 }}>
+                    <DateComponent setDate={(date, key) => this.setDateValue(date, key)} />
+                </div>
+                <div style={{ marginTop: 30 }}>
+                    <GuestCountComponent type="detailsPage" onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
+                </div>
+                {(+total) > 0 ?
+                    <div style={{ marginTop: 30 }}>
+                        <div className="flex-align">
+                            <p>
+                                ${propertyDetails.amount} x nights
+                    </p>
+                            <span className="strong">
+                                ${total}
+                            </span>
+                        </div>
+                        <div className="flex-align total-wrap">
+                            <span className="strong">
+                                Total
+                    </span>
+                            <span className="strong">
+                                ${total}
+                            </span>
+                        </div>
+                    </div>
+                    : null}
+                <div style={{ marginTop: 30 }}>
+                    <button type="submit" id="submitSearchBtn"
+                        className="search-button btn btn-primary btn-block"
+                        onClick={total > 0 ? this.onClickBook : this.dateErroralert}
+                    >
+                        <span class="d-sm-inline">Book</span>
+                    </button>
+                </div>
+                <p className="hint">
+                    You won't be charged yet
+                </p>
+            </div>
+        </div>;
 
         return (
             <div className="detailsPage">
@@ -433,64 +499,8 @@ class DetailsPage extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-4 col-md-12 col-sm-12 ">
-                                        <div className="booking-section">
-                                            <div className="container">
-                                                <div class="rate-section">
-                                                    <div >
-                                                        <span>From</span>
-                                                    </div>
-                                                    <div>
-                                                        <div class="rate-row">
-                                                            <span class="rate">${propertyDetails.amount}<sup ></sup></span>
-                                                            <span>per night</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {dateError ?
-                                                    <div className="date-error-wrap">
-                                                        <p className="text-danger">Please select a check in and check out date</p>
-                                                    </div>
-                                                    : null}
-                                                <div style={{ marginTop: 30 }}>
-                                                    <DateComponent setDate={(date, key) => this.setDateValue(date, key)} />
-                                                </div>
-                                                <div style={{ marginTop: 30 }}>
-                                                    <GuestCountComponent type="detailsPage" onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
-                                                </div>
-                                                {(+total) > 0 ?
-                                                    <div style={{ marginTop: 30 }}>
-                                                        <div className="flex-align">
-                                                            <p>
-                                                                ${propertyDetails.amount} x nights
-                                                        </p>
-                                                            <span className="strong">
-                                                                ${total}
-                                                            </span>
-                                                        </div>
-                                                        <div className="flex-align total-wrap">
-                                                            <span className="strong">
-                                                                Total
-                                                        </span>
-                                                            <span className="strong">
-                                                                ${total}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    : null}
-                                                <div style={{ marginTop: 30 }}>
-                                                    <button type="submit" id="submitSearchBtn"
-                                                        className="search-button btn btn-primary btn-block"
-                                                        onClick={total > 0 ? this.onClickBook : this.dateErroralert}
-                                                    >
-                                                        <span class="d-sm-inline">Book</span>
-                                                    </button>
-                                                </div>
-                                                <p className="hint">
-                                                    You won't be charged yet
-                                                    </p>
-                                            </div>
-                                        </div>
+                                    <div className="col-lg-4 col-md-12 col-sm-12 d-none d-lg-block">
+                                        {bookingComponent}
                                     </div>
                                 </div>
                             </div>
@@ -520,13 +530,37 @@ class DetailsPage extends Component {
                             }
                         </div> : null
                 }
+                {!loader && Object.keys(propertyDetails).length > 0 ?
+                    <div className="bottom-booking-wrap d-lg-none">
+                        <button
+                            className="search-button btn btn-primary "
+                            onClick={this.bookingModel}
+                        >
+                            <span class="button-text col">Book</span>
+                            <span class="button-price col-auto"><strong>${propertyDetails.amount}</strong> per night</span>
+                        </button>
+                    </div>
+                    : null
+                }
                 {
                     !loader ?
                         <FooterComponent />
                         : null
                 }
+                <div className="modal modal-booking show fade makeBooking-dialog  d-lg-none" id="myModal" role="dialog" style={{ display: this.state.bookingPopUpModel ? "block" : "none" }}>
+                    <div className="modal-dialog modal-md modal-dialog-centered">
+                        <div className="col-lg-12 col-md-12 col-sm-10">
+                            <div className="modal-content">
+                                <div className="content">
+                                    <button className="close-btn" onClick={this.closeDialog}>×</button>
+                                    {bookingComponent}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <MakeBookingDialog show={showMakebookingDialog} />
-            </div >
+            </div>
         );
     }
 }

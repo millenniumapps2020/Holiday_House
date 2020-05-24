@@ -81,7 +81,7 @@ class DateRangeComponent extends Component {
     render() {
         return (
             <div>
-                <div className="multiple-month-date">
+                <div className="d-none d-lg-block">
                     <DayPickerRangeController
                         key="multiple"
                         numberOfMonths={this.props.numberMonth ?? 1}
@@ -100,7 +100,7 @@ class DateRangeComponent extends Component {
                         hideKeyboardShortcutsPanel={this.props.name == "popUpDatemodel" ? true : false}
                     />
                 </div>
-                <div className="single-month-date">
+                <div className="d-block d-lg-none">
                     <DayPickerRangeController
                         monthFormat={"MMM YYYY"}
                         key="single"

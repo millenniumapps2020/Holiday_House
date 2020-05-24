@@ -129,3 +129,7 @@
     white-space: pre-wrap;
     height: 100px !important;
 }
+
+.modal-dialog-centered {
+    justify-content: center!important;
+}

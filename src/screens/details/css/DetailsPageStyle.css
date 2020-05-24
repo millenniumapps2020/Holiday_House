@@ -168,11 +168,31 @@
 }
 
 .booking-section {
+    width: 100%;
     margin-top: 30px;
     box-shadow: 0 0 5px rgba(0, 0, 0, .25);
     padding: 20px 10px 60px 10px;
 }
 
+
+.modal-booking .modal-dialog{
+    width: 100%!important;
+}
+
+.modal-booking .modal-dialog .close-btn {
+    cursor: pointer;
+    line-height: 18px;
+    font-size: 30px;
+    border: 0;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: var(--primary_color);
+    color: #5e5e5e;
+    position: absolute;
+    top: -20px;
+    right: -16px;
+    z-index: 100;
+}
 .rate-section {
     font-size: 18px;
     font-weight: 600;
@@ -292,6 +312,22 @@
 .gallery-base .header h1 {
     font-size: 24px;
     font-weight: 400;
+}
+
+.bottom-booking-wrap {
+    z-index: 498;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-shadow: 0 -1px 6px 0 rgba(68, 68, 68, .15);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .gallery-base .img-div {
