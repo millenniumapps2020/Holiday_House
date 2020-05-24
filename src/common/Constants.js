@@ -12,6 +12,7 @@ export const SCREENS = {
     MAP: "/map",
     SEARCH: "/search",
     LISTMYHOUSE: "/listmyhouse",
+    BOOKINGPAYMENTDETAILS : "/bookingpaymentdetails"
 }
 
 export const LOCAL_STORAGE = {

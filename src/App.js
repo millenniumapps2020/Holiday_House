@@ -10,6 +10,7 @@ import ShortList from './screens/postLogin/ShortlistPage'
 import Maps from './components/MapComponent'
 import ListMyHouse from './screens/listmyhouse/listmyhouse'
 import AppDialog from './components/AppDialogComponent'
+import BookingPaymentDetails from './screens/bookingpaymentdetails/bookingpymntdtls'
 
 import { SCREENS, LOCAL_STORAGE } from './common/Constants'
 import { getItemFromSessionStorage, storeToSessionStorage } from './common/LocalStorage'
@@ -44,6 +45,7 @@ class App extends Component {
             <Route exact path={SCREENS.BASE} render={(props) => <BaseRouter {...props} loginStatus={this.state.loginStatus} />} />
             <Route path={SCREENS.PRELOGIN} component={PreLoginNavigation} />
             <Route exact path={SCREENS.LISTMYHOUSE} component={ListMyHouse} />
+            <Route exact path={SCREENS.BOOKINGPAYMENTDETAILS} component={BookingPaymentDetails} />
             {/* <Authorized path={SCREENS.HOME} component={PostLoginNavigation} /> */}
           </Switch>
         </BrowserRouter>
