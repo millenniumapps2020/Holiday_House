@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { isValidEmail } from '../../common/commonMethods'
 import DateRangeComponent from '../../components/DateRangeComponent'
+import { SCREENS } from '../../common/Constants'
 
 class MakeBookingDialog extends Component {
 
@@ -51,6 +52,9 @@ class MakeBookingDialog extends Component {
             }
         })
         this.setState({ errorMsg: error })
+        if (hasError) {
+            this.props.history.push(SCREENS.BOOKINGPAYMENTDETAILS);
+        }
     }
 
     closeDialog = () => {

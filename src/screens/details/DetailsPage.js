@@ -559,7 +559,7 @@ class DetailsPage extends Component {
                         </div>
                     </div>
                 </div>
-                <MakeBookingDialog show={showMakebookingDialog} />
+                <MakeBookingDialog show={showMakebookingDialog} history={this.props.history} />
             </div>
         );
     }
