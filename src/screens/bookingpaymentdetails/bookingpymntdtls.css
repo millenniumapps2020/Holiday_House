@@ -1,0 +1,50 @@
+.mainbox{
+    margin-top: 50px;
+    height: 500px;
+}
+.sideSection{
+    background-color: rgba(0, 0, 0, 0.08);
+    height: 600px;
+    margin-top: 50px;
+}
+.innerBox{
+    margin-top: 60px;
+    height: 500px;
+}
+.RequestFont{
+    margin-top: 10px;
+}
+.NoteText{
+    font-size: 12px;
+}
+.UserDetailsBox{
+    border-style: solid;
+    border-width: 1px;
+    height: 400px;
+    margin-top: 20px;
+    border-color: rgba(0, 0, 0, 0.12);
+    /* background-color: black; */
+}
+.border{
+    margin-top: 10px;
+    border-style: solid;
+    border-width: 0.4px;
+    border-color: rgba(0, 0, 0, 0.04);
+}
+.BookingInnerbox{
+    background-color: rgba(0, 0, 0, 0.04);
+    height: 400px;
+}
+.BookingDetailsBox{
+    margin-top: 20px;
+}
+.DetailNote{
+    padding-top: 20px;
+    font-style: bold;
+}
+.backGroundText{
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.04);
+    text-align: center;
+    height: 30px;
+}
