@@ -9,6 +9,7 @@ import HomePage from './screens/home/HomePage'
 import ShortList from './screens/postLogin/ShortlistPage'
 import Maps from './components/MapComponent'
 import ListMyHouse from './screens/listmyhouse/listmyhouse'
+import AppDialog from './components/AppDialogComponent'
 
 import { SCREENS, LOCAL_STORAGE } from './common/Constants'
 import { getItemFromSessionStorage, storeToSessionStorage } from './common/LocalStorage'
@@ -46,6 +47,8 @@ class App extends Component {
             {/* <Authorized path={SCREENS.HOME} component={PostLoginNavigation} /> */}
           </Switch>
         </BrowserRouter>
+
+        <AppDialog />
       </div>
     )
   }

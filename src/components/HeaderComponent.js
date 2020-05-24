@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 
 import LoginSignUpModal from './LoginSignUpModalComponent'
 
-import { storeLoggedUser } from '../state/actions/actions'
+import { storeLoggedUser, showAppDialog } from '../state/actions/actions'
 
 import { SCREENS } from '../common/Constants'
 import PlacesSearchComponent from './PlacesSearchComponent';
@@ -68,13 +68,24 @@ class HeaderComponent extends Component {
     }
 
     onClickLogout = () => {
-        this.props.storeLoggedUser("")
+        this.props.showAppDialog({
+            show: true,
+            message: "Are you sure want to Logout ?",
+            buttons: [{ name: 'YES', action: this.onClickLogin_Yes }],
+            defaultBtnName: "NO"
+        })
     }
+
+    onClickLogin_Yes = () => {
+        this.props.storeLoggedUser({ userName: null, isLogin: false })
+    }
+
     searchCallBack(location) {
         this.setState({ location: location }, () => {
             this.searchUpdate();
         })
     }
+
     searchUpdate = () => {
         var { location, checkIndate, checkOutdate, guest_details, online_payment, priceRange, filterDetails } = this.state;
         var data = {
@@ -133,12 +144,12 @@ class HeaderComponent extends Component {
                             this.props.userName ?
                                 <div className="userInfo-div">
                                     <div className="userName">Hi {this.props.userName}</div>
-                                    <div className="fa fa-sign-out-alt logout-btn"
+                                    <div className="fa fa-sign-out-alt logout-btn" title="logout"
                                         onClick={this.onClickLogout}
                                     ></div>
                                 </div>
                                 :
-                                <div onClick={this.onClickLogin}>
+                                <div className="login-btn" onClick={this.onClickLogin}>
                                     Login
                                 </div>
                         }
@@ -202,7 +213,7 @@ class HeaderComponent extends Component {
                                 })}>Online Payment {online_payment ? <img className="payment-tick-icon" src={images.icons.circle_tick}></img> : null}</div>
                                 <FiltersComponent name="subHeader" onCallBack={(data) => this.filterDetails(data)} />
                             </div>
-                            {console.log('this.state.selectedSlideMenu',this.state.selectedSlideMenu)}
+                            {console.log('this.state.selectedSlideMenu', this.state.selectedSlideMenu)}
                             <div className="map-galary d-none d-lg-block">
                                 <div className={`tab-slider-bar ${this.state.selectedSlideMenu === 'gallery' ? 'slide' : ''}`}>
                                     <div className={("tab " + (this.state.selectedSlideMenu == "map" ? 'active' : ''))}
@@ -232,7 +243,6 @@ class HeaderComponent extends Component {
     }
 }
 
-
 const mapStateToProps = ({ shortList, login }) => {
     return {
         houseCount: shortList.houseCount,
@@ -242,7 +252,8 @@ const mapStateToProps = ({ shortList, login }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        storeLoggedUser: (data) => { dispatch(storeLoggedUser(data)) }
+        storeLoggedUser: (data) => { dispatch(storeLoggedUser(data)) },
+        showAppDialog: (data) => { dispatch(showAppDialog(data)) }
     };
 };
 

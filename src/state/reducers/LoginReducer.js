@@ -1,4 +1,3 @@
-
 import { STORE_LOGGED_USER } from '../actions/actions'
 
 const intialState = {
@@ -7,7 +6,7 @@ const intialState = {
 
 const login = (state = intialState, action) => {
     if (action.type === STORE_LOGGED_USER) {
-        return Object.assign({}, state, { userName: action.payload });
+        return Object.assign({}, state, action.payload);
     } else {
         return state;
     }
