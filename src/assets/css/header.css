@@ -16,11 +16,15 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  cursor: pointer;
 }
 
 .header-base .menus>div {
   padding-left: 20px;
+  cursor: pointer;
+}
+
+.header-base .menus>div:last-child {
+  cursor: default;
 }
 
 .headerComp .dropdown-content .menu-item {
@@ -75,8 +79,13 @@
   font-weight: bold;
 }
 
+.headerComp .header-base .login-btn {
+  cursor: pointer !important;
+}
+
 .headerComp .header-base .logout-btn {
   margin-left: 15px;
+  cursor: pointer;
 }
 
 .form-control{

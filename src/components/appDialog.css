@@ -1,0 +1,83 @@
+
+/* ==== [Modal Dialog starts] ==== */
+.appModal-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2001;
+    text-align: center;
+}
+
+.appModal-dialog>.window {
+    width: 25%;
+    min-width: 350px;
+    max-width: 350px;
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.11), 0 5px 15px 0 rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+    color: #5e5e5e;
+    font-weight: 500;
+}
+
+.appModal-dialog>.window>.title {
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 12px;
+    background-color: rgb(192, 192, 192);
+}
+
+.appModal-dialog>.window>.title#title .modalTitle {
+    color: var(--primary_color) !important;
+}
+
+.appModal-dialog>.window>.title h4 {
+    margin: 0;
+}
+
+.appModal-dialog>.window>.content {
+    padding: 25px;
+    font-weight: 500;
+}
+
+.appModal-dialog>.window>.footer {
+    display: flex;
+    align-items: center;
+    height: 45px;
+}
+
+.appModal-dialog>.window>.footer button {
+    flex: 1;
+    background-color: transparent;
+    height: 70%;
+    font-size: 14px;
+    border: none;
+}
+
+.appModal-dialog>.window>.footer button:hover {
+    opacity: 0.5;
+}
+
+.appModal-dialog>.window>.footer>.negativeBtn {
+    height: 100%;
+    width: 30%;
+    font-size: 15px;
+}
+
+.appModal-dialog>.window>.footer>.positiveBtn {
+    border-left: 1px solid #707070;
+}
+
+.modalTitle {
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+}
+
+/* ==== [ModalDialog ends] ==== */

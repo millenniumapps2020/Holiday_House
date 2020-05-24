@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 
+import LoaderComponent from './LoaderComponent'
+
 import { POST } from '../model/ApiCommunicator'
 import { LOGIN } from '../model/ServiceURLs'
 
 import { storeLoggedUser } from '../state/actions/actions'
+
+import { isValidEmail } from '../common/commonMethods';
+
 import images from '../assets/images';
 
 class LoginComponent extends Component {
@@ -13,9 +18,13 @@ class LoginComponent extends Component {
         super(props);
 
         this.state = {
+            fieldArray: ['email', 'password'],
             email: "",
             password: "",
-            showPassword: false
+            showPassword: false,
+            errorMsg: {},
+            apiError: '',
+            showLoader: false
         }
     }
 
@@ -40,6 +49,33 @@ class LoginComponent extends Component {
     }
 
     onClickLogin = () => {
+        this.setState({ apiError: '' })
+        let error = {}
+        let placeReq = true
+        this.state.fieldArray.map((item) => {
+            if (this.state[item]) {
+                if (item === "email") {
+                    if (!isValidEmail(this.state[item])) {
+                        placeReq = false
+                        error[item] = {}
+                        error[item].msg = 'Please enter valid ' + item
+                    }
+                }
+            } else {
+                placeReq = false
+                error[item] = {}
+                error[item].msg = 'Please enter ' + item
+            }
+        })
+
+        this.setState({ errorMsg: error })
+
+        if (placeReq)
+            this.placeLoginReq()
+    }
+
+    placeLoginReq = () => {
+        this.setState({ apiError: '', showLoader: true })
         let request = {
             emailId: this.state.email,
             password: this.state.password
@@ -48,33 +84,36 @@ class LoginComponent extends Component {
     }
 
     successRespCBLogin = (response) => {
-        this.props.storeLoggedUser(response.result[0].firstName)
+        this.setState({ apiError: '', showLoader: false })
+        this.props.storeLoggedUser({
+            userName: response.result[0].firstName,
+            isLogin: true
+        })
         this.props.closeDialogCB && this.props.closeDialogCB()
     }
 
     errorRespCBLogin = (error) => {
-        console.log('error.message', error)
-        alert(error)
+        this.setState({ apiError: error, showLoader: false })
     }
 
     render() {
-        const { showPassword } = this.state
+        const { showPassword, errorMsg, showLoader } = this.state
 
         return (
             <div className="login-base">
                 <div className="body">
                     <div className="details-div">
                         <h3 className="heading">Sign in to NZStays</h3>
-                        <div className="input-div">
+                        <div className={`input-div ${errorMsg['email'] ? errorMsg['email'].msg ? 'hasError' : '' : ''}`}>
                             <div className="label">Email Address</div>
                             <input className="form-control" placeholder="Email Address"
                                 onChange={this.onChangeEmail}
                             />
                             <div class="invalid inside-flex email">
-                                <div><span>Please enter a valid email</span></div>
+                                <div><span>{errorMsg['email'] ? errorMsg['email'].msg : ''}</span></div>
                             </div>
                         </div>
-                        <div className="input-div">
+                        <div className={`input-div last ${errorMsg['password'] ? errorMsg['password'].msg ? 'hasError' : '' : ''}`}>
                             <div className="label password-label">
                                 <span>Password</span>
                                 <span className="forgrt-password-btn">I forget my password</span>
@@ -98,8 +137,11 @@ class LoginComponent extends Component {
                                 </div>
                             </div>
                             <div class="invalid inside-flex password">
-                                <div><span>Please enter your password</span></div>
+                                <div><span>{errorMsg['password'] ? errorMsg['password'].msg : ''}</span></div>
                             </div>
+                        </div>
+                        <div className="apiErrorMsg">
+                            {this.state.apiError}
                         </div>
                         <div className="btn-div">
                             <button className="btn loginBtn"
@@ -128,6 +170,12 @@ class LoginComponent extends Component {
                         </div>
                     </div> */}
                 </div>
+                {
+                    showLoader ?
+                        <LoaderComponent />
+                        :
+                        null
+                }
             </div>
         )
     }
