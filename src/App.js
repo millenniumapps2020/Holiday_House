@@ -36,7 +36,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path={SCREENS.HOME} component={HomePage} />
-            <Route exact path={SCREENS.DETAILS} component={DetailsPage} />
+            <Route  path={SCREENS.DETAILS} component={DetailsPage} />
             <Route exact path={SCREENS.SHORTLIST} component={ShortList} />
             <Route exact path={SCREENS.MAP} component={Maps} />
             <Route exact path={SCREENS.SEARCH} component={SearchPage} />

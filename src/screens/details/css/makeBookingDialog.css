@@ -1,6 +1,4 @@
-.makeBooking-dialog {
-
-}
+.makeBooking-dialog {}
 
 .makeBooking-dialog .content {
     display: flex;
@@ -13,8 +11,8 @@
     width: 800px;
     max-width: 800px;
     z-index: 2050;
-  }
-  
+}
+
 .modal-makeBooking .modal-dialog .close-btn {
     cursor: pointer;
     line-height: 18px;
@@ -30,10 +28,10 @@
     z-index: 100;
 }
 
-.makeBooking-dialog .content .inputFields-div {
+/* .makeBooking-dialog .content .inputFields-div {
     flex: 65;
     padding: 10px 0px;
-}
+} */
 
 .makeBooking-dialog .content .inputFields-div #heading {
     color: black !important;
@@ -46,7 +44,30 @@
 }
 
 .makeBooking-dialog .content .datePick-div {
-    flex: 35;
+    background-color: #f9f9f9;
+}
+
+.calendar-heading {
+    margin: 0 20px;
+    padding-top: 5px;
+    font-size: 14px;
+    border-top: 2px solid var(--primary_color);
+    width: 50%;
+}
+
+.datePick-div {
+    height: 100%;
+}
+
+.datePick-div .properties-details {
+    padding: 15px 20px;
+    line-height: 16px;
+    font-weight: 300;
+    color: #000;
+}
+
+.datePick-div .properties-details p {
+    font-size: 16px;
 }
 
 .makeBooking-dialog .inputRow {
@@ -65,6 +86,14 @@
     left: 20%;
 }
 
+.makeBooking-dialog .datePick-div .img-cover {
+    width: 100%;
+    height: 100%;
+    max-height: 140px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
 .makeBooking-dialog .hasError input {
     border: 1px solid #f05755;
 }
@@ -73,8 +102,7 @@
     padding-top: 10px !important;
 }
 
-.makeBooking-dialog .inputRow.lowWidth input,
-.makeBooking-dialog .inputRow.lowWidth button {
+.makeBooking-dialog .inputRow.lowWidth input, .makeBooking-dialog .inputRow.lowWidth button {
     width: 75%;
 }
 
@@ -92,9 +120,9 @@
     position: relative;
 }
 
-.makeBooking-dialog .inputRow .inputDiv input.second {
+/* .makeBooking-dialog .inputRow .inputDiv input.second {
     margin-left: 20px;
-}
+} */
 
 .makeBooking-dialog .inputRow .inputDiv textarea {
     resize: none;

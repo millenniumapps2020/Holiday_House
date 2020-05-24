@@ -3,18 +3,21 @@ import React, { Component } from 'react'
 class GuestCountComponent extends Component {
     state = {
         guestDropdownView: false,
-        children: 1,
+        children: 0,
         adults: 1,
         isPets: false
     }
     componentWillMount() {
         var guest_details = this.props.initial;
-        if (guest_details && Object.keys(guest_details).langth > 0) {
+        if(guest_details && Object.keys(guest_details).langth > 0) {
             this.setState({
                 children: guest_details.children ? guest_details.children : 1,
                 adults: guest_details.adults ? guest_details.adults : 1,
                 isPets: guest_details.isPets ? true : false
             })
+        }
+        if(this.props.type == "detailsPage") {
+            this.addGeustDetails();
         }
     }
     componentDidMount() {
@@ -38,7 +41,7 @@ class GuestCountComponent extends Component {
     changeGuest(key, type) {
         var value = this.state[key];
         if (type == "minus") {
-            if (value !== 0) {
+            if ((key == "adults" && value != 1) || (key != "adults" && value !== 0)) {
                 this.setState({ [key]: value - 1 })
             }
         } else {
@@ -47,7 +50,6 @@ class GuestCountComponent extends Component {
     }
     addGeustDetails() {
         var count = (this.state.adults + this.state.children)
-        console.log('isPets', this.state.isPets)
         this.setState({ guestDropdownView: false, guestCount: count > 0 ? ((count + ' Guests') + (this.state.isPets == true ? ', Pets' : '')) : '' })
         var details = {
             'adults': this.state.adults,
@@ -57,10 +59,10 @@ class GuestCountComponent extends Component {
         this.props.onSetGuestDetails(details);
     }
     render() {
-        var { guestDropdownView,guestCount } = this.state;
+        var { guestDropdownView, guestCount } = this.state;
         return (
             <div className="col input-controller location-controller" ref={(node) => this.guestRef = node}>
-                {this.props.name == "headerPage" ? <div className={"tab btn btn-basic"+(guestCount?" selected-search-btn":"")} onClick={() => this.onGuestChange(true)}>{guestCount?guestCount:'Guests'}</div> :
+                {this.props.name == "headerPage" ? <div className={"tab btn btn-basic" + (guestCount ? " selected-search-btn" : "")} onClick={() => this.onGuestChange(true)}>{guestCount ? guestCount : 'Guests'}</div> :
                     <input
                         onFocus={() => this.onGuestChange(true)}
                         value={guestCount}

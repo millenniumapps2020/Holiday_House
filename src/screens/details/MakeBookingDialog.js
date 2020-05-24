@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { isValidEmail } from '../../common/commonMethods'
+import DateRangeComponent from '../../components/DateRangeComponent'
 
 class MakeBookingDialog extends Component {
 
@@ -68,7 +69,7 @@ class MakeBookingDialog extends Component {
                         <div className="modal-content">
                             <button className="close-btn" onClick={this.closeDialog}>×</button>
                             <div className="content">
-                                <div className="inputFields-div">
+                                <div className="inputFields-div col-lg-8">
                                     <h4 id="heading">Make a booking</h4>
                                     <h4 id="heading2">Enter the details for your stay</h4>
                                     <div className="inputRow first">
@@ -86,9 +87,11 @@ class MakeBookingDialog extends Component {
                                                 </div>
                                             </div>
                                             <div className={`${errorMsg['last name'] ? errorMsg['last name'].error ? 'hasError' : '' : ''}`}
-                                                style={{ flex: 1 }}
+                                                style={{ flex: 1, padding: '0px 10px' }}
                                             >
-                                                <input className="form-control second" placeholder="Last name"
+                                                <input
+                                                    className="form-control second"
+                                                    placeholder="Last name"
                                                     name="last name"
                                                     onChange={this.onChangeValue}
                                                 />
@@ -139,8 +142,24 @@ class MakeBookingDialog extends Component {
                                     </button>
                                     </div>
                                 </div>
-                                <div className="datePick-div">
-
+                                <div className="col-lg-4">
+                                    <div className="datePick-div">
+                                        <div>
+                                            <img
+                                                src={"https://holidayhouses.tmcdn.co.nz/hh/medium/31/154231.jpg"}
+                                                className="img-cover"
+                                            />
+                                        </div>
+                                        <div className="properties-details">
+                                            EAGLE RETREAT-STUNNING VIEWS WITH A SPA
+                                        </div>
+                                        <div className="calendar-heading">
+                                            Availability
+                                        </div>
+                                        <div style={{marginLeft:-20}}>
+                                            <DateRangeComponent key="popUpDatemodel" name="popUpDatemodel" numberMonth={1} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

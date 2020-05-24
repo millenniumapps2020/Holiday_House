@@ -81,44 +81,44 @@ class DateRangeComponent extends Component {
     render() {
         return (
             <div>
-                <DayPickerRangeController
-                    numberOfMonths={2}
-                    startDateId="startDate"
-                    endDateId="endDate"
-                    noBorder={true}
-                    isOutsideRange={day => {
-                        if (moment().diff(day) > 0) {
-                            return true
-                        }
-                        return moment(day) <= moment().subtract(1, 'year')
-                    }}
-                />
-
-                {/* <DateRangePicker
-                    // orientation="horizontal"
-                    reopenPickerOnClearDates={true}
-                    startDatePlaceholderText="Check in"
-                    endDatePlaceholderText="Check out"
-                    showDefaultInputIcon={true}
-                    showClearDates={true}
-                    small={true}
-                    monthFormat={"MMM YYYY"}
-                    displayFormat={"DD/MM/YYYY"}
-                    numberOfMonths={1}
-                    startDateId="startDate"
-                    endDateId="endDate"
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
-                    onDatesChange={({ startDate, endDate }) => {
-                        this.setState({ startDate, endDate }, () => {
-                            this.setDate(startDate, 'checkIndate')
-                            this.setDate(endDate, 'checkOutdate')
-
-                        })
-                    }}
-                    focusedInput={this.state.focusedInput}
-                    onFocusChange={(focusedInput) => { this.setState({ focusedInput }) }}
-                /> */}
+                <div className="multiple-month-date">
+                    <DayPickerRangeController
+                        key="multiple"
+                        numberOfMonths={this.props.numberMonth ?? 1}
+                        monthFormat={"MMM YYYY"}
+                        startDateId="startDate"
+                        endDateId="endDate"
+                        daySize={this.props.name == "popUpDatemodel" ? 30 : 40}
+                        noBorder={true}
+                        isOutsideRange={day => {
+                            if (moment().diff(day) > 0) {
+                                return true
+                            }
+                            return moment(day) <= moment().subtract(1, 'year')
+                        }}
+                        backgroundColor={this.props.name == "popUpDatemodel" ? '#f9f9f9' : false}
+                        hideKeyboardShortcutsPanel={this.props.name == "popUpDatemodel" ? true : false}
+                    />
+                </div>
+                <div className="single-month-date">
+                    <DayPickerRangeController
+                        monthFormat={"MMM YYYY"}
+                        key="single"
+                        daySize={30}
+                        numberOfMonths={1}
+                        startDateId="startDate"
+                        endDateId="endDate"
+                        noBorder={true}
+                        isOutsideRange={day => {
+                            if (moment().diff(day) > 0) {
+                                return true
+                            }
+                            return moment(day) <= moment().subtract(1, 'year')
+                        }}
+                        backgroundColor={this.props.name == "popUpDatemodel" ? '#f9f9f9' : false}
+                        hideKeyboardShortcutsPanel={true}
+                    />
+                </div>
             </div>
         );
     }

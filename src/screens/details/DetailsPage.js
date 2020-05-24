@@ -36,6 +36,9 @@ class DetailsPage extends Component {
         fullAmentiesView: false,
         fullReviewView: false,
         showGallery: false,
+        checkIndate: '',
+        checkOutdate: '',
+        dateError: false,
         showMakebookingDialog: false
     }
     componentWillMount() {
@@ -121,7 +124,25 @@ class DetailsPage extends Component {
     onClickBook = () => {
         this.setState({ showMakebookingDialog: true })
     }
-
+    dateErroralert = () => {
+        this.setState({ dateError: true })
+    }
+    getDateDifferents(date1String, date2String) {
+        var splitDate1 = date1String.split('/');
+        var splitDate2 = date2String.split('/');
+        if (splitDate1.length == 3 && splitDate2.length == 3) {
+            const date1 = new Date(splitDate1[1] + '/' + splitDate1[0] + '/' + splitDate1[2]);
+            const date2 = new Date(splitDate2[1] + '/' + splitDate2[0] + '/' + splitDate2[2]);
+            const diffTime = Math.abs(date2 - date1);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays != NaN ? diffDays : 0;
+        } else {
+            return 0;
+        }
+    }
+    setDateValue(date, key) {
+        this.setState({ [key]: date, dateError: false })
+    }
     render() {
         const settings = {
             className: "slider variable-width",
@@ -132,7 +153,11 @@ class DetailsPage extends Component {
             slidesToScroll: 1,
             variableWidth: true,
         };
-        var { propertyDetails, loader, fullAmentiesView, fullReviewView, showGallery, showMakebookingDialog } = this.state;
+        var { propertyDetails, loader, fullAmentiesView, fullReviewView, showGallery, showMakebookingDialog, dateError } = this.state;
+
+        var dates = this.getDateDifferents(this.state.checkIndate, this.state.checkOutdate);
+        var total = (+propertyDetails.amount) * (dates);
+
         return (
             <div className="detailsPage">
                 <HeaderComponent />
@@ -204,7 +229,7 @@ class DetailsPage extends Component {
                             }
                             <div className="container details-body">
                                 <div className="row details-full-wrap">
-                                    <div className="col-md-7 col-sm-12">
+                                    <div className="col-lg-8  col-md-12 col-sm-12">
                                         <div className="feature-wrap row">
                                             <div className="col-md-4 col-4 features">
                                                 <h3>{propertyDetails.maximumGuests}</h3>
@@ -382,7 +407,7 @@ class DetailsPage extends Component {
                                         <div className="decription-section">
                                             <h2 className="title">Availability</h2>
                                             <div className="mt-3">
-                                                <DateRangeComponent />
+                                                <DateRangeComponent numberMonth={2} />
                                             </div>
                                         </div>
 
@@ -408,7 +433,7 @@ class DetailsPage extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-md-4 col-sm-12">
+                                    <div className="col-lg-4 col-md-12 col-sm-12 ">
                                         <div className="booking-section">
                                             <div className="container">
                                                 <div class="rate-section">
@@ -422,18 +447,43 @@ class DetailsPage extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {dateError ?
+                                                    <div className="date-error-wrap">
+                                                        <p className="text-danger">Please select a check in and check out date</p>
+                                                    </div>
+                                                    : null}
                                                 <div style={{ marginTop: 30 }}>
-                                                    <DateComponent setDate={(date, key) => { this.setState({ [key]: date }) }} />
+                                                    <DateComponent setDate={(date, key) => this.setDateValue(date, key)} />
                                                 </div>
                                                 <div style={{ marginTop: 30 }}>
-                                                    <GuestCountComponent onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
+                                                    <GuestCountComponent type="detailsPage" onSetGuestDetails={(details) => this.setState({ guest_details: details })} />
                                                 </div>
+                                                {(+total) > 0 ?
+                                                    <div style={{ marginTop: 30 }}>
+                                                        <div className="flex-align">
+                                                            <p>
+                                                                ${propertyDetails.amount} x nights
+                                                        </p>
+                                                            <span className="strong">
+                                                                ${total}
+                                                            </span>
+                                                        </div>
+                                                        <div className="flex-align total-wrap">
+                                                            <span className="strong">
+                                                                Total
+                                                        </span>
+                                                            <span className="strong">
+                                                                ${total}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    : null}
                                                 <div style={{ marginTop: 30 }}>
                                                     <button type="submit" id="submitSearchBtn"
                                                         className="search-button btn btn-primary btn-block"
-                                                        onClick={this.onClickBook}
+                                                        onClick={total > 0 ? this.onClickBook : this.dateErroralert}
                                                     >
-                                                        <span class="d-none d-sm-inline">Book</span>
+                                                        <span class="d-sm-inline">Book</span>
                                                     </button>
                                                 </div>
                                                 <p className="hint">
