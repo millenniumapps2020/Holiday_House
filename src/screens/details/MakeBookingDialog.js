@@ -52,7 +52,7 @@ class MakeBookingDialog extends Component {
             }
         })
         this.setState({ errorMsg: error })
-        if (hasError) {
+        if (!hasError) {
             this.props.history.push(SCREENS.BOOKINGPAYMENTDETAILS);
         }
     }
