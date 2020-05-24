@@ -7,7 +7,8 @@ const intialState = {
         title: null,
         message: null,
         buttons: null,
-        success: null
+        success: null,
+        closeCB: null
     }
 }
 

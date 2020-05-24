@@ -8,6 +8,7 @@ import './appDialog.css'
 class AppDialogComponent extends Component {
 
     onClose = () => {
+        this.props.appDialog.closeCB && this.props.appDialog.closeCB()
         this.props.showAppDialog({ show: false })
     }
 

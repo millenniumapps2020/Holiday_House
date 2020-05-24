@@ -6,7 +6,7 @@ import LoaderComponent from './LoaderComponent'
 import { POST } from '../model/ApiCommunicator'
 import { REGISTER } from '../model/ServiceURLs'
 
-import { storeLoggedUser } from '../state/actions/actions'
+import { storeLoggedUser, showAppDialog } from '../state/actions/actions'
 
 import { isValidEmail } from '../common/commonMethods'
 
@@ -73,9 +73,16 @@ class RegisterComponent extends Component {
     }
 
     successRespCBRegister = (response) => {
-        alert('Registered Successfully')
+        this.props.showAppDialog({
+            show: true,
+            message: "Registered Successfully"
+        })
         this.setState({ apiError: '', showLoader: false })
-        this.props.storeLoggedUser(response.result[0].firstName)
+        this.props.storeLoggedUser({
+            userName: response.result[0].firstName,
+            email: response.result[0].emailId,
+            isLogin: true
+        })
         this.props.closeDialogCB && this.props.closeDialogCB()
     }
 
@@ -164,7 +171,8 @@ class RegisterComponent extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        storeLoggedUser: (data) => { dispatch(storeLoggedUser(data)) }
+        storeLoggedUser: (data) => { dispatch(storeLoggedUser(data)) },
+        showAppDialog: (data) => { dispatch(showAppDialog(data)) }
     };
 };
 

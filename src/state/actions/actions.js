@@ -23,7 +23,6 @@ export function storeLoggedUser(payload) {
   }
 }
 
-
 export function showAppDialog(payload) {
   return {
     type: STORE_APP_DIALOG_DETAILS,
