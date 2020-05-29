@@ -4,7 +4,7 @@
 }
 .sideSection{
     background-color: rgba(0, 0, 0, 0.08);
-    height: 600px;
+    height: 1000px;
     margin-top: 50px;
 }
 .innerBox{
@@ -33,7 +33,7 @@
 }
 .BookingInnerbox{
     background-color: rgba(0, 0, 0, 0.04);
-    height: 400px;
+    height: 500px;
 }
 .BookingDetailsBox{
     margin-top: 20px;
@@ -47,4 +47,82 @@
     background-color: rgba(0, 0, 0, 0.04);
     text-align: center;
     height: 30px;
+}
+.OwnerPolicySection{
+    border-style: solid;
+    border-width: 1px;
+    height: 200px;
+    margin-top: 20px;
+    border-color: rgba(0, 0, 0, 0.12);
+    padding-top: 20px;
+}
+.Agreement{
+    margin-top: 20px;
+}
+.buttonDiv{
+    margin-top: 20px;
+}
+.crediText{
+    margin-top: 30px;
+    font-size: 12px;
+}
+.EditButton{
+    font-size: 12px;
+    float: right;
+}
+.listtext{
+    font-size: 13px;
+    padding-top: 10px;
+}
+.CheckInDetails{
+    padding-top: 20px;
+    /* color: rgba(0, 0, 0, 0.04); */
+    font-size: 12px;
+}
+.CheckOutDetails{
+    padding-top: 20px;
+    /* color: rgba(0, 0, 0, 0.04); */
+    font-size: 12px;
+    padding-left: 100px;
+}
+.GuestDetails{
+    padding-top: 20px;
+    font-size: 12px;
+}
+.border-dottted{
+    margin-top: 20px;
+    border-style: dashed;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.16);
+}
+.stayDetails{
+    padding-top: 20px;
+    /* color: rgba(0, 0, 0, 0.04); */
+    font-size: 15px;
+}
+.RateDetails{
+    padding-top: 20px;
+    /* color: rgba(0, 0, 0, 0.04); */
+    /* font-size: 25px; */
+    padding-left: 160px;
+    
+}
+.Rate{
+    font-weight: bold;
+    font-size: 25px;
+}
+.NotedText{
+    padding-top: 20px;
+    font-size: 12px;
+}
+.PolicyDetails{
+    padding-top: 20px;
+}
+.PolicyDetails h6{
+    font-weight: bold;
+}
+.PolicyDetails p {
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 12px;
 }
