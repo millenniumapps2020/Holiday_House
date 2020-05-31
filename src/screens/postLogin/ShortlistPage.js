@@ -12,6 +12,7 @@ import { POST } from '../../model/ApiCommunicator';
 import { SCREENS } from '../../common/Constants';
 import images from '../../assets/images';
 import './ShortlistStyle.css'
+import AppUtils from '../../data/app_utils';
 
 class ShortlistPage extends Component {
 
@@ -25,13 +26,12 @@ class ShortlistPage extends Component {
     }
 
     componentDidMount() {
-
         this.getShortList();
     }
 
     getShortList = () => {
         let request = {
-            "userId": "1",
+            "userId": AppUtils.getUserId(),
             "limit": "10",
             "offset": "0",
         }
@@ -60,10 +60,13 @@ class ShortlistPage extends Component {
         this.props.history.push(SCREENS.SEARCH, { passvalue: { location: 'Hibiscus' } });
     }
 
-    shortcallback = (msg) => {
-        console.log('shortListcallback', msg);
+    shortcallback = (index) => {
         if (this.state.shortlist.length == 1) {
             this.setState({ shortlist: [] })
+        }else{
+           var shortlist= this.state.shortlist;
+           shortlist.splice(index, 1);
+           this.setState({shortlist})
         }
     }
     render() {
@@ -83,9 +86,9 @@ class ShortlistPage extends Component {
                             <LoaderComponent />
                         </div> :
                         <div className="row">
-                            {this.state.shortlist.map((item) => {
+                            {this.state.shortlist.map((item,index) => {
                                 return (<div style={{ padding: 0 }} id="house-card-0" className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                    <HouseCardComponent data={item} shortActioncallback={this.shortcallback} onCardClick={(item) => this.dicoverCardPressed(item)} />
+                                    <HouseCardComponent data={item} shortActioncallback={this.shortcallback} index={index} onCardClick={(item) => this.dicoverCardPressed(item)} />
                                 </div>)
                             })}
                             {this.state.shortlist.length == 0 ?

@@ -11,6 +11,7 @@ import './SearchStyle.css';
 import images from '../../assets/images'
 import LoaderComponent from '../../components/LoaderComponent'
 import TripleCardWidthSlider from './TripleCardWidthSlider';
+import AppUtils from '../../data/app_utils'
 
 class SearchPage extends Component {
 
@@ -41,7 +42,7 @@ class SearchPage extends Component {
             var { location, checkIndate, checkOutdate, guest_details } = this.props.location.state.passvalue;
 
             var request = {
-                "userId": "1",
+                "userId": AppUtils.getUserId(),
                 "search": location ?? '',
                 "sortBy": "",
                 "fromDate": checkIndate ?? '',
@@ -93,7 +94,7 @@ class SearchPage extends Component {
         var { location, checkIndate, checkOutdate, guest_details, payment, price, filterDetails, } = data;
         var { sortOptionsIndex, sortOptions } = this.state;
         var request = {
-            "userId": "1",
+            "userId": AppUtils.getUserId(),
             "search": location ?? '',
             "sortBy": sortOptions[sortOptionsIndex],
             "fromDate": checkIndate ?? '',

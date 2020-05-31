@@ -5,6 +5,9 @@ import ImageGallery from 'react-image-gallery';
 
 import './HouseCardComponentStyle.css';
 import RatingStartComponent from './RatingStartComponent';
+import AppUtils from '../data/app_utils';
+import { storeShortListedHouseList } from '../state/actions/actions';
+import { connect } from 'react-redux';
 
 
 class HouseCardComponent extends Component {
@@ -24,7 +27,7 @@ class HouseCardComponent extends Component {
     }
     addShortList = () => {
         let request = {
-            "userId": "1",
+            "userId": AppUtils.getUserId(),
             "propertyId": this.props.data.propertyId
         }
         POST(ADD_REMOVE_SHORTLIST, request, this.successRespCBShortListAction, this.errorRespCBShortListAction);
@@ -40,7 +43,7 @@ class HouseCardComponent extends Component {
         } else {
             data.favourite = "1";
         }
-        console.log('this.props.shortActioncallback', this.props.shortActioncallback)
+        this.props.storeShortListedHouseList(response.result.length)
         if (this.props.shortActioncallback) {
             this.props.shortActioncallback(response.message)
         }
@@ -131,4 +134,11 @@ class HouseCardComponent extends Component {
     }
 }
 
-export default HouseCardComponent;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        storeShortListedHouseList: (data) => { dispatch(storeShortListedHouseList(data)) }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(HouseCardComponent);

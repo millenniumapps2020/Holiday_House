@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
-
 import Authorized from './navigation/Authorized'
 
 import PreLoginNavigation from './navigation/PreLoginNavigation'
 import PostLoginNavigation from './navigation/PostLoginNavigation'
 import HomePage from './screens/home/HomePage'
 import ShortList from './screens/postLogin/ShortlistPage'
-import Maps from './components/MapComponent'
+import Maps from './components/MapComponent';
 import ListMyHouse from './screens/listmyhouse/listmyhouse'
 import AppDialog from './components/AppDialogComponent'
 import BookingPaymentDetails from './screens/bookingpaymentdetails/bookingpymntdtls'
@@ -18,19 +17,39 @@ import { getItemFromSessionStorage, storeToSessionStorage } from './common/Local
 import './assets/css/global.css'
 import DetailsPage from './screens/details/DetailsPage';
 import SearchPage from './screens/search/SearchPage';
+import AppUtils from './data/app_utils';
+const publicIp = require('public-ip');
+
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      loginStatus: (getItemFromSessionStorage(LOCAL_STORAGE.LOGIN_STATUS) === 'true') ? true : false
+      loginStatus: (getItemFromSessionStorage(LOCAL_STORAGE.LOGIN_STATUS) === 'true') ? true : false,
+      view: false,
       // loginStatus: true
+    }
+  }
+  componentWillMount() {
+    this.setUserDetails();
+  }
+  setUserDetails = async () => {
+    var getUserDetails = await localStorage.getItem('userDetails');
+    if (getUserDetails != null && getUserDetails != '' && Object.values(getUserDetails).length > 3) {
+      var userDetails = JSON.parse(getUserDetails);
+      AppUtils.setUserId(userDetails.userId);
+      this.setState({ view: true })
+    } else {
+      var data = await publicIp.v4();
+      var randomNumber = Math.floor(100000 + Math.random() * 900000);
+      AppUtils.setUserId(randomNumber);
+      this.setState({ view: true })
     }
   }
 
   render() {
-    return (
+    return this.state.view ? (
       <div>
         <style>
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" />
@@ -38,7 +57,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path={SCREENS.HOME} component={HomePage} />
-            <Route  path={SCREENS.DETAILS} component={DetailsPage} />
+            <Route path={SCREENS.DETAILS} component={DetailsPage} />
             <Route exact path={SCREENS.SHORTLIST} component={ShortList} />
             <Route exact path={SCREENS.MAP} component={Maps} />
             <Route exact path={SCREENS.SEARCH} component={SearchPage} />
@@ -52,7 +71,7 @@ class App extends Component {
 
         <AppDialog />
       </div>
-    )
+    ) : <div></div>;
   }
 }
 

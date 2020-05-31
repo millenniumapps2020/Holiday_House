@@ -193,7 +193,7 @@ class BookingPaymentDetails extends Component {
                                             <p>$1,287.00</p>
                                         </span>
                                     </div>
-                                    <div className="border-dottted" />
+                                    <div className="border" />
                                     <div className="rate-details d-flex justify-content-between">
                                         <span>
                                             <p>Total</p>

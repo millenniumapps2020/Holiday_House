@@ -14,6 +14,7 @@ import PlacesSearchComponent from '../../components/PlacesSearchComponent';
 import { SUGGESTION, PROPERTY, PERFECTS, DISCOVER } from '../../model/ServiceURLs';
 import { POST } from '../../model/ApiCommunicator';
 import GuestCountComponent from '../../components/GuestCountComponent';
+import AppUtils from '../../data/app_utils';
 
 
 const languages = [
@@ -59,7 +60,7 @@ class HomePage extends Component {
 
     getDiscoverList = () => {
         var request = {
-            "userId": "1",
+            "userId":AppUtils.getUserId(),
             "limit": "9",
             "offset": "0"
         };
@@ -93,7 +94,7 @@ class HomePage extends Component {
     }
     getSuggestionList() {
         let request = {
-            "userId": "",
+            "userId":AppUtils.getUserId(),
             "limit": "4",
             "offset": "0"
         };
@@ -114,7 +115,7 @@ class HomePage extends Component {
 
     getPerfectList() {
         let request = {
-            "userId": "1",
+            "userId":AppUtils.getUserId(),
             "limit": "3",
             "offset": "0"
         };

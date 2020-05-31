@@ -11,6 +11,7 @@ import { storeLoggedUser } from '../state/actions/actions'
 import { isValidEmail } from '../common/commonMethods';
 
 import images from '../assets/images';
+import AppUtils from '../data/app_utils';
 
 class LoginComponent extends Component {
 
@@ -89,7 +90,10 @@ class LoginComponent extends Component {
             userName: response.result[0].firstName,
             isLogin: true
         })
+        localStorage.setItem('userDetails', JSON.stringify(response.result[0]))
+        AppUtils.setUserId(response.result[0].userId);
         this.props.closeDialogCB && this.props.closeDialogCB()
+        window.location.reload()
     }
 
     errorRespCBLogin = (error) => {

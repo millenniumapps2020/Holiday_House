@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { POST } from '../model/ApiCommunicator';
 import { PROPERTY } from '../model/ServiceURLs';
+import AppUtils from '../data/app_utils';
 
 class PlacesSearchComponent extends Component {
 
@@ -27,7 +28,7 @@ class PlacesSearchComponent extends Component {
     }
     getProperties = (searchValue) => {
         var request = {
-            "userId": "",
+            "userId": AppUtils.getUserId(),
             "search": searchValue,
             "sortBy": "",
             "fromDate": "",
@@ -82,7 +83,7 @@ class PlacesSearchComponent extends Component {
     }
     getSearchProperties = (searchValue) => {
         var request = {
-            "userId": "",
+            "userId": AppUtils.getUserId(),
             "search": searchValue,
             "sortBy": "",
             "fromDate": "",

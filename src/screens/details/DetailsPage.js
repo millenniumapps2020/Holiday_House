@@ -19,6 +19,9 @@ import RatingStartComponent from '../../components/RatingStartComponent';
 import GalleryPage from './GalleryPage';
 import LoaderComponent from '../../components/LoaderComponent';
 import MakeBookingDialog from './MakeBookingDialog';
+import AppUtils from '../../data/app_utils';
+import { storeShortListedHouseList } from '../../state/actions/actions';
+import { connect } from 'react-redux';
 
 var settings = {
     dots: true,
@@ -52,7 +55,7 @@ class DetailsPage extends Component {
     getPerpertyDetails() {
         this.setState({ loader: true })
         var request = {
-            "userId": "1",
+            "userId": AppUtils.getUserId(),
             "propertyId": this.props.location.state.propertyId
         };
         POST(PROPERTY_DETAILS, request, this.successRespCBDetails, this.errorRespCBDetails);
@@ -67,7 +70,7 @@ class DetailsPage extends Component {
     }
     addShortList = () => {
         let request = {
-            "userId": "1",
+            "userId": AppUtils.getUserId(),
             "propertyId": this.props.location.state.propertyId
         }
         POST(ADD_REMOVE_SHORTLIST, request, this.successRespCBShortListAction, this.errorRespCBShortListAction);
@@ -76,6 +79,7 @@ class DetailsPage extends Component {
         this.setState({ propertyDetails: propertyDetails });
     }
 
+
     successRespCBShortListAction = (response) => {
         var { propertyDetails } = this.state;
         if (response.message == "Removed short List") {
@@ -83,6 +87,7 @@ class DetailsPage extends Component {
         } else {
             propertyDetails.favourite = "1";
         }
+        this.props.storeShortListedHouseList(response.result.length)
         this.setState({ propertyDetails });
     }
 
@@ -267,7 +272,7 @@ class DetailsPage extends Component {
                                         </span>
                                     </div>
                                 </div>
-                            </div >
+                            </div>
                             {propertyDetails.images.length > 0 ?
                                 <div className="slider-base">
                                     <Slider {...settings}>
@@ -565,4 +570,10 @@ class DetailsPage extends Component {
     }
 }
 
-export default DetailsPage;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        storeShortListedHouseList: (data) => { dispatch(storeShortListedHouseList(data)) }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(DetailsPage);

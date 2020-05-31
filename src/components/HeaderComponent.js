@@ -74,10 +74,13 @@ class HeaderComponent extends Component {
             buttons: [{ name: 'YES', action: this.onClickLogin_Yes }],
             defaultBtnName: "NO"
         })
+
     }
 
     onClickLogin_Yes = () => {
         this.props.storeLoggedUser({ userName: null, isLogin: false })
+        localStorage.setItem('userDetails', JSON.stringify(''))
+        window.location.reload();
     }
 
     searchCallBack(location) {
