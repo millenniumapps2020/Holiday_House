@@ -20,7 +20,9 @@ import no_houses_image from './images/common/no_houses_image.svg';
 
 import visible_off from './images/icons/visible_off.svg';
 import visible_svg from './images/icons/visible_svg.svg';
-
+import comment from './images/icons/comment.png';
+import edit from './images/icons/edit.png';
+import paper from './images/icons/paper.png'
 
 
 const images = {
@@ -40,7 +42,10 @@ const images = {
         "close": close,
         "circle_tick": circle_tick,
         "visible_off": visible_off,
-        "visible_svg": visible_svg
+        "visible_svg": visible_svg,
+        "comment": comment,
+        "edit": edit,
+        "paper":paper
     },
 }
 export default images;
