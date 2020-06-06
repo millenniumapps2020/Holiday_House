@@ -564,10 +564,25 @@ class DetailsPage extends Component {
                         </div>
                     </div>
                 </div>
-                <MakeBookingDialog show={showMakebookingDialog} history={this.props.history} />
+                <MakeBookingDialog show={showMakebookingDialog} continueCallback={this.continueCallback} history={this.props.history} />
             </div>
         );
     }
+
+    continueCallback = (data) => {
+        var { checkIndate, checkOutdate, propertyDetails, guest_details, propertyDetails } = this.state;
+        var dates = this.getDateDifferents(this.state.checkIndate, this.state.checkOutdate);
+        var total = (+propertyDetails.amount) * (dates);
+        var bookingDetails = {
+            'checkIndate': checkIndate,
+            'checkOutdate': checkOutdate,
+            'total': total,
+            'dates': dates,
+            'guest_details': guest_details,
+        }
+        this.props.history.push(SCREENS.BOOKINGPAYMENTDETAILS, { values: data, propertyDetails: propertyDetails, bookingDetails: bookingDetails });
+    }
+
 }
 
 const mapDispatchToProps = (dispatch) => {

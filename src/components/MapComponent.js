@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import HouseCardComponent from './HouseCardComponent'
 import { SCREENS } from '../common/Constants';
+import store from '../state/store';
+import { Provider } from 'react-redux';
 
 const mapStyles = {
     width: '100%',
@@ -44,7 +46,7 @@ class MapComponent extends Component {
     }
 
     onClickCity = (props, marker, e) => {
-        if (!this.props.name == "detailsComponent") {
+        if (!(this.props.name == "detailsComponent")) {
             this.setState({
                 selectedPlace: props,
                 activeStore: marker,
@@ -73,7 +75,7 @@ class MapComponent extends Component {
         var coordinates = this.props.maplist ? { lat: this.props.maplist[0].latitude, lng: this.props.maplist[0].longitude } : {}
         return (
 
-            <div className="map-base" style={this.props.name == "detailsComponent" ? { marginTop: 30, height:'300!important', } : null}>
+            <div className="map-base" style={this.props.name == "detailsComponent" ? { marginTop: 30, height: '300!important', } : null}>
                 <div className="map-div">
                     {Object.keys(coordinates).length > 0 ?
                         <Map
@@ -100,7 +102,10 @@ class MapComponent extends Component {
                                 marker={this.state.activeStore}
                                 visible={this.state.showingInfoWindow}
                                 onOpen={(e) => {
-                                    const _houseCardComponent = <HouseCardComponent name="mapComponent" data={this.props.maplist[this.state.selectedPlace.id]} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
+                                    const _houseCardComponent =
+                                        <Provider store={store}>
+                                            <HouseCardComponent name="mapComponent" data={this.props.maplist[this.state.selectedPlace.id]} onCardClick={(discoverData) => this.dicoverCardPressed(discoverData)} />
+                                        </Provider>
                                     ReactDOM.render(
                                         React.Children.only(_houseCardComponent),
                                         document.getElementById("infoWindowHouseCard")
